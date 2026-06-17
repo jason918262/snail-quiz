@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>蜗牛AI学习互动 · 会议要点测验</title>
+<title>蜗牛AI · CRM系统优化学习互动</title>
 <style>
 :root {
   --bg-cream: #FFF8F2;
@@ -25,9 +25,7 @@
   --radius-sm: 16px;
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
+* { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: var(--font);
   background: var(--bg-cream);
@@ -36,316 +34,247 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== 浮动蜗牛装饰 ===== */
+/* Floating snails */
 .snail-float {
   position: fixed;
   z-index: 50;
-  opacity: 0.55;
+  opacity: 0.5;
   pointer-events: none;
-  font-size: 28px;
   animation: snailFloat 5s ease-in-out infinite;
+  font-size: 28px;
 }
-.snail-fl-1 { top: 70px; left: 12px; animation-delay: 0s; }
-.snail-fl-2 { top: 200px; right: 14px; animation-delay: 0.8s; }
-.snail-fl-3 { top: 400px; left: 18px; animation-delay: 1.6s; }
-.snail-fl-4 { top: 600px; right: 10px; animation-delay: 2.4s; }
-.snail-fl-5 { top: 800px; left: 16px; animation-delay: 3.2s; }
-.snail-fl-6 { top: 1000px; right: 20px; animation-delay: 4.0s; }
-.snail-fl-7 { top: 1200px; left: 10px; animation-delay: 0.4s; }
-.snail-fl-8 { top: 1400px; right: 12px; animation-delay: 2.0s; }
-
+.snail-fl-1 { top: 60px; left: 12px; animation-delay: 0s; }
+.snail-fl-2 { top: 180px; right: 15px; animation-delay: 1s; }
+.snail-fl-3 { top: 340px; left: 8px; animation-delay: 2s; }
+.snail-fl-4 { top: 500px; right: 10px; animation-delay: 0.5s; }
+.snail-fl-5 { top: 650px; left: 14px; animation-delay: 1.5s; }
+.snail-fl-6 { top: 800px; right: 12px; animation-delay: 2.5s; }
+.snail-fl-7 { top: 950px; left: 10px; animation-delay: 3s; }
+.snail-fl-8 { top: 1100px; right: 16px; animation-delay: 0.8s; }
 @keyframes snailFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   25% { transform: translateY(-10px) rotate(3deg); }
   75% { transform: translateY(6px) rotate(-2deg); }
 }
 
-/* ===== 开始页 ===== */
-.start-screen {
+/* Quiz Container */
+.quiz-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Logo bar */
+.quiz-logo-bar {
+  text-align: center;
+  padding: 8px 0 4px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
+  gap: 6px;
+}
+.quiz-logo-bar img {
+  height: 32px;
+  opacity: 0.45;
+  transition: opacity 0.3s;
+}
+.quiz-logo-bar img:hover { opacity: 0.7; }
+.quiz-logo-bar span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Start Page */
+.start-page {
   text-align: center;
+  padding: 40px 20px;
+  animation: fadeInUp 0.6s ease;
 }
-.start-logo {
+.start-page .logo-hero {
   width: 140px;
-  height: auto;
-  margin-bottom: 20px;
   animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(200,160,0,0.25));
+  filter: drop-shadow(0 4px 12px rgba(255,200,0,0.3));
+  margin-bottom: 20px;
 }
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.start-title {
+.start-page h1 {
   font-size: 28px;
   font-weight: 700;
-  color: var(--text-primary);
   margin-bottom: 8px;
+  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.start-subtitle {
-  font-size: 16px;
+.start-page .subtitle {
+  font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 20px;
-  max-width: 400px;
-  line-height: 1.6;
+  margin-bottom: 24px;
 }
-/* 学习进度概览（开始页） */
+.start-page .desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+.btn-start {
+  display: inline-block;
+  padding: 14px 48px;
+  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(255,143,171,0.3);
+}
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(255,143,171,0.4);
+}
+
+/* Progress Overview */
 .progress-overview {
   background: var(--card-white);
   border-radius: var(--radius-sm);
   padding: 16px 20px;
-  margin-bottom: 28px;
-  max-width: 380px;
-  width: 100%;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  margin: 20px 0 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   text-align: left;
 }
-.progress-overview-title {
-  font-size: 13px;
-  font-weight: 600;
+.progress-overview h3 {
+  font-size: 14px;
   color: var(--text-secondary);
   margin-bottom: 10px;
+}
+.progress-stats {
   display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.progress-stat-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 0;
-  font-size: 12px;
-}
-.progress-stat-label { color: var(--text-muted); }
-.progress-stat-value { font-weight: 700; color: var(--text-primary); }
-.progress-stat-value.green { color: var(--green); }
-.progress-stat-value.orange { color: #F59E0B; }
-.progress-stat-value.red { color: var(--red); }
-.weak-modules {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #F0E8E0;
-}
-.weak-modules-title {
-  font-size: 11px;
-  color: var(--red);
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.weak-module-tag {
-  display: inline-block;
-  background: rgba(251,113,133,0.1);
-  color: var(--red);
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 10px;
-  margin: 2px 4px 2px 0;
-}
-.start-meta {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 36px;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 12px;
 }
-.meta-chip {
-  background: var(--card-white);
-  border-radius: 20px;
-  padding: 8px 18px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-.start-btn {
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-coral));
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 16px 48px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(255,143,171,0.35);
-}
-.start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,143,171,0.45); }
-
-/* ===== 主容器 ===== */
-.quiz-container {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 20px 16px 60px;
-  display: none;
-}
-.quiz-container.active { display: block; }
-
-/* ===== 进度条 ===== */
-.progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: rgba(255,248,242,0.92);
-  backdrop-filter: blur(12px);
-  padding: 12px 20px 8px;
-}
-.progress-track {
-  width: 100%;
-  height: 6px;
-  background: #F0E8E0;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-pink), var(--accent-mint));
-  border-radius: 3px;
-  transition: width 0.5s ease;
-}
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.progress-stat {
   font-size: 12px;
   color: var(--text-muted);
-  margin-top: 4px;
+  background: var(--bg-warm);
+  padding: 6px 12px;
+  border-radius: 20px;
 }
-.progress-logo {
-  width: 20px;
-  height: 14px;
-  object-fit: contain;
-  opacity: 0.6;
+.progress-stat strong { color: var(--text-primary); }
+
+/* Quiz Card */
+.quiz-page { display: none; }
+.quiz-page.active { display: block; animation: fadeInUp 0.5s ease; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-/* ===== 题目上方Logo水印条 ===== */
-.quiz-logo-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 0 6px;
-  margin-top: 48px;
-  opacity: 0.45;
-  transition: opacity 0.3s;
-}
-.quiz-logo-bar:hover { opacity: 0.7; }
-.quiz-logo-bar img {
-  height: 32px;
-  width: auto;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.08));
-}
-.quiz-logo-label {
-  font-size: 10px;
-  color: var(--text-muted);
-  margin-left: 8px;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
-
-/* ===== 题目卡片 ===== */
 .quiz-card {
   background: var(--card-white);
   border-radius: var(--radius);
   padding: 28px 24px;
-  margin-top: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  animation: cardIn 0.5s ease;
+  transition: all 0.3s;
 }
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(30px) scale(0.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.quiz-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
 }
+/* 15 backgrounds */
+.snail-bg-1::before  { background: linear-gradient(135deg, #FFF0F5, #FFE4EC); }
+.snail-bg-2::before  { background: linear-gradient(135deg, #F0FFF4, #E6FFE6); }
+.snail-bg-3::before  { background: linear-gradient(135deg, #F0F8FF, #E6F2FF); }
+.snail-bg-4::before  { background: linear-gradient(135deg, #F8F0FF, #F0E6FF); }
+.snail-bg-5::before  { background: linear-gradient(135deg, #FFF5F0, #FFEEE6); }
+.snail-bg-6::before  { background: linear-gradient(135deg, #FFFCF0, #FFF8E6); }
+.snail-bg-7::before  { background: linear-gradient(135deg, #FFF0F0, #FFE8E8); }
+.snail-bg-8::before  { background: linear-gradient(135deg, #F0FFF5, #E6FFEE); }
+.snail-bg-9::before  { background: linear-gradient(135deg, #F8F0FF, #F3E8FF); }
+.snail-bg-10::before { background: linear-gradient(135deg, #FFF0F5, #FFE8F0); }
+.snail-bg-11::before { background: linear-gradient(135deg, #F0FFFF, #E6FAFA); }
+.snail-bg-12::before { background: linear-gradient(135deg, #FFFDF5, #FFF8EE); }
+.snail-bg-13::before { background: linear-gradient(135deg, #FFF0F3, #FFEAEF); }
+.snail-bg-14::before { background: linear-gradient(135deg, #FFFCF0, #FFF5E6); }
+.snail-bg-15::before { background: linear-gradient(135deg, #F8F0FF, #F5EAFF); }
 
-.quiz-card.snail-bg-1  { background: linear-gradient(135deg, #FFF0F5, #FFE4EC); }
-.quiz-card.snail-bg-2  { background: linear-gradient(135deg, #F0FFF4, #E6FFE6); }
-.quiz-card.snail-bg-3  { background: linear-gradient(135deg, #F0F8FF, #E6F2FF); }
-.quiz-card.snail-bg-4  { background: linear-gradient(135deg, #F8F0FF, #F0E6FF); }
-.quiz-card.snail-bg-5  { background: linear-gradient(135deg, #FFF5F0, #FFEEE6); }
-.quiz-card.snail-bg-6  { background: linear-gradient(135deg, #FFFCF0, #FFF8E6); }
-.quiz-card.snail-bg-7  { background: linear-gradient(135deg, #FFF0F0, #FFE8E8); }
-.quiz-card.snail-bg-8  { background: linear-gradient(135deg, #F0FFF5, #E6FFEE); }
-.quiz-card.snail-bg-9  { background: linear-gradient(135deg, #F8F0FF, #F3E8FF); }
-.quiz-card.snail-bg-10 { background: linear-gradient(135deg, #FFF0F5, #FFE8F0); }
-.quiz-card.snail-bg-11 { background: linear-gradient(135deg, #F0FFFF, #E6FAFA); }
-.quiz-card.snail-bg-12 { background: linear-gradient(135deg, #FFFDF5, #FFF8EE); }
-.quiz-card.snail-bg-13 { background: linear-gradient(135deg, #FFF0F3, #FFEAEF); }
-.quiz-card.snail-bg-14 { background: linear-gradient(135deg, #FFFCF0, #FFF5E6); }
-.quiz-card.snail-bg-15 { background: linear-gradient(135deg, #F8F0FF, #F5EAFF); }
+.card-corner-snail {
+  position: absolute;
+  width: 45px; height: 45px;
+  pointer-events: none;
+  opacity: 0.35;
+  z-index: 0;
+  font-size: 24px;
+}
+.ccs-tl { top: 8px; left: 8px; }
+.ccs-tr { top: 8px; right: 8px; }
+.ccs-bl { bottom: 8px; left: 8px; }
+.ccs-br { bottom: 8px; right: 8px; }
 
 .module-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(8px);
+  display: inline-block;
+  padding: 4px 12px;
   border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   position: relative;
   z-index: 1;
 }
-/* 知识掌握度徽章 */
 .mastery-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 16px;
   font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 10px;
-  margin-left: 6px;
   font-weight: 600;
+  margin-left: 6px;
 }
-.mastery-badge.strong { background: rgba(110,231,183,0.15); color: #059669; }
-.mastery-badge.medium { background: rgba(253,230,138,0.3); color: #D97706; }
-.mastery-badge.weak { background: rgba(251,113,133,0.12); color: #E11D48; }
-.mastery-badge.new { background: rgba(125,211,252,0.15); color: #0284C7; }
+.mastery-mastered { background: #D1FAE5; color: #065F46; }
+.mastery-familiar { background: #FEF3C7; color: #92400E; }
+.mastery-weak { background: #FEE2E2; color: #991B1B; }
+.mastery-new { background: #E0E7FF; color: #3730A3; }
 
 .contact-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255,255,255,0.6);
-  border-radius: 14px;
-  padding: 4px 12px 4px 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
   font-size: 11px;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
   position: relative;
   z-index: 1;
 }
 .contact-avatar {
-  width: 22px;
-  height: 22px;
+  width: 20px; height: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
   font-size: 10px;
   font-weight: 700;
-  color: white;
 }
-.question-number {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
-}
+
 .question-text {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   line-height: 1.6;
-  color: var(--text-primary);
   margin-bottom: 20px;
   position: relative;
   z-index: 1;
@@ -362,92 +291,111 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(6px);
+  padding: 14px 18px;
+  background: var(--bg-warm);
   border: 2px solid transparent;
   border-radius: var(--radius-sm);
-  padding: 14px 18px;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.25s;
+  font-size: 14px;
   text-align: left;
-  width: 100%;
 }
 .option-btn:hover {
-  background: rgba(255,255,255,0.95);
+  background: #FFF0F5;
   border-color: var(--accent-pink);
   transform: translateX(4px);
 }
-.option-btn .option-letter {
-  width: 30px;
-  height: 30px;
+.option-btn.selected {
+  background: #FFF0F5;
+  border-color: var(--accent-pink);
+}
+.option-btn.correct {
+  background: #D1FAE5;
+  border-color: var(--green);
+}
+.option-btn.wrong {
+  background: #FEE2E2;
+  border-color: var(--red);
+}
+.option-letter {
+  width: 28px; height: 28px;
   border-radius: 50%;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   flex-shrink: 0;
-  background: #F5F0EB;
-  color: var(--text-secondary);
-  transition: all 0.25s;
+  border: 2px solid #E5E7EB;
 }
-.option-btn:hover .option-letter {
-  background: var(--accent-pink);
-  color: white;
-}
-.option-btn.correct {
-  background: rgba(110,231,183,0.15);
-  border-color: var(--green);
-}
-.option-btn.correct .option-letter {
-  background: var(--green);
-  color: white;
-}
-.option-btn.wrong {
-  background: rgba(251,113,133,0.12);
-  border-color: var(--red);
-}
-.option-btn.wrong .option-letter {
-  background: var(--red);
-  color: white;
-}
-.option-btn.disabled { pointer-events: none; }
+.option-btn.correct .option-letter { background: var(--green); color: white; border-color: var(--green); }
+.option-btn.wrong .option-letter { background: var(--red); color: white; border-color: var(--red); }
 
 .explanation-box {
+  display: none;
   margin-top: 16px;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(6px);
+  padding: 16px;
+  background: #F0F9FF;
   border-radius: var(--radius-sm);
-  padding: 16px 18px;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  border-left: 4px solid var(--accent-mint);
+  border-left: 4px solid var(--accent-sky);
   position: relative;
   z-index: 1;
-  animation: fadeUp 0.4s ease;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
 }
-.explanation-box .exp-title {
-  font-weight: 700;
-  color: var(--accent-mint);
-  margin-bottom: 4px;
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.explanation-box.visible { display: block; animation: fadeInUp 0.3s ease; }
+.explanation-box .knowledge-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #DBEAFE;
+  color: #1E40AF;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
 }
 
-.next-btn {
-  display: block;
-  margin: 24px auto 0;
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-coral));
+/* Progress bar */
+.progress-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 16px;
+}
+.progress-track {
+  flex: 1;
+  height: 8px;
+  background: #F3F0F6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF8FAB, #C4B5FD);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.progress-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.progress-logo {
+  height: 14px;
+  opacity: 0.6;
+}
+
+.btn-next {
+  display: none;
+  margin-top: 20px;
+  padding: 12px 36px;
+  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
   color: white;
   border: none;
   border-radius: 50px;
-  padding: 12px 36px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -455,176 +403,142 @@ body {
   position: relative;
   z-index: 1;
 }
-.next-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,143,171,0.35); }
+.btn-next:hover { transform: translateY(-2px); }
+.btn-next.visible { display: inline-block; animation: fadeInUp 0.3s ease; }
 
-/* ===== 结果页 ===== */
-.result-screen {
+/* Result Page */
+.result-page {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
   text-align: center;
+  padding: 30px 20px;
+  animation: fadeInUp 0.6s ease;
 }
-.result-screen.active { display: flex; }
-.result-logo {
+.result-page.active { display: block; }
+.result-page .logo-result {
   width: 100px;
-  height: auto;
-  margin-bottom: 16px;
   animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(200,160,0,0.25));
+  filter: drop-shadow(0 4px 12px rgba(255,200,0,0.3));
+  margin-bottom: 16px;
 }
-.result-title {
+.result-page h2 {
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .result-score {
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-mint));
+  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 16px;
+  margin: 12px 0;
 }
-.result-desc {
+.result-msg {
   font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 28px;
-  line-height: 1.6;
-  max-width: 360px;
+  margin-bottom: 20px;
 }
-.result-details {
+
+/* Memory Panel */
+.memory-panel {
   background: var(--card-white);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   padding: 20px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  margin-bottom: 16px;
+  margin: 20px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   text-align: left;
 }
-.result-module {
+.memory-panel h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+}
+.trend-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #F0E8E0;
+  margin-bottom: 8px;
+  font-size: 13px;
 }
-.result-module:last-child { border-bottom: none; }
-.result-module-name {
+.trend-label { color: var(--text-secondary); }
+.trend-value { font-weight: 700; }
+.trend-up { color: var(--green); }
+.trend-down { color: var(--red); }
+.trend-flat { color: var(--text-muted); }
+
+/* Option preference bars */
+.pref-bar-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.result-module-score {
-  font-size: 14px;
-  font-weight: 700;
-}
-.result-module-score.perfect { color: var(--green); }
-.result-module-score.partial { color: var(--accent-yellow); }
-.result-module-score.low { color: var(--red); }
-
-/* 学习记忆面板 */
-.memory-panel {
-  background: var(--card-white);
-  border-radius: var(--radius);
-  padding: 20px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  margin-bottom: 24px;
-  text-align: left;
-}
-.memory-panel-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.memory-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
-  font-size: 13px;
-}
-.memory-label { color: var(--text-secondary); }
-.memory-value { font-weight: 700; }
-.memory-value.green { color: var(--green); }
-.memory-value.orange { color: #F59E0B; }
-.memory-value.red { color: var(--red); }
-.memory-trend {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  margin-bottom: 6px;
   font-size: 12px;
-  font-weight: 600;
 }
-.memory-trend.up { color: var(--green); }
-.memory-trend.down { color: var(--red); }
-.memory-trend.same { color: var(--text-muted); }
-.memory-bar-track {
-  width: 100%;
-  height: 4px;
-  background: #F0E8E0;
-  border-radius: 2px;
-  margin-top: 4px;
+.pref-label { width: 16px; font-weight: 700; color: var(--text-secondary); }
+.pref-track {
+  flex: 1;
+  height: 10px;
+  background: #F3F0F6;
+  border-radius: 5px;
   overflow: hidden;
 }
-.memory-bar-fill {
+.pref-fill {
   height: 100%;
-  border-radius: 2px;
-  transition: width 0.5s ease;
+  border-radius: 5px;
+  transition: width 0.5s;
 }
-.memory-bar-fill.green { background: var(--green); }
-.memory-bar-fill.orange { background: #F59E0B; }
-.memory-bar-fill.red { background: var(--red); }
+.pref-pct { width: 36px; text-align: right; color: var(--text-muted); font-size: 11px; }
 
-.retry-btn {
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-coral));
+/* Module mastery */
+.module-mastery-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.mm-icon { font-size: 16px; }
+.mm-name { flex: 1; color: var(--text-secondary); }
+.mm-bar {
+  width: 80px;
+  height: 8px;
+  background: #F3F0F6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.mm-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.mm-pct { width: 30px; text-align: right; font-weight: 600; font-size: 11px; }
+
+.btn-retry {
+  display: inline-block;
+  padding: 12px 36px;
+  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
   color: white;
   border: none;
   border-radius: 50px;
-  padding: 14px 42px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(255,143,171,0.35);
+  margin-top: 10px;
 }
-.retry-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,143,171,0.45); }
+.btn-retry:hover { transform: translateY(-2px); }
 
-.card-corner-snail {
-  position: absolute;
-  font-size: 20px;
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
-}
-.corner-tl { top: 8px; left: 10px; }
-.corner-br { bottom: 8px; right: 10px; }
-
+/* Responsive */
 @media (max-width: 480px) {
-  .start-title { font-size: 22px; }
-  .question-text { font-size: 16px; }
-  .quiz-card { padding: 22px 18px; }
-  .option-btn { padding: 12px 14px; font-size: 14px; }
+  .quiz-container { padding: 12px; }
+  .quiz-card { padding: 20px 16px; }
+  .question-text { font-size: 15px; }
+  .option-btn { padding: 12px 14px; font-size: 13px; }
+  .snail-float { display: none; }
   .quiz-logo-bar img { height: 24px; }
-  .progress-overview { padding: 12px 16px; }
 }
 </style>
 </head>
 <body>
 
-<!-- 浮动蜗牛 -->
+<!-- Floating snails -->
 <div class="snail-float snail-fl-1">🐌</div>
 <div class="snail-float snail-fl-2">🐌</div>
 <div class="snail-float snail-fl-3">🐌</div>
@@ -634,550 +548,609 @@ body {
 <div class="snail-float snail-fl-7">🐌</div>
 <div class="snail-float snail-fl-8">🐌</div>
 
-<!-- 开始页 -->
-<div class="start-screen" id="startScreen">
-  <img id="startLogo" alt="蜗牛AI" class="start-logo">
-  <div class="start-title">蜗牛AI学习互动</div>
-  <div class="start-subtitle">AI财务系统调试与线下活动筹备研讨会<br>要点回顾 · 15道互动测验</div>
-  <div class="progress-overview" id="startProgressOverview" style="display:none"></div>
-  <div class="start-meta">
-    <div class="meta-chip">📋 5大模块</div>
-    <div class="meta-chip">❓ 15道题</div>
-    <div class="meta-chip">⏱ 约5分钟</div>
-  </div>
-  <button class="start-btn" onclick="startQuiz()">开始答题 🚀</button>
+<div class="quiz-container">
+
+<!-- Logo bar (always visible) -->
+<div class="quiz-logo-bar" id="logoBar">
+  <img src="" alt="蜗牛AI" id="logoBarImg">
+  <span>蜗牛AI</span>
 </div>
 
-<!-- 答题区 -->
-<div class="quiz-container" id="quizContainer">
-  <div class="progress-bar" id="progressBar">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-    </div>
-    <div class="progress-info">
-      <span id="progressLabel">第 1 题 / 共 15 题</span>
-      <span id="scoreLabel">得分: 0</span>
-      <img id="progressLogo" alt="" class="progress-logo">
-    </div>
+<!-- Start Page -->
+<div class="start-page" id="startPage">
+  <img src="" alt="蜗牛AI" class="logo-hero" id="logoHero">
+  <h1>CRM系统优化学习互动</h1>
+  <div class="subtitle">数据迁移 · 客户管理 · 机会管理</div>
+  <div class="desc">
+    基于CRM系统优化与数据迁移研讨会内容<br>
+    5大模块 · 15道题 · 即时解析 · 学习记忆追踪
   </div>
-  <!-- 题目上方Logo水印条 -->
-  <div class="quiz-logo-bar">
-    <img id="barLogo" alt="蜗牛AI">
-    <span class="quiz-logo-label">蜗牛AI</span>
+  <button class="btn-start" onclick="startQuiz()">开始答题 🚀</button>
+  <div class="progress-overview" id="progressOverview" style="display:none">
+    <h3>📊 学习进度</h3>
+    <div class="progress-stats" id="progressStats"></div>
   </div>
-  <div id="quizContent"></div>
 </div>
 
-<!-- 结果页 -->
-<div class="result-screen" id="resultScreen">
-  <img id="resultLogo" alt="蜗牛AI" class="result-logo">
-  <div class="result-title" id="resultTitle">答题完成！</div>
+<!-- Quiz Page -->
+<div class="quiz-page" id="quizPage">
+  <div class="progress-bar-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-text" id="progressText">1/15</span>
+    <img src="" alt="" class="progress-logo" id="progressLogo">
+  </div>
+  <div class="quiz-card" id="quizCard">
+    <div class="card-corner-snail ccs-tl">🐌</div>
+    <div class="card-corner-snail ccs-tr">🐌</div>
+    <div class="card-corner-snail ccs-bl">🐌</div>
+    <div class="card-corner-snail ccs-br">🐌</div>
+    <div id="cardContent"></div>
+  </div>
+  <button class="btn-next" id="btnNext" onclick="nextQuestion()">下一题 →</button>
+</div>
+
+<!-- Result Page -->
+<div class="result-page" id="resultPage">
+  <img src="" alt="蜗牛AI" class="logo-result" id="logoResult">
+  <h2>答题完成！</h2>
   <div class="result-score" id="resultScore">0/15</div>
-  <div class="result-desc" id="resultDesc"></div>
-  <div class="result-details" id="resultDetails"></div>
+  <div class="result-msg" id="resultMsg"></div>
   <div class="memory-panel" id="memoryPanel"></div>
-  <button class="retry-btn" onclick="retryQuiz()">再来一次 🔄</button>
+  <button class="btn-retry" onclick="retryQuiz()">再试一次 🔄</button>
+</div>
+
 </div>
 
 <script>
-/* ===== Logo URL (base64, 定义一次，全局引用) ===== */
-const LOGO_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgHBgcJCAgJDBMMDAsLDBgREg4THBgdHRsYGxofIywlHyEqIRobJjQnKi4vMTIxHiU2OjYwOiwwMTD/2wBDAQgJCQwKDBcMDBcwIBsgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDD/wAARCAF3ApoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAIWuIVfY0qBvQsM1IrBhwc1zfiS1Mcy3CDh+D9f8A69VtP82biG58uQdF5GRXj1cxdKs6Tj+J0KhePMmddmlrn47nVLf/AFi+av8Au5/UVat9bjZtlxGY29e1dMMdTlpLT1M3Ta2Naio4po5V3RuGHtUldykpK6M9gooopgFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFYuo64LS7Nv5JYjHJOOtZVa0KMeab0KjFydkbVBrnz4j2dYD/wB9f/Wqxb6/byjLIyfr/KsFjqD+0U6Ul0LesWwurCSPvjcv1HNcdGJF/eIzK0Z/h/z1rtYLuC4GYpFb2B5/KuWuoPJ1CaHtksP5/wAjXj5tBSUa8GdOHbV4M29JvReQZ4Drww/r9KsyQQyj54wfw/ya5aF5LK4EyL07evtXUQzrLAksZyGGRWWGrqtG090KpBwkVX014zvtZSpPbpSRalPauEvI8j+9V4SZ5pHCyja6hh6EV1RfK/3crGd7/ET29xFOu6NwalrElsnhbzLRzn+7U9nqm5vKuhsccZ/x9K7qOMTfLV0ZEqfWJq0UlLXomQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAF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yR71V1KxvfDOrWt/cSi53OS0gyCfUH8K9JVQoAUAAdAO1RzQxTx7JUV164YZFc/1CCilF2a6+ZftnfU4T4hTLPNpsinKvGXB9iQa79OgqF7O2kVQ9vGyoMKCoOBViumlQcJym3vb8DOU+ZJLoLRRRXSQFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRiiigAooooAMUYFFFABijFFFABRRRQAUYoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//9k0e3rTAAAAAObGDxzL5fZBXWTbCFf5U4Q=";
+// ========== LOGO ==========
+const LOGO_URL = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgHBgcJCAgJDBMMDAsLDBgREg4THBgdHRsYGxofIywlHyEqIRobJjQnKi4vMTIxHiU2OjYwOiwwMTD/2wBDAQgJCQwKDBcMDBcwIBsgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDD/wAARCAF3ApoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAIWuIVfY0qBvQsM1IrBhwc1zfiS1Mcy3CDh+D9f8A69VtP82biG58uQdF5GRXj1cxdKs6Tj+J0KhePMmddmlrn47nVLf/AFi+av8Au5/UVat9bjZtlxGY29e1dMMdTlpLT1M3Ta2Naio4po5V3RuGHtUldykpK6M9gooopgFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFYuo64LS7Nv5JYjHJOOtZVa0KMeab0KjFydkbVBrnz4j2dYD/wB9f/Wqxb6/byjLIyfr/KsFjqD+0U6Ul0LesWwurCSPvjcv1HNcdGJF/eIzK0Z/h/z1rtYLuC4GYpFb2B5/KuWuoPJ1CaHtksP5/wAjXj5tBSUa8GdOHbV4M29JvReQZ4Drww/r9KsyQQyj54wfw/ya5aF5LK4EyL07evtXUQzrLAksZyGGRWWGrqtG090KpBwkVX014zvtZSpPbpSRalPauEvI8j+9V4SZ5pHCyja6hh6EV1RfK/3crGd7/ET29xFOu6NwalrElsnhbzLRzn+7U9nqm5vKuhsccZ/x9K7qOMTfLV0ZEqfWJq0UlLXomQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAF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';
 
-// 设置所有Logo图片
-document.getElementById('startLogo').src = LOGO_URL;
+// Set logo images
+document.getElementById('logoBarImg').src = LOGO_URL;
+document.getElementById('logoHero').src = LOGO_URL;
+document.getElementById('logoResult').src = LOGO_URL;
 document.getElementById('progressLogo').src = LOGO_URL;
-document.getElementById('barLogo').src = LOGO_URL;
-document.getElementById('resultLogo').src = LOGO_URL;
 
-/* ===== 题目数据 ===== */
+// ========== QUIZ DATA ==========
 const modules = [
   {
-    id: 1, title: 'AI财务系统验证', subtitle: '核心业务逻辑', icon: '💰', color: '#FF8FAB',
+    id: 1, title: '数据迁移与对接', subtitle: '金数据API与CSV方案', icon: '🔄', color: '#FF8FAB',
     questions: [
-      { id: 1, contact: { name: 'RobinMacMini', initial: 'R', role: '技术负责人', color: '#7DD3FC' },
-        text: 'AI财务系统的核心业务流程顺序是？',
-        options: ['记录账单 → 供应商付款 → 银行流水匹配', '银行流水匹配 → 记录账单 → 供应商付款', '供应商付款 → 银行流水匹配 → 记录账单', '记录账单 → 银行流水匹配 → 供应商付款'],
-        originalAnswer: 0,
-        explanation: '核心流程为：<b>记录账单 → 供应商付款 → 银行流水匹配</b>。这是系统设计的业务闭环，每一步都有明确的数据流转边界。',
-        knowledge: '核心业务流程' },
-      { id: 2, contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#FF8FAB' },
-        text: '会议中发现的银行对账模块卡点是什么？',
-        options: ['银行交易无法记录', '供应商付款功能缺失', '银行交易记录未能与供应商付款自动关联', '系统登录异常'],
-        originalAnswer: 2,
-        explanation: '银行对账模块的卡点在于：<b>银行交易记录未能完全实现与供应商付款记录的自动关联</b>，仍需人工介入核对。',
-        knowledge: '自动化匹配卡点' },
-      { id: 3, contact: { name: 'RobinMacMini', initial: 'R', role: '技术负责人', color: '#7DD3FC' },
-        text: '技术负责人需要修复的两个核心问题是什么？',
-        options: ['系统登录页与权限管理', 'Menu弹出无反应 + 银行匹配流程断裂', '数据导出格式与打印功能', '报表生成速度与缓存机制'],
+      {
+        id: 1,
+        contact: { name: 'RobinMacMini', initial: 'R', role: '数据迁移负责人', color: '#FF8FAB' },
+        text: '团队在尝试通过API获取金数据时遇到了什么限制？',
+        options: [
+          'API接口不存在，金数据未提供API服务',
+          'API仅支持高级会员，团队为普通会员无法使用',
+          'API调用频率受限，每小时仅允许10次请求',
+          'API返回数据格式与CRM系统不兼容'
+        ],
         originalAnswer: 1,
-        explanation: '待修复的两个核心问题：<b>①Menu弹出无反应 ②银行匹配流程断裂</b>。修复后才能实现全链路自动化。',
-        knowledge: '待修复问题' }
+        explanation: '经测试确认，金数据API仅支持<b>高级会员</b>使用，团队当前为<b>普通会员</b>，无法直接通过API获取数据。因此决定放弃API对接，采用手动导出CSV方案。',
+        knowledge: '金数据API限制'
+      },
+      {
+        id: 2,
+        contact: { name: 'Michael', initial: 'M', role: '产品经理', color: '#7DD3FC' },
+        text: '团队最终确定的数据迁移方案是什么？',
+        options: [
+          '开发中间件实现API自动同步',
+          '使用ETL工具进行实时数据转换',
+          '手动导出CSV文件再导入CRM系统',
+          '直接在数据库层面进行数据迁移'
+        ],
+        originalAnswer: 2,
+        explanation: '决定放弃API对接，采用<b>手动导出CSV文件再导入CRM系统</b>的方案。RobinMacMini强调需先导出数据，再通过手动调整格式进行导入。',
+        knowledge: 'CSV迁移方案'
+      },
+      {
+        id: 3,
+        contact: { name: 'sean电脑', initial: 'S', role: '技术顾问', color: '#6EE7B7' },
+        text: '为减少手动调整格式的工作量，后端需要增加什么功能？',
+        options: [
+          '自动识别并过滤重复数据的去重功能',
+          '支持Excel和CSV双格式导入的兼容功能',
+          'CSV导入功能，实现自动列名匹配与解析逻辑',
+          '数据格式自动转换和字段映射的AI功能'
+        ],
+        originalAnswer: 2,
+        explanation: '要求后端增加<b>CSV导入功能</b>，并实现<b>自动列名匹配与解析逻辑</b>，减少手动调整格式的工作量。同时在导入过程中发现数据错乱，需由数据工程师介入清洗和修正。',
+        knowledge: 'CSV自动解析'
+      }
     ]
   },
   {
-    id: 2, title: '线下活动定位', subtitle: '6月20日分享会', icon: '🎯', color: '#6EE7B7',
+    id: 2, title: '客户分级与标签', subtitle: '多维分类体系构建', icon: '🏷️', color: '#C4B5FD',
     questions: [
-      { id: 4, contact: { name: 'JasonXie', initial: 'J', role: '活动总策划', color: '#FF8FAB' },
-        text: '6月20日线下分享会的核心目标是什么？',
-        options: ['销售AI课程产品', '构建澳洲华人AI爱好者圈子，3个月进化出10名AI应用高手', '展示公司技术实力', '招募技术开发人员'],
+      {
+        id: 4,
+        contact: { name: '蒋培james', initial: 'J', role: '业务架构师', color: '#FDE68A' },
+        text: '会议确立的客户分类体系包含哪两个维度？',
+        options: [
+          '"国内/海外"与"企业/个人"两个维度',
+          '"新客户/老客户"与"等级（VVIP/VIP/普通）"两个维度',
+          '"高价值/低价值"与"活跃/沉睡"两个维度',
+          '"付费/免费"与"长期/短期"两个维度'
+        ],
         originalAnswer: 1,
-        explanation: '核心目标：<b>构建澳洲华人AI爱好者圈子，计划在三个月内进化出10名AI应用高手</b>。不是直接卖课，而是建立社群、培养高手。',
-        knowledge: '活动核心目标' },
-      { id: 5, contact: { name: 'Renee', initial: 'Z', role: '签到管理', color: '#C4B5FD' },
-        text: '活动设计的三级漏斗转化路径是？',
-        options: ['报名 → 付费 → 毕业', '公海流量 → 意向用户 → 付费学员', '围观 → 体验 → 购买', '引流 → 转化 → 复购'],
+        explanation: '确立了<b>"新客户/老客户"</b>与<b>"等级（VVIP/VIP/普通）"</b>两个维度的分类体系，并增加了"批发/零售"的业务属性。',
+        knowledge: '客户分类维度'
+      },
+      {
+        id: 5,
+        contact: { name: 'RobinMacMini', initial: 'R', role: '数据迁移负责人', color: '#FF8FAB' },
+        text: '"蝴蝶"和"水牛"在系统中分别代表什么角色？',
+        options: [
+          '"蝴蝶"代表大客户，"水牛"代表小客户',
+          '"蝴蝶"代表推荐人，"水牛"代表跟进转化人',
+          '"蝴蝶"代表新客户，"水牛"代表老客户',
+          '"蝴蝶"代表零售客户，"水牛"代表批发客户'
+        ],
         originalAnswer: 1,
-        explanation: '三级漏斗：<b>公海流量 → 意向用户 → 付费学员</b>。通过高价值内容分享激发兴趣，在情绪高点直接引导报名实现转化。',
-        knowledge: '三级转化漏斗' },
-      { id: 6, contact: { name: 'JasonXie', initial: 'J', role: '活动总策划', color: '#FF8FAB' },
-        text: '为什么将"课程介绍与转化引导"环节提前至中场休息前？',
-        options: ['节省时间', '抓住听众兴奋点，采用"快马加鞭"策略直接推课', '场地时间限制', '讲师时间安排冲突'],
-        originalAnswer: 1,
-        explanation: '采用<b>"快马加鞭"策略</b>：将课程介绍提前至中场休息前，是为了<b>抓住听众兴奋点</b>，在情绪高点直接引导报名。',
-        knowledge: '议程节奏策略' }
+        explanation: '明确<b>"蝴蝶"代表推荐人</b>，<b>"水牛"代表跟进转化人</b>，需在系统中建立对应的归属关系字段。同时增设"能否推荐其他客户"字段，覆盖潜在代理或推荐人需求，替代了原有的模糊标签。',
+        knowledge: '蝴蝶/水牛定义'
+      },
+      {
+        id: 6,
+        contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#7DD3FC' },
+        text: '为覆盖潜在代理或推荐人需求，系统增设了什么字段？',
+        options: [
+          '"客户来源渠道"字段',
+          '"客户终身价值(LTV)"字段',
+          '"能否推荐其他客户"字段',
+          '"客户活跃度评分"字段'
+        ],
+        originalAnswer: 2,
+        explanation: '增设<b>"能否推荐其他客户"</b>字段，以覆盖潜在代理或推荐人需求，替代了原有的"蝴蝶/水牛"等模糊标签，使分类逻辑更加清晰。',
+        knowledge: '推荐人字段'
+      }
     ]
   },
   {
-    id: 3, title: '会务执行分工', subtitle: '人员与物料', icon: '📋', color: '#7DD3FC',
+    id: 3, title: '客户管理交互优化', subtitle: '权限修复与体验提升', icon: '🛠️', color: '#6EE7B7',
     questions: [
-      { id: 7, contact: { name: 'Michael', initial: 'M', role: '技术支持', color: '#FCA5A5' },
-        text: 'Michael需要在6月17日上午完成什么任务？',
-        options: ['打印签到表和易拉宝', '前往办公室取音箱、麦克风及长线插线板', '测试直播设备', '布置会场座位'],
-        originalAnswer: 1,
-        explanation: 'Michael需在6月17日上午<b>前往办公室取音箱、麦克风及长线插线板</b>，并于下午送至现场进行联合调试。',
-        knowledge: '设备搬运安排' },
-      { id: 8, contact: { name: '蒋培', initial: '蒋', role: '线上班主任', color: '#FDE68A' },
-        text: '线上班主任和线下班主任分别由谁担任？',
-        options: ['蒋培 / JasonXie', '吴清 / Michael', '蒋培 / 吴清', 'Renee / 彭总'],
+      {
+        id: 7,
+        contact: { name: 'sean电脑', initial: 'S', role: '技术顾问', color: '#6EE7B7' },
+        text: '客户管理中"创建人"字段存在什么问题需要修复？',
+        options: [
+          '创建人字段数据丢失，无法恢复',
+          '创建人权限过高，可以修改所有客户数据',
+          '添加客户时创建人字段不显示或无法选择',
+          '创建人字段与修改人字段混淆显示'
+        ],
         originalAnswer: 2,
-        explanation: '<b>线上班主任由蒋培担任，线下班主任由吴清担任</b>。两人分工明确，确保线上线下的学员体验同步。',
-        knowledge: '班主任分工' },
-      { id: 9, contact: { name: '彭总', initial: '彭', role: '现场接待', color: '#C4B5FD' },
-        text: '彭总在现场负责哪些工作？',
-        options: ['签到管理与设备调试', '拍照、VIP引导及临时来宾接待', '直播推流与课程介绍', '物料打印与搬运'],
+        explanation: '解决了添加客户时<b>"创建人"字段不显示或无法选择</b>的问题，确保数据可追溯。这是保证客户管理数据完整性的关键修复。',
+        knowledge: '创建人权限修复'
+      },
+      {
+        id: 8,
+        contact: { name: 'Michael', initial: 'M', role: '产品经理', color: '#7DD3FC' },
+        text: '客户管理页面中编辑功能存在什么Bug？',
+        options: [
+          '编辑后数据无法保存，总是回到原始状态',
+          '编辑时系统报错并自动退出页面',
+          '"编辑客户"按钮点击无响应',
+          '编辑页面加载速度过慢，经常超时'
+        ],
+        originalAnswer: 2,
+        explanation: '修复了客户管理页面中<b>"编辑客户"按钮点击无响应</b>的Bug，确保用户可以正常编辑客户信息。',
+        knowledge: '编辑按钮Bug'
+      },
+      {
+        id: 9,
+        contact: { name: '蒋培james', initial: 'J', role: '业务架构师', color: '#FDE68A' },
+        text: '客户详情页需要增加什么功能来丰富客户信息展示？',
+        options: [
+          '客户评分和等级自动计算功能',
+          '图片上传功能及附件列表索引',
+          '客户社交账号自动抓取功能',
+          '客户消费趋势预测图表'
+        ],
         originalAnswer: 1,
-        explanation: '彭总负责：<b>现场拍照、VIP引导及临时来宾接待</b>。Renee负责签到管理，Michael负责设备调试。',
-        knowledge: '现场接待分工' }
+        explanation: '增加<b>附件列表功能</b>，支持上传图片和文件，并在客户详情页展示。同时增加"下次联系时间"字段，用于后续的自动化扫描提醒。',
+        knowledge: '附件与图片功能'
+      }
     ]
   },
   {
-    id: 4, title: '营销转化策略', subtitle: '引流与成交', icon: '📣', color: '#C4B5FD',
+    id: 4, title: '机会管理与项目增强', subtitle: '金额细化与功能完善', icon: '💰', color: '#FDE68A',
     questions: [
-      { id: 10, contact: { name: 'JasonXie', initial: 'J', role: '营销总负责', color: '#FF8FAB' },
-        text: '活动当天全员发布朋友圈宣传的具体时间是？',
-        options: ['13:30', '13:45', '13:50', '14:00'],
-        originalAnswer: 2,
-        explanation: '全员需在活动当天<b>13:50同步发布</b>带有直播链接的朋友圈，配合现场照片素材进行造势。直播预热则在13:45开启。',
-        knowledge: '朋友圈发布时间' },
-      { id: 11, contact: { name: 'JasonXie', initial: 'J', role: '营销总负责', color: '#FF8FAB' },
-        text: '由于支付接口限制，统一的付款引导话术是什么？',
-        options: ['直接点击链接支付', '添加蜗牛AI助理微信，发送截图后拉入正式学员群', '扫描二维码直接支付', '联系客服获取支付链接'],
+      {
+        id: 10,
+        contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#7DD3FC' },
+        text: '原有的"机会金额"被拆分为哪三个金额字段？',
+        options: [
+          '"预算金额"、"审批金额"、"执行金额"',
+          '"意向金额"、"已确定金额"、"已到账金额"',
+          '"预估金额"、"合同金额"、"回款金额"',
+          '"报价金额"、"成交金额"、"利润金额"'
+        ],
         originalAnswer: 1,
-        explanation: '由于支付接口限制无法自动跳转二维码，统一设置为：<b>"添加蜗牛AI助理微信，发送截图后拉入正式学员群"</b>。',
-        knowledge: '付款引导话术' },
-      { id: 12, contact: { name: 'Michael', initial: 'M', role: '客户回访', color: '#FCA5A5' },
-        text: '对未成交意向客户的回访截止日期是？',
-        options: ['6月20日', '6月22日', '6月25日', '6月30日'],
+        explanation: '将原有的"机会金额"拆分为<b>"意向金额"、"已确定金额"和"已到账金额"</b>三列，以精确追踪投资进度。',
+        knowledge: '三阶段金额管理'
+      },
+      {
+        id: 11,
+        contact: { name: 'RobinMacMini', initial: 'R', role: '数据迁移负责人', color: '#FF8FAB' },
+        text: '项目管理模块需要增加什么功能？',
+        options: [
+          '项目审批流程和权限管理功能',
+          '"新增项目"和"删除项目"功能',
+          '项目甘特图和里程碑追踪功能',
+          '项目模板自动生成功能'
+        ],
+        originalAnswer: 1,
+        explanation: '在项目管理模块增加<b>"新增项目"和"删除项目"</b>的功能，并清理了测试数据（如6号、13号地等无效项目）。',
+        knowledge: '项目增删功能'
+      },
+      {
+        id: 12,
+        contact: { name: 'Michael', initial: 'M', role: '产品经理', color: '#7DD3FC' },
+        text: '机会管理中"下次联系时间"字段的用途是什么？',
+        options: [
+          '用于统计销售跟进频率和效率',
+          '用于计算客户流失预警指标',
+          '用于后续的自动化扫描推送提醒',
+          '用于生成年度客户回访计划'
+        ],
         originalAnswer: 2,
-        explanation: '明确要求在活动结束后<b>6月25日前</b>对未成交但有意向的客户进行电话回访，确保转化漏斗不漏人。',
-        knowledge: '回访截止日期' }
+        explanation: '增加"下次联系时间"字段，用于后续的<b>自动化扫描推送提醒</b>，确保销售人员不会遗漏重要跟进时机。',
+        knowledge: '自动化提醒'
+      }
     ]
   },
   {
-    id: 5, title: '待办事项追踪', subtitle: '关键节点', icon: '✅', color: '#FDE68A',
+    id: 5, title: '待办与执行计划', subtitle: '6月1日全量上线', icon: '📋', color: '#7DD3FC',
     questions: [
-      { id: 13, contact: { name: 'sean电脑', initial: 'S', role: '素材制作', color: '#6EE7B7' },
-        text: 'sean电脑需要制作的视频素材是什么？',
-        options: ['活动回顾视频', '课程宣传视频', '"直播马上开始"的横屏倒计时视频', '讲师介绍视频'],
+      {
+        id: 13,
+        contact: { name: 'sean电脑', initial: 'S', role: '技术顾问', color: '#6EE7B7' },
+        text: '现有多少个客户和机会数据需要进行迁移？',
+        options: [
+          '56个客户和72个机会',
+          '76个客户和82个机会',
+          '96个客户和102个机会',
+          '66个客户和92个机会'
+        ],
+        originalAnswer: 1,
+        explanation: '需要对现有<b>76个客户</b>和<b>82个机会</b>数据进行迁移，并自动补充新增字段的默认值。',
+        knowledge: '数据迁移规模'
+      },
+      {
+        id: 14,
+        contact: { name: '蒋培james', initial: 'J', role: '业务架构师', color: '#FDE68A' },
+        text: 'Michael需要在企微中发送什么文档？',
+        options: [
+          '数据迁移时间表和风险预案',
+          '客户类型、蝴蝶/水牛归属等新增字段需求文档',
+          '系统测试用例和验收标准',
+          '项目预算和资源分配计划'
+        ],
+        originalAnswer: 1,
+        explanation: 'Michael需要将<b>客户类型、蝴蝶/水牛归属等新增字段需求</b>整理成文档发到企微，确保开发团队明确需求。',
+        knowledge: '字段需求文档'
+      },
+      {
+        id: 15,
+        contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#7DD3FC' },
+        text: '会议要求全体参会人员在什么时间做什么？',
+        options: [
+          '当天晚上提交系统优化建议报告',
+          '次日早上参加线上培训会议',
+          '半小时后登录系统进行功能测试，发现问题截图发群',
+          '一周内完成所有客户数据的重新录入'
+        ],
         originalAnswer: 2,
-        explanation: 'sean电脑负责制作<b>"直播马上开始"的横屏倒计时视频素材</b>，用于直播预热阶段播放。',
-        knowledge: '视频素材制作' },
-      { id: 14, contact: { name: 'RobinMacMini', initial: 'R', role: '技术负责人', color: '#7DD3FC' },
-        text: '用于现场调研的Google表格需要收集哪些信息？',
-        options: ['姓名和手机号', '昵称和AI应用场景', '公司名称和职位', '邮箱和兴趣方向'],
-        originalAnswer: 1,
-        explanation: 'RobinMacMini需制作包含<b>昵称和AI应用场景</b>的Google表格收集链接，用于现场调研了解参与者画像。',
-        knowledge: '调研表格字段' },
-      { id: 15, contact: { name: 'Michael', initial: 'M', role: '技术支持', color: '#FCA5A5' },
-        text: '6月19日Michael需要对已报名人员执行什么操作？',
-        options: ['发送活动海报', '短信/电话确认提醒', '收取剩余费用', '分配座位号'],
-        originalAnswer: 1,
-        explanation: '6月19日Michael需对<b>已报名人员进行短信/电话确认提醒</b>，确保活动到场率。',
-        knowledge: '报名确认时间' }
+        explanation: '要求全体参会人员<b>半小时后登录系统进行功能测试</b>，发现问题截图发群。同时制定6月1日全量上线的执行计划。',
+        knowledge: '测试与上线计划'
+      }
     ]
   }
 ];
 
-/* ===== 完全随机化答案算法 (v2.1) ===== */
-// 每道题的正确答案位置完全随机，无任何分布约束
-// 每次生成的选项顺序不可预测，杜绝规律性排列
-function shuffleArray(arr) {
-  const shuffled = [...arr];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
+// ========== STATE ==========
+let currentQ = 0;
+let score = 0;
+let answers = [];
+let shuffledOptions = [];
+let answered = false;
+const totalQ = 15;
 
-function randomizeAnswers(modules) {
-  const allQuestions = [];
+// ========== RANDOMIZE ==========
+function randomizeAnswers() {
+  shuffledOptions = [];
   modules.forEach(m => {
     m.questions.forEach(q => {
-      allQuestions.push({ ...q, moduleId: m.id, module: m });
+      const correctIdx = q.originalAnswer;
+      const correctOpt = q.options[correctIdx];
+      const wrongOpts = q.options.filter((_, i) => i !== correctIdx);
+      // Fisher-Yates shuffle wrong options
+      for (let i = wrongOpts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [wrongOpts[i], wrongOpts[j]] = [wrongOpts[j], wrongOpts[i]];
+      }
+      const correctSlot = Math.floor(Math.random() * 4);
+      const opts = [];
+      let wIdx = 0;
+      for (let i = 0; i < 4; i++) {
+        if (i === correctSlot) {
+          opts.push({ text: correctOpt, isCorrect: true });
+        } else {
+          opts.push({ text: wrongOpts[wIdx++], isCorrect: false });
+        }
+      }
+      shuffledOptions.push({ questionId: q.id, options: opts, correctSlot });
     });
   });
-
-  // 完全随机：每道题独立随机选择正确答案位置
-  // 不做均匀分布，不设目标配额，完全不可预测
-  const assigned = allQuestions.map(q => {
-    const correctOption = q.options[q.originalAnswer];
-    const wrongOptions = q.options.filter((opt, idx) => idx !== q.originalAnswer);
-    const shuffledWrong = shuffleArray(wrongOptions);
-
-    // 随机决定正确答案放在哪个位置 (0-3)
-    const correctSlot = Math.floor(Math.random() * 4);
-
-    const newOptions = [];
-    let wrongIdx = 0;
-    for (let s = 0; s < 4; s++) {
-      if (s === correctSlot) {
-        newOptions.push(correctOption);
-      } else {
-        newOptions.push(shuffledWrong[wrongIdx++]);
-      }
-    }
-
-    return { ...q, options: newOptions, answer: correctSlot };
-  });
-
-  return assigned;
 }
 
-/* ===== 学习进度记忆系统 (localStorage) ===== */
-const STORAGE_KEY = 'snail_quiz_progress';
-
-function loadProgress() {
+// ========== LOCALSTORAGE ==========
+function getProgress() {
   try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : null;
-  } catch (e) { return null; }
+    const d = localStorage.getItem('snail_quiz_progress');
+    return d ? JSON.parse(d) : null;
+  } catch(e) { return null; }
 }
-
-function saveProgress(progress) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  } catch (e) {}
-}
-
-function initProgress() {
-  return {
-    totalAttempts: 0,
-    bestScore: 0,
-    lastScore: 0,
-    lastDate: null,
-    history: [],        // [{date, score, total, moduleScores}]
-    questionStats: {},  // {questionId: {correct: N, wrong: N, lastAnswer: idx}}
-    moduleStats: {},    // {moduleId: {totalCorrect: N, totalWrong: N}}
-    optionPreference: { A: 0, B: 0, C: 0, D: 0 },  // 用户选A/B/C/D的次数
-  };
-}
-
-function recordAttempt(score, total, moduleScores, answers) {
-  const progress = loadProgress() || initProgress();
-  const now = new Date().toISOString().slice(0, 10);
-
-  progress.totalAttempts++;
-  if (score > progress.bestScore) progress.bestScore = score;
-  progress.lastScore = score;
-  progress.lastDate = now;
-
-  // 记录本次历史（保留最近20次）
-  progress.history.push({ date: now, score, total, moduleScores: {...moduleScores} });
-  if (progress.history.length > 20) progress.history = progress.history.slice(-20);
-
-  // 记录每题统计
-  answers.forEach(a => {
-    if (!progress.questionStats[a.qId]) progress.questionStats[a.qId] = { correct: 0, wrong: 0, lastAnswer: -1 };
-    if (a.isCorrect) progress.questionStats[a.qId].correct++;
-    else progress.questionStats[a.qId].wrong++;
-    progress.questionStats[a.qId].lastAnswer = a.selectedIdx;
+function saveProgress(result) {
+  let p = getProgress() || { totalAttempts:0, bestScore:0, lastScore:0, lastDate:'', history:[], questionStats:{}, moduleStats:{}, optionPreference:{A:0,B:0,C:0,D:0} };
+  p.totalAttempts++;
+  if (result.score > p.bestScore) p.bestScore = result.score;
+  p.lastScore = result.score;
+  p.lastDate = new Date().toISOString().slice(0,10);
+  p.history.push({ date: p.lastDate, score: result.score, total: totalQ, moduleScores: result.moduleScores });
+  if (p.history.length > 20) p.history = p.history.slice(-20);
+  // question stats
+  result.details.forEach(d => {
+    if (!p.questionStats[d.qId]) p.questionStats[d.qId] = { correct:0, wrong:0 };
+    d.correct ? p.questionStats[d.qId].correct++ : p.questionStats[d.qId].wrong++;
   });
-
-  // 记录模块统计
-  for (const [mId, ms] of Object.entries(moduleScores)) {
-    if (!progress.moduleStats[mId]) progress.moduleStats[mId] = { totalCorrect: 0, totalWrong: 0 };
-    progress.moduleStats[mId].totalCorrect += ms.correct;
-    progress.moduleStats[mId].totalWrong += (ms.total - ms.correct);
-  }
-
-  // 记录选项偏好
-  answers.forEach(a => {
-    const letters = ['A', 'B', 'C', 'D'];
-    if (a.selectedIdx >= 0 && a.selectedIdx < 4) {
-      progress.optionPreference[letters[a.selectedIdx]]++;
-    }
+  // module stats
+  Object.entries(result.moduleScores).forEach(([mId, ms]) => {
+    if (!p.moduleStats[mId]) p.moduleStats[mId] = { totalCorrect:0, totalWrong:0 };
+    p.moduleStats[mId].totalCorrect += ms.correct;
+    p.moduleStats[mId].totalWrong += ms.wrong;
   });
-
-  saveProgress(progress);
-  return progress;
+  // option preference
+  result.optionPreference && Object.entries(result.optionPreference).forEach(([k,v]) => {
+    p.optionPreference[k] = (p.optionPreference[k]||0) + v;
+  });
+  try { localStorage.setItem('snail_quiz_progress', JSON.stringify(p)); } catch(e) {}
 }
 
-function getModuleMastery(moduleId, questionIds) {
-  const progress = loadProgress();
-  if (!progress) return 'new';
-  let totalC = 0, totalW = 0;
-  questionIds.forEach(qId => {
-    const qs = progress.questionStats[qId];
-    if (qs) { totalC += qs.correct; totalW += qs.wrong; }
-  });
-  const total = totalC + totalW;
+function getMasteryLevel(qId) {
+  const p = getProgress();
+  if (!p || !p.questionStats[qId]) return 'new';
+  const s = p.questionStats[qId];
+  const total = s.correct + s.wrong;
   if (total === 0) return 'new';
-  const rate = totalC / total;
-  if (rate >= 0.7) return 'strong';
-  if (rate >= 0.4) return 'medium';
+  const rate = s.correct / total;
+  if (rate >= 0.8) return 'mastered';
+  if (rate >= 0.5) return 'familiar';
   return 'weak';
 }
 
-/* ===== 开始页显示历史进度 ===== */
-function renderStartProgress() {
-  const progress = loadProgress();
-  const el = document.getElementById('startProgressOverview');
-  if (!progress || progress.totalAttempts === 0) { el.style.display = 'none'; return; }
+function getMasteryLabel(level) {
+  const map = { mastered:'已掌握', familiar:'熟悉中', weak:'薄弱', new:'首次' };
+  return map[level] || '首次';
+}
+function getMasteryClass(level) {
+  const map = { mastered:'mastery-mastered', familiar:'mastery-familiar', weak:'mastery-weak', new:'mastery-new' };
+  return map[level] || 'mastery-new';
+}
 
-  el.style.display = 'block';
-  const avgScore = progress.history.length > 0
-    ? Math.round(progress.history.reduce((s, h) => s + h.score, 0) / progress.history.length)
-    : 0;
-
-  // 找出薄弱模块
-  const weakModules = [];
-  modules.forEach(m => {
-    const mastery = getModuleMastery(m.id, m.questions.map(q => q.id));
-    if (mastery === 'weak') weakModules.push(m.title);
-  });
-
-  // 上次分数vs平均分
-  const lastPct = progress.history.length > 0
-    ? Math.round(progress.history[progress.history.length-1].score / progress.history[progress.history.length-1].total * 100)
-    : 0;
-  const avgPct = progress.history.length > 0
-    ? Math.round(progress.history.reduce((s, h) => s + h.score / h.total, 0) / progress.history.length * 100)
-    : 0;
-
-  let html = '<div class="progress-overview-title">📊 学习进度 · 第 ' + (progress.totalAttempts + 1) + ' 次挑战</div>';
-  html += '<div class="progress-stat-row"><span class="progress-stat-label">历史最佳</span><span class="progress-stat-value green">' + progress.bestScore + '/15</span></div>';
-  html += '<div class="progress-stat-row"><span class="progress-stat-label">平均得分</span><span class="progress-stat-value">' + avgScore + '/15</span></div>';
-  html += '<div class="progress-stat-row"><span class="progress-stat-label">上次得分</span><span class="progress-stat-value">' + progress.lastScore + '/15</span></div>';
-
-  if (weakModules.length > 0) {
-    html += '<div class="weak-modules"><div class="weak-modules-title">⚠️ 薄弱模块 · 重点关注</div>';
-    weakModules.forEach(w => { html += '<span class="weak-module-tag">' + w + '</span>'; });
-    html += '</div>';
+// ========== RENDER ==========
+function renderStartPage() {
+  document.getElementById('startPage').style.display = '';
+  document.getElementById('quizPage').classList.remove('active');
+  document.getElementById('resultPage').classList.remove('active');
+  const p = getProgress();
+  if (p && p.totalAttempts > 0) {
+    document.getElementById('progressOverview').style.display = '';
+    const avg = p.history.length > 0 ? (p.history.reduce((s,h) => s+h.score, 0) / p.history.length).toFixed(1) : 0;
+    // Find weak modules
+    let weakModules = [];
+    Object.entries(p.moduleStats).forEach(([mId, ms]) => {
+      const rate = ms.totalCorrect / (ms.totalCorrect + ms.totalWrong || 1);
+      if (rate < 0.5) weakModules.push(mId);
+    });
+    let weakHtml = weakModules.map(mId => {
+      const m = modules.find(x => x.id == mId);
+      return m ? `<span style="background:#FEE2E2;color:#991B1B;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;margin-left:4px">${m.icon} ${m.title} 薄弱</span>` : '';
+    }).join('');
+    document.getElementById('progressStats').innerHTML =
+      `<div class="progress-stat">答题 <strong>${p.totalAttempts}</strong> 次</div>` +
+      `<div class="progress-stat">最佳 <strong>${p.bestScore}/${totalQ}</strong></div>` +
+      `<div class="progress-stat">平均 <strong>${avg}</strong></div>` +
+      `<div class="progress-stat">上次 <strong>${p.lastScore}/${totalQ}</strong></div>` +
+      (weakHtml ? `</div><div style="margin-top:8px;font-size:11px;color:var(--text-muted)">薄弱模块：${weakHtml}</div>` : '');
   }
-
-  el.innerHTML = html;
 }
 
-// 页面加载时显示历史进度
-renderStartProgress();
-
-/* ===== 核心逻辑 ===== */
-let shuffledQuestions = randomizeAnswers(modules);
-let currentQuestion = 0;
-let score = 0;
-let moduleScores = {};
-let answered = false;
-let attemptAnswers = [];  // 记录本次答题选择
-
-function initModuleScores() {
-  moduleScores = {};
-  modules.forEach(m => { moduleScores[m.id] = { total: m.questions.length, correct: 0 }; });
+function getQuestionData(idx) {
+  let qIdx = 0;
+  for (const m of modules) {
+    for (const q of m.questions) {
+      if (qIdx === idx) return { module: m, question: q, shuffled: shuffledOptions[idx] };
+      qIdx++;
+    }
+  }
+  return null;
 }
 
-function startQuiz() {
-  document.getElementById('startScreen').style.display = 'none';
-  document.getElementById('quizContainer').classList.add('active');
-  currentQuestion = 0;
-  score = 0;
-  attemptAnswers = [];
-  shuffledQuestions = randomizeAnswers(modules);
-  initModuleScores();
-  showQuestion();
-}
-
-function showQuestion() {
-  answered = false;
-  const q = shuffledQuestions[currentQuestion];
-  const m = q.module;
-  const progress = ((currentQuestion) / shuffledQuestions.length * 100);
-
-  document.getElementById('progressFill').style.width = progress + '%';
-  document.getElementById('progressLabel').textContent = '第 ' + (currentQuestion + 1) + ' 题 / 共 ' + shuffledQuestions.length + ' 题';
-  document.getElementById('scoreLabel').textContent = '得分: ' + score;
-
-  // 获取模块掌握度
-  const mastery = getModuleMastery(m.id, m.questions.map(qq => qq.id));
-  const masteryLabels = { new: '首次', strong: '已掌握', medium: '熟悉中', weak: '薄弱' };
-  const masteryBadge = '<span class="mastery-badge ' + mastery + '">' + masteryLabels[mastery] + '</span>';
-
-  const letters = ['A', 'B', 'C', 'D'];
-  const optionsHTML = q.options.map((opt, i) =>
-    '<button class="option-btn" onclick="selectOption(' + i + ')" id="opt' + i + '">' +
-    '<span class="option-letter">' + letters[i] + '</span>' +
-    '<span>' + opt + '</span></button>'
+function renderQuestion(idx) {
+  const data = getQuestionData(idx);
+  if (!data) return;
+  const { module, question, shuffled } = data;
+  const bgClass = `snail-bg-${(idx % 15) + 1}`;
+  const card = document.getElementById('quizCard');
+  card.className = `quiz-card ${bgClass}`;
+  const mastery = getMasteryLevel(question.id);
+  const letters = ['A','B','C','D'];
+  const optsHtml = shuffled.options.map((o, i) =>
+    `<button class="option-btn" data-idx="${i}" onclick="selectOption(${i})">
+      <span class="option-letter">${letters[i]}</span>
+      <span>${o.text}</span>
+    </button>`
   ).join('');
 
-  document.getElementById('quizContent').innerHTML =
-    '<div class="quiz-card snail-bg-' + q.id + '">' +
-    '<span class="card-corner-snail corner-tl">🐌</span>' +
-    '<span class="card-corner-snail corner-br">🐌</span>' +
-    '<div class="module-badge">' + m.icon + ' ' + m.title + masteryBadge + '</div>' +
-    '<div class="contact-tag"><span class="contact-avatar" style="background:' + q.contact.color + '">' + q.contact.initial + '</span>' +
-    q.contact.name + ' · ' + q.contact.role + '</div>' +
-    '<div class="question-number">第 ' + (currentQuestion + 1) + ' 题</div>' +
-    '<div class="question-text">' + q.text + '</div>' +
-    '<div class="options-list" id="optionsList">' + optionsHTML + '</div>' +
-    '<div id="explanationArea"></div></div>';
+  document.getElementById('cardContent').innerHTML =
+    `<span class="module-badge" style="background:${module.color}22;color:${module.color}">${module.icon} ${module.title}</span>` +
+    `<span class="mastery-badge ${getMasteryClass(mastery)}">${getMasteryLabel(mastery)}</span>` +
+    `<div class="contact-tag" style="background:${question.contact.color}15;color:${question.contact.color}">
+      <span class="contact-avatar" style="background:${question.contact.color}">${question.contact.initial}</span>
+      ${question.contact.name} · ${question.contact.role}
+    </div>` +
+    `<div class="question-text">${question.text}</div>` +
+    `<div class="options-list">${optsHtml}</div>` +
+    `<div class="explanation-box" id="explanation">
+      <strong>📝 解析：</strong>${question.explanation}
+      <div class="knowledge-tag">${question.knowledge}</div>
+    </div>`;
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('progressFill').style.width = `${((idx+1)/totalQ)*100}%`;
+  document.getElementById('progressText').textContent = `${idx+1}/${totalQ}`;
+  document.getElementById('btnNext').classList.remove('visible');
+  answered = false;
 }
 
-function selectOption(index) {
+function selectOption(idx) {
   if (answered) return;
   answered = true;
-  const q = shuffledQuestions[currentQuestion];
-  const isCorrect = index === q.answer;
-  if (isCorrect) { score++; moduleScores[q.moduleId].correct++; }
+  const data = getQuestionData(currentQ);
+  const shuffled = data.shuffled;
+  const isCorrect = shuffled.options[idx].isCorrect;
+  if (isCorrect) score++;
 
-  // 记录答题选择
-  attemptAnswers.push({ qId: q.id, selectedIdx: index, isCorrect, correctIdx: q.answer });
+  answers.push({
+    qId: data.question.id,
+    moduleId: data.module.id,
+    selectedIdx: idx,
+    correct: isCorrect,
+    selectedLetter: ['A','B','C','D'][idx]
+  });
 
-  for (let i = 0; i < q.options.length; i++) {
-    const btn = document.getElementById('opt' + i);
-    btn.classList.add('disabled');
-    if (i === q.answer) btn.classList.add('correct');
-    else if (i === index && !isCorrect) btn.classList.add('wrong');
-  }
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach((btn, i) => {
+    btn.onclick = null;
+    if (shuffled.options[i].isCorrect) btn.classList.add('correct');
+    if (i === idx && !isCorrect) btn.classList.add('wrong');
+    if (i === idx) btn.classList.add('selected');
+  });
 
-  const resultIcon = isCorrect ? '✅' : '❌';
-  document.getElementById('explanationArea').innerHTML =
-    '<div class="explanation-box"><div class="exp-title">' + resultIcon + ' ' + (isCorrect ? '回答正确！' : '答错了～') + '</div>' +
-    q.explanation + '</div>' +
-    '<button class="next-btn" onclick="nextQuestion()">' +
-    (currentQuestion < shuffledQuestions.length - 1 ? '下一题 →' : '查看结果 🎉') + '</button>';
-
-  document.getElementById('scoreLabel').textContent = '得分: ' + score;
+  document.getElementById('explanation').classList.add('visible');
+  document.getElementById('btnNext').classList.add('visible');
+  document.getElementById('btnNext').textContent = currentQ < totalQ - 1 ? '下一题 →' : '查看结果 🎯';
 }
 
 function nextQuestion() {
-  currentQuestion++;
-  if (currentQuestion >= shuffledQuestions.length) showResult();
-  else showQuestion();
+  currentQ++;
+  if (currentQ >= totalQ) {
+    showResult();
+  } else {
+    renderQuestion(currentQ);
+  }
+}
+
+function startQuiz() {
+  currentQ = 0;
+  score = 0;
+  answers = [];
+  answered = false;
+  randomizeAnswers();
+  document.getElementById('startPage').style.display = 'none';
+  document.getElementById('quizPage').classList.add('active');
+  document.getElementById('resultPage').classList.remove('active');
+  renderQuestion(0);
 }
 
 function showResult() {
-  document.getElementById('quizContainer').classList.remove('active');
-  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('quizPage').classList.remove('active');
+  document.getElementById('resultPage').classList.add('active');
 
-  const total = shuffledQuestions.length;
-  const pct = Math.round(score / total * 100);
-  let title, desc;
-  if (pct >= 90) { title = '会议达人！'; desc = '你对本次会议要点掌握得非常扎实，可以放心上岗了！'; }
-  else if (pct >= 70) { title = '掌握良好！'; desc = '大部分要点已掌握，个别细节可以再回顾一下会议纪要。'; }
-  else if (pct >= 50) { title = '还需加油！'; desc = '有部分要点还不够熟悉，建议重新阅读会议纪要强化记忆。'; }
-  else { title = '慢慢来～'; desc = '会议内容还需要再消化一下，建议完整回顾一遍会议记录。'; }
+  const pct = Math.round((score / totalQ) * 100);
+  document.getElementById('resultScore').textContent = `${score}/${totalQ}`;
+  const msgs = [
+    { min: 90, text: '🎉 CRM优化大师！你对每个细节了如指掌！' },
+    { min: 70, text: '👍 表现优秀！大部分知识点都掌握了！' },
+    { min: 50, text: '💪 不错的基础，继续加油复习薄弱点！' },
+    { min: 0, text: '📚 需要多复习哦，重新学习会议内容吧！' }
+  ];
+  document.getElementById('resultMsg').textContent = msgs.find(m => pct >= m.min).text;
 
-  document.getElementById('resultTitle').textContent = title;
-  document.getElementById('resultScore').textContent = score + '/' + total;
-  document.getElementById('resultDesc').textContent = desc;
-
-  let detailsHTML = '';
-  modules.forEach(m => {
-    const ms = moduleScores[m.id];
-    const mpct = Math.round(ms.correct / ms.total * 100);
-    let cls = 'perfect';
-    if (mpct < 67) cls = 'partial';
-    if (mpct < 34) cls = 'low';
-    detailsHTML += '<div class="result-module"><div class="result-module-name">' + m.icon + ' ' + m.title + '</div><div class="result-module-score ' + cls + '">' + ms.correct + '/' + ms.total + ' (' + mpct + '%)</div></div>';
+  // Module scores
+  const moduleScores = {};
+  modules.forEach(m => { moduleScores[m.id] = { correct: 0, wrong: 0 }; });
+  answers.forEach(a => {
+    if (a.correct) moduleScores[a.moduleId].correct++;
+    else moduleScores[a.moduleId].wrong++;
   });
-  document.getElementById('resultDetails').innerHTML = detailsHTML;
 
-  // 记录本次进度到localStorage
-  const progress = recordAttempt(score, total, moduleScores, attemptAnswers);
+  // Option preference
+  const optionPreference = { A:0, B:0, C:0, D:0 };
+  answers.forEach(a => { optionPreference[a.selectedLetter]++; });
 
-  // 渲染学习记忆面板
-  renderMemoryPanel(progress, pct);
-}
+  // Save to localStorage
+  saveProgress({ score, moduleScores, details: answers, optionPreference });
 
-function renderMemoryPanel(progress, currentPct) {
-  const panel = document.getElementById('memoryPanel');
-
-  // 计算趋势
-  const hist = progress.history;
-  let trend = 'same';
-  let trendLabel = '';
-  if (hist.length >= 2) {
-    const prevPct = Math.round(hist[hist.length - 2].score / hist[hist.length - 2].total * 100);
-    if (currentPct > prevPct) { trend = 'up'; trendLabel = '↑ 较上次提升 ' + (currentPct - prevPct) + '%'; }
-    else if (currentPct < prevPct) { trend = 'down'; trendLabel = '↓ 较上次下降 ' + (prevPct - currentPct) + '%'; }
-    else { trend = 'same'; trendLabel = '— 与上次持平'; }
+  // Render memory panel
+  const p = getProgress();
+  const prevScore = p.history.length >= 2 ? p.history[p.history.length - 2].score : null;
+  let trendHtml = '';
+  if (prevScore !== null) {
+    const diff = score - prevScore;
+    if (diff > 0) trendHtml = `<span class="trend-value trend-up">↑ +${diff}</span>`;
+    else if (diff < 0) trendHtml = `<span class="trend-value trend-down">↓ ${diff}</span>`;
+    else trendHtml = `<span class="trend-value trend-flat">— 持平</span>`;
+  } else {
+    trendHtml = `<span class="trend-value trend-flat">首次答题</span>`;
   }
 
-  let html = '<div class="memory-panel-title">🧠 学习记忆 · 累计 ' + progress.totalAttempts + ' 次</div>';
+  const prefColors = ['#FF8FAB','#C4B5FD','#6EE7B7','#7DD3FC'];
+  const totalPref = Object.values(optionPreference).reduce((a,b)=>a+b,0) || 1;
+  const prefHtml = ['A','B','C','D'].map((l,i) => {
+    const cnt = optionPreference[l];
+    const p2 = Math.round((cnt/totalPref)*100);
+    return `<div class="pref-bar-wrap">
+      <span class="pref-label">${l}</span>
+      <div class="pref-track"><div class="pref-fill" style="width:${p2}%;background:${prefColors[i]}"></div></div>
+      <span class="pref-pct">${cnt}次 ${p2}%</span>
+    </div>`;
+  }).join('');
 
-  html += '<div class="memory-row"><span class="memory-label">本次得分</span><span class="memory-value">' + currentPct + '%</span></div>';
-  html += '<div class="memory-row"><span class="memory-label">历史最佳</span><span class="memory-value green">' + Math.round(progress.bestScore / 15 * 100) + '%</span></div>';
-  html += '<div class="memory-row"><span class="memory-label">进步趋势</span><span class="memory-trend ' + trend + '">' + trendLabel + '</span></div>';
+  const moduleMasteryHtml = modules.map(m => {
+    const ms = moduleScores[m.id];
+    const rate = ms.correct / (ms.correct + ms.wrong || 1);
+    const pRate = Math.round(rate * 100);
+    const color = rate >= 0.8 ? '#34D399' : rate >= 0.5 ? '#FDE68A' : '#FB7185';
+    return `<div class="module-mastery-row">
+      <span class="mm-icon">${m.icon}</span>
+      <span class="mm-name">${m.title}</span>
+      <div class="mm-bar"><div class="mm-fill" style="width:${pRate}%;background:${color}"></div></div>
+      <span class="mm-pct" style="color:${color}">${pRate}%</span>
+    </div>`;
+  }).join('');
 
-  // 选项偏好
-  const pref = progress.optionPreference;
-  const totalPicks = pref.A + pref.B + pref.C + pref.D;
-  html += '<div style="margin-top:12px;padding-top:10px;border-top:1px solid #F0E8E0">';
-  html += '<div class="memory-row"><span class="memory-label" style="font-weight:600">选项偏好</span><span></span></div>';
-  ['A','B','C','D'].forEach(letter => {
-    const count = pref[letter];
-    const pct = totalPicks > 0 ? Math.round(count / totalPicks * 100) : 0;
-    let barColor = 'green';
-    if (pct > 40) barColor = 'orange';
-    if (pct > 55) barColor = 'red';
-    html += '<div class="memory-row"><span class="memory-label">' + letter + ' · ' + count + '次 (' + pct + '%)</span></div>';
-    html += '<div class="memory-bar-track"><div class="memory-bar-fill ' + barColor + '" style="width:' + pct + '%"></div></div>';
-  });
-  html += '</div>';
-
-  // 模块掌握度
-  html += '<div style="margin-top:12px;padding-top:10px;border-top:1px solid #F0E8E0">';
-  html += '<div class="memory-row"><span class="memory-label" style="font-weight:600">模块掌握度</span><span></span></div>';
-  modules.forEach(m => {
-    const ms = progress.moduleStats[m.id];
-    const mastery = getModuleMastery(m.id, m.questions.map(q => q.id));
-    const masteryLabels = { new: '首次', strong: '💪 已掌握', medium: '📖 熟悉中', weak: '⚠️ 薄弱' };
-    const totalQ = ms ? ms.totalCorrect + ms.totalWrong : 0;
-    const rate = totalQ > 0 ? Math.round(ms.totalCorrect / totalQ * 100) : 0;
-    let barColor = 'green';
-    if (rate < 67) barColor = 'orange';
-    if (rate < 40) barColor = 'red';
-    html += '<div class="memory-row"><span class="memory-label">' + m.icon + ' ' + m.title + '</span><span class="memory-value">' + masteryLabels[mastery] + '</span></div>';
-    if (totalQ > 0) {
-      html += '<div class="memory-bar-track"><div class="memory-bar-fill ' + barColor + '" style="width:' + rate + '%"></div></div>';
-    }
-  });
-  html += '</div>';
-
-  panel.innerHTML = html;
+  document.getElementById('memoryPanel').innerHTML =
+    `<h3>🧠 学习记忆面板</h3>` +
+    `<div class="trend-row"><span class="trend-label">本次得分</span><span class="trend-value">${score}/${totalQ}</span></div>` +
+    `<div class="trend-row"><span class="trend-label">历史最佳</span><span class="trend-value">${p.bestScore}/${totalQ}</span></div>` +
+    `<div class="trend-row"><span class="trend-label">进步趋势</span>${trendHtml}</div>` +
+    `<div style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text-secondary)">选项偏好</div>` +
+    prefHtml +
+    `<div style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text-secondary)">模块掌握度</div>` +
+    moduleMasteryHtml;
 }
 
 function retryQuiz() {
-  document.getElementById('resultScreen').classList.remove('active');
-  currentQuestion = 0;
-  score = 0;
-  attemptAnswers = [];
-  shuffledQuestions = randomizeAnswers(modules);
-  initModuleScores();
-  document.getElementById('quizContainer').classList.add('active');
-  showQuestion();
+  document.getElementById('resultPage').classList.remove('active');
+  startQuiz();
 }
+
+// ========== INIT ==========
+randomizeAnswers();
+renderStartPage();
 </script>
 </body>
 </html>
