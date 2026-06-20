@@ -2,1155 +2,836 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>蜗牛AI · CRM系统优化学习互动</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🐌 蜗牛AI · 互动学习测验</title>
 <style>
-:root {
-  --bg-cream: #FFF8F2;
-  --bg-warm: #FFF5EB;
-  --card-white: #FFFFFF;
-  --text-primary: #2D2B32;
-  --text-secondary: #6B6678;
-  --text-muted: #9E99AA;
-  --accent-pink: #FF8FAB;
-  --accent-mint: #6EE7B7;
-  --accent-sky: #7DD3FC;
-  --accent-lavender: #C4B5FD;
-  --accent-peach: #FCA5A5;
-  --accent-yellow: #FDE68A;
-  --accent-coral: #FDA4AF;
-  --green: #34D399;
-  --red: #FB7185;
-  --radius: 24px;
-  --radius-sm: 16px;
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-cream:#FFF8F2;--bg-warm:#FFF5EB;--card-white:#FFFFFF;
+  --text-primary:#2D2B32;--text-secondary:#6B6678;--text-muted:#9E99AA;
+  --accent-pink:#FF8FAB;--accent-mint:#6EE7B7;--accent-sky:#7DD3FC;
+  --accent-lavender:#C4B5FD;--accent-peach:#FCA5A5;--accent-yellow:#FDE68A;
+  --green:#34D399;--red:#FB7185;--radius:24px;--radius-sm:16px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC",sans-serif;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: var(--font);
-  background: var(--bg-cream);
-  color: var(--text-primary);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary);min-height:100vh;overflow-x:hidden}
 
-/* Floating snails */
-.snail-float {
-  position: fixed;
-  z-index: 50;
-  opacity: 0.5;
-  pointer-events: none;
-  animation: snailFloat 5s ease-in-out infinite;
-  font-size: 28px;
-}
-.snail-fl-1 { top: 60px; left: 12px; animation-delay: 0s; }
-.snail-fl-2 { top: 180px; right: 15px; animation-delay: 1s; }
-.snail-fl-3 { top: 340px; left: 8px; animation-delay: 2s; }
-.snail-fl-4 { top: 500px; right: 10px; animation-delay: 0.5s; }
-.snail-fl-5 { top: 650px; left: 14px; animation-delay: 1.5s; }
-.snail-fl-6 { top: 800px; right: 12px; animation-delay: 2.5s; }
-.snail-fl-7 { top: 950px; left: 10px; animation-delay: 3s; }
-.snail-fl-8 { top: 1100px; right: 16px; animation-delay: 0.8s; }
-@keyframes snailFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(3deg); }
-  75% { transform: translateY(6px) rotate(-2deg); }
-}
+/* ===== 页面容器 ===== */
+.app-container{max-width:680px;margin:0 auto;padding:20px 16px 100px;position:relative;z-index:1}
 
-/* Quiz Container */
-.quiz-container {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 20px;
-  position: relative;
-  z-index: 10;
-}
+/* ===== 开始页 ===== */
+.start-page{text-align:center;padding:60px 20px 40px}
+.start-logo-wrap{margin-bottom:32px}
+.start-logo-wrap img{width:140px;height:auto;border-radius:16px;animation:bounceIn 1s ease both;filter:drop-shadow(0 4px 20px rgba(212,175,55,0.4))}
+@keyframes bounceIn{0%{transform:scale(.3);opacity:0}50%{transform:scale(1.05)}70%{transform:scale(.9)}100%{transform:scale(1);opacity:1}}
+.start-title{font-size:28px;font-weight:800;background:linear-gradient(135deg,#D4AF37,#F5D76E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.start-subtitle{font-size:15px;color:var(--text-secondary);margin-bottom:36px}
+.start-btn{display:inline-block;padding:16px 48px;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,var(--accent-pink),#f472b6);color:#fff;transition:.3s;box-shadow:0 4px 20px rgba(255,143,171,.35)}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,143,171,.45)}
+.start-progress{margin-top:40px;padding:24px;border-radius:var(--radius-sm);background:var(--card-white);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.start-progress h3{font-size:14px;color:var(--text-muted);margin-bottom:14px}
+.progress-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left}
+.progress-item{padding:10px 14px;border-radius:12px;background:var(--bg-warm);font-size:13px}
+.progress-item .label{color:var(--text-muted);font-size:11px}
+.progress-item .value{font-weight:700;font-size:18px;color:var(--text-primary)}
+.weak-modules{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.weak-tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:#fef2f2;color:var(--red);border:1px solid #fecdd3}
 
-/* Logo bar */
-.quiz-logo-bar {
-  text-align: center;
-  padding: 8px 0 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-.quiz-logo-bar img {
-  height: 32px;
-  opacity: 0.45;
-  transition: opacity 0.3s;
-}
-.quiz-logo-bar img:hover { opacity: 0.7; }
-.quiz-logo-bar span {
-  font-size: 10px;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  font-weight: 600;
-}
+/* ===== 题目区域 ===== */
+.quiz-area{display:none}
+.quiz-logo-bar{text-align:center;padding:12px 0 8px}
+.quiz-logo-bar img{height:32px;opacity:.45;transition:.3s;border-radius:6px}
+.quiz-logo-bar img:hover{opacity:.7}
+.quiz-logo-bar .logo-label{font-size:10px;color:var(--text-muted);letter-spacing:1px;margin-top:2px}
 
-/* Start Page */
-.start-page {
-  text-align: center;
-  padding: 40px 20px;
-  animation: fadeInUp 0.6s ease;
-}
-.start-page .logo-hero {
-  width: 140px;
-  animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(255,200,0,0.3));
-  margin-bottom: 20px;
-}
-.start-page h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.start-page .subtitle {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-}
-.start-page .desc {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 30px;
-  line-height: 1.8;
-}
-.btn-start {
-  display: inline-block;
-  padding: 14px 48px;
-  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(255,143,171,0.3);
-}
-.btn-start:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(255,143,171,0.4);
-}
+/* 进度条 */
+.progress-bar-wrap{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:0 4px}
+.progress-track{flex:1;height:8px;background:#ede9e3;border-radius:4px;overflow:hidden;position:relative}
+.progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent-mint),var(--accent-sky));transition:width .5s ease}
+.progress-text{font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;min-width:52px;text-align:right}
+.progress-logo{width:20px;height:14px;opacity:.6;flex-shrink:0}
 
-/* Progress Overview */
-.progress-overview {
-  background: var(--card-white);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  margin: 20px 0 0;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  text-align: left;
-}
-.progress-overview h3 {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-}
-.progress-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.progress-stat {
-  font-size: 12px;
-  color: var(--text-muted);
-  background: var(--bg-warm);
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-.progress-stat strong { color: var(--text-primary); }
+/* 模块标签 */
+.module-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.module-icon{font-size:22px}
+.module-info h2{font-size:18px;font-weight:700}
+.module-info p{font-size:12px;color:var(--text-muted)}
 
-/* Quiz Card */
-.quiz-page { display: none; }
-.quiz-page.active { display: block; animation: fadeInUp 0.5s ease; }
+/* 题目卡片 */
+.quiz-card{background:var(--card-white);border-radius:var(--radius);padding:28px 24px;box-shadow:0 4px 24px rgba(0,0,0,.05);position:relative;overflow:hidden;margin-bottom:24px;transition:.3s}
+.quiz-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;opacity:.08;z-index:0}
+/* 卡片四角蜗牛装饰 */
+.card-corner-snail{position:absolute;width:42px;height:42px;pointer-events:none;opacity:.45;z-index:0}
+.corner-tl{top:8px;left:8px}.corner-tr{top:8px;right:8px}.corner-bl{bottom:8px;left:8px}.corner-br{bottom:8px;right:8px}
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
+.q-number{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:1px;margin-bottom:8px;position:relative;z-index:1}
+.contact-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:14px;position:relative;z-index:1}
+.contact-avatar{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700}
+.mastery-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;margin-left:8px;position:relative;z-index:1}
+.mastery-mastered{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0}
+.mastery-familiar{background:#fefce8;color:#a16207;border:1px solid #fde68a}
+.mastery-weak{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.mastery-new{background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe}
 
-.quiz-card {
-  background: var(--card-white);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-.quiz-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  opacity: 0.15;
-  z-index: 0;
-  pointer-events: none;
-}
-/* 15 backgrounds */
-.snail-bg-1::before  { background: linear-gradient(135deg, #FFF0F5, #FFE4EC); }
-.snail-bg-2::before  { background: linear-gradient(135deg, #F0FFF4, #E6FFE6); }
-.snail-bg-3::before  { background: linear-gradient(135deg, #F0F8FF, #E6F2FF); }
-.snail-bg-4::before  { background: linear-gradient(135deg, #F8F0FF, #F0E6FF); }
-.snail-bg-5::before  { background: linear-gradient(135deg, #FFF5F0, #FFEEE6); }
-.snail-bg-6::before  { background: linear-gradient(135deg, #FFFCF0, #FFF8E6); }
-.snail-bg-7::before  { background: linear-gradient(135deg, #FFF0F0, #FFE8E8); }
-.snail-bg-8::before  { background: linear-gradient(135deg, #F0FFF5, #E6FFEE); }
-.snail-bg-9::before  { background: linear-gradient(135deg, #F8F0FF, #F3E8FF); }
-.snail-bg-10::before { background: linear-gradient(135deg, #FFF0F5, #FFE8F0); }
-.snail-bg-11::before { background: linear-gradient(135deg, #F0FFFF, #E6FAFA); }
-.snail-bg-12::before { background: linear-gradient(135deg, #FFFDF5, #FFF8EE); }
-.snail-bg-13::before { background: linear-gradient(135deg, #FFF0F3, #FFEAEF); }
-.snail-bg-14::before { background: linear-gradient(135deg, #FFFCF0, #FFF5E6); }
-.snail-bg-15::before { background: linear-gradient(135deg, #F8F0FF, #F5EAFF); }
+.question-text{font-size:16px;line-height:1.65;font-weight:500;margin-bottom:20px;position:relative;z-index:1}
 
-.card-corner-snail {
-  position: absolute;
-  width: 45px; height: 45px;
-  pointer-events: none;
-  opacity: 0.35;
-  z-index: 0;
-  font-size: 24px;
-}
-.ccs-tl { top: 8px; left: 8px; }
-.ccs-tr { top: 8px; right: 8px; }
-.ccs-bl { bottom: 8px; left: 8px; }
-.ccs-br { bottom: 8px; right: 8px; }
+.options-list{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.option-btn{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--radius-sm);border:2px solid #f0ece4;background:#fafaf8;cursor:pointer;transition:.25s;font-size:15px;font-weight:500;text-align:left}
+.option-btn:hover{border-color:var(--accent-pink);background:#fff;transform:translateX(4px)}
+.option-letter{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;background:var(--bg-warm);color:var(--text-secondary);flex-shrink:0;transition:.25s}
+.option-btn.selected{border-color:var(--accent-lavender);background:#faf5ff}
+.option-btn.selected .option-letter{background:var(--accent-lavender);color:#fff}
+.option-btn.correct{border-color:var(--green)!important;background:#ecfdf5!important}
+.option-btn.correct .option-letter{background:var(--green)!important;color:#fff!important}
+.option-btn.wrong{border-color:var(--red)!important;background:#fef2f2!important}
+.option-btn.wrong .option-letter{background:var(--red)!important;color:#fff!important}
+.option-btn.disabled{pointer-events:none;opacity:.6}
 
-.module-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  position: relative;
-  z-index: 1;
-}
-.mastery-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 16px;
-  font-size: 10px;
-  font-weight: 600;
-  margin-left: 6px;
-}
-.mastery-mastered { background: #D1FAE5; color: #065F46; }
-.mastery-familiar { background: #FEF3C7; color: #92400E; }
-.mastery-weak { background: #FEE2E2; color: #991B1B; }
-.mastery-new { background: #E0E7FF; color: #3730A3; }
+/* 解析区 */
+.explanation-area{display:none;margin-top:20px;padding:18px;border-radius:var(--radius-sm);background:var(--bg-warm);position:relative;z-index:1}
+.explanation-area.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.explanation-title{font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.explanation-text{font-size:14px;line-height:1.7;color:var(--text-primary)}
+.knowledge-tag{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;background:#e0e7ff;color:#4338ca;margin-top:10px}
 
-.contact-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
-}
-.contact-avatar {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-}
+/* 导航按钮 */
+.nav-buttons{display:flex;gap:12px;margin-top:20px}
+.nav-btn{flex:1;padding:14px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;border:none;transition:.25s}
+.nav-btn.primary{background:linear-gradient(135deg,var(--accent-pink),#f472b6);color:#fff;box-shadow:0 4px 16px rgba(255,143,171,.3)}
+.nav-btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(255,143,171,.4)}
+.nav-btn.secondary{background:var(--bg-warm);color:var(--text-secondary);border:1.5px solid #e8e2da}
+.nav-btn.secondary:hover{border-color:var(--accent-lavender)}
 
-.question-text {
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
+/* ===== 结果页 ===== */
+.result-page{display:none;text-align:center;padding:40px 20px}
+.result-logo{width:100px;margin-bottom:20px;border-radius:16px;animation:bounceIn .8s ease both;filter:drop-shadow(0 4px 16px rgba(212,175,55,.35))}
+.result-score-circle{width:160px;height:160px;border-radius:50%;margin:0 auto 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.score-ring{position:absolute;width:100%;height:100%;border-radius:50%;border:6px solid #ede9e3}
+.score-fill{position:absolute;width:100%;height:100%;border-radius:50%;border:6px solid transparent;border-top-color:var(--accent-mint);border-right-color:var(--accent-mint);transition:transform .8s ease}
+.score-number{font-size:44px;font-weight:800;background:linear-gradient(135deg,#059669,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.score-label{font-size:12px;color:var(--text-muted);margin-top:2px}
+.result-title{font-size:24px;font-weight:800;margin-bottom:6px}
+.result-subtitle{font-size:14px;color:var(--text-secondary);margin-bottom:32px}
 
-.options-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  z-index: 1;
-}
-.option-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  background: var(--bg-warm);
-  border: 2px solid transparent;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.25s;
-  font-size: 14px;
-  text-align: left;
-}
-.option-btn:hover {
-  background: #FFF0F5;
-  border-color: var(--accent-pink);
-  transform: translateX(4px);
-}
-.option-btn.selected {
-  background: #FFF0F5;
-  border-color: var(--accent-pink);
-}
-.option-btn.correct {
-  background: #D1FAE5;
-  border-color: var(--green);
-}
-.option-btn.wrong {
-  background: #FEE2E2;
-  border-color: var(--red);
-}
-.option-letter {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 13px;
-  flex-shrink: 0;
-  border: 2px solid #E5E7EB;
-}
-.option-btn.correct .option-letter { background: var(--green); color: white; border-color: var(--green); }
-.option-btn.wrong .option-letter { background: var(--red); color: white; border-color: var(--red); }
+/* 学习记忆面板 */
+.memory-panel{background:var(--card-white);border-radius:var(--radius);padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.05);text-align:left;margin-bottom:24px}
+.memory-panel h3{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.memory-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f5f0ea}
+.memory-row:last-child{border:none}
+.memory-label{font-size:13px;color:var(--text-secondary)}
+.memory-value{font-size:15px;font-weight:700}
+.trend-up{color:var(--green)}.trend-down{color:var(--red)}.trend-same{color:var(--text-muted)}
 
-.explanation-box {
-  display: none;
-  margin-top: 16px;
-  padding: 16px;
-  background: #F0F9FF;
-  border-radius: var(--radius-sm);
-  border-left: 4px solid var(--accent-sky);
-  position: relative;
-  z-index: 1;
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-.explanation-box.visible { display: block; animation: fadeInUp 0.3s ease; }
-.explanation-box .knowledge-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  background: #DBEAFE;
-  color: #1E40AF;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 8px;
-}
+/* 选项偏好 */
+.preference-section{margin-top:16px}
+.pref-bar-wrap{display:flex;align-items:center;gap:8px;margin-top:6px}
+.pref-label{width:20px;font-size:12px;font-weight:700;color:var(--text-muted)}
+.pref-bar{flex:1;height:18px;background:#f0ece4;border-radius:4px;overflow:hidden;position:relative}
+.pref-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.pref-pct{font-size:11px;font-weight:600;color:var(--text-muted);min-width:32px;text-align:right}
 
-/* Progress bar */
-.progress-bar-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0 16px;
-}
-.progress-track {
-  flex: 1;
-  height: 8px;
-  background: #F3F0F6;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #FF8FAB, #C4B5FD);
-  border-radius: 4px;
-  transition: width 0.5s ease;
-}
-.progress-text {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 600;
-  white-space: nowrap;
-}
-.progress-logo {
-  height: 14px;
-  opacity: 0.6;
-}
+/* 模块掌握度 */
+.module-mastery{margin-top:16px}
+.mm-item{display:flex;align-items:center;gap:10px;padding:8px 0}
+.mm-icon{font-size:16px}
+.mm-name{flex:1;font-size:13px;font-weight:500}
+.mm-bar{width:80px;height:8px;background:#f0ece4;border-radius:4px;overflow:hidden}
+.mm-fill{height:100%;border-radius:4px}
+.mm-pct{font-size:11px;font-weight:700;color:var(--text-muted);min-width:32px;text-align:right}
 
-.btn-next {
-  display: none;
-  margin-top: 20px;
-  padding: 12px 36px;
-  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-  z-index: 1;
-}
-.btn-next:hover { transform: translateY(-2px); }
-.btn-next.visible { display: inline-block; animation: fadeInUp 0.3s ease; }
+.result-actions{display:flex;gap:12px;margin-top:28px}
+.result-actions .nav-btn{padding:16px 28px}
 
-/* Result Page */
-.result-page {
-  display: none;
-  text-align: center;
-  padding: 30px 20px;
-  animation: fadeInUp 0.6s ease;
-}
-.result-page.active { display: block; }
-.result-page .logo-result {
-  width: 100px;
-  animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(255,200,0,0.3));
-  margin-bottom: 16px;
-}
-.result-page h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.result-score {
-  font-size: 56px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 12px 0;
-}
-.result-msg {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-}
+/* ===== 15种题目背景色 ===== */
+.snail-bg-1{background:linear-gradient(135deg,#FFF0F5,#FFE4EC)}
+.snail-bg-2{background:linear-gradient(135deg,#F0FFF4,#E6FFE6)}
+.snail-bg-3{background:linear-gradient(135deg,#F0F8FF,#E6F2FF)}
+.snail-bg-4{background:linear-gradient(135deg,#F8F0FF,#F0E6FF)}
+.snail-bg-5{background:linear-gradient(135deg,#FFF5F0,#FFEEE6)}
+.snail-bg-6{background:linear-gradient(135deg,#FFFCF0,#FFF8E6)}
+.snail-bg-7{background:linear-gradient(135deg,#FFF0F0,#FFE8E8)}
+.snail-bg-8{background:linear-gradient(135deg,#F0FFF5,#E6FFEE)}
+.snail-bg-9{background:linear-gradient(135deg,#F8F0FF,#F3E8FF)}
+.snail-bg-10{background:linear-gradient(135deg,#FFF0F5,#FFE8F0)}
+.snail-bg-11{background:linear-gradient(135deg,#F0FFFF,#E6FAFA)}
+.snail-bg-12{background:linear-gradient(135deg,#FFFDF5,#FFF8EE)}
+.snail-bg-13{background:linear-gradient(135deg,#FFF0F3,#FFEAEF)}
+.snail-bg-14{background:linear-gradient(135deg,#FFFCF0,#FFF5E6)}
+.snail-bg-15{background:linear-gradient(135deg,#F8F0FF,#F5EAFF)}
 
-/* Memory Panel */
-.memory-panel {
-  background: var(--card-white);
-  border-radius: var(--radius-sm);
-  padding: 20px;
-  margin: 20px 0;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  text-align: left;
-}
-.memory-panel h3 {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: var(--text-primary);
-}
-.trend-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 13px;
-}
-.trend-label { color: var(--text-secondary); }
-.trend-value { font-weight: 700; }
-.trend-up { color: var(--green); }
-.trend-down { color: var(--red); }
-.trend-flat { color: var(--text-muted); }
+/* ===== 浮动蜗牛（页面两侧） ===== */
+.snail-float{position:fixed;z-index:50;opacity:.5;pointer-events:none;animation:snailFloat 4s ease-in-out infinite}
+.sf-1{top:80px;left:12px;animation-delay:0s}.sf-2{top:200px;right:16px;animation-delay:.8s}
+.sf-3{top:400px;left:8px;animation-delay:1.6s}.sf-4{top:560px;right:12px;animation-delay:2.4s}
+.sf-5{top:720px;left:20px;animation-delay:3.2s}.sf-6{top:900px;right:8px;animation-delay:.4s}
+.sf-7{top:1080px;left:14px;animation-delay:1.2s}.sf-8{top:1240px;right:20px;animation-delay:2s}
+@keyframes snailFloat{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-8px) rotate(2deg)}75%{transform:translateY(5px) rotate(-2deg)}}
 
-/* Option preference bars */
-.pref-bar-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-  font-size: 12px;
-}
-.pref-label { width: 16px; font-weight: 700; color: var(--text-secondary); }
-.pref-track {
-  flex: 1;
-  height: 10px;
-  background: #F3F0F6;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.pref-fill {
-  height: 100%;
-  border-radius: 5px;
-  transition: width 0.5s;
-}
-.pref-pct { width: 36px; text-align: right; color: var(--text-muted); font-size: 11px; }
-
-/* Module mastery */
-.module-mastery-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  font-size: 12px;
-}
-.mm-icon { font-size: 16px; }
-.mm-name { flex: 1; color: var(--text-secondary); }
-.mm-bar {
-  width: 80px;
-  height: 8px;
-  background: #F3F0F6;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.mm-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
-.mm-pct { width: 30px; text-align: right; font-weight: 600; font-size: 11px; }
-
-.btn-retry {
-  display: inline-block;
-  padding: 12px 36px;
-  background: linear-gradient(135deg, #FF8FAB, #C4B5FD);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin-top: 10px;
-}
-.btn-retry:hover { transform: translateY(-2px); }
-
-/* Responsive */
-@media (max-width: 480px) {
-  .quiz-container { padding: 12px; }
-  .quiz-card { padding: 20px 16px; }
-  .question-text { font-size: 15px; }
-  .option-btn { padding: 12px 14px; font-size: 13px; }
-  .snail-float { display: none; }
-  .quiz-logo-bar img { height: 24px; }
+/* ===== 响应式 ===== */
+@media(max-width:520px){
+  .app-container{padding:12px 10px 80px}
+  .start-title{font-size:24px}.quiz-card{padding:22px 18px}
+  .question-text{font-size:15px}.option-btn{padding:14px 14px;font-size:14px}
+  .quiz-logo-bar img{height:24px}
+  .start-logo-wrap img{width:110px}
+  .result-score-circle{width:130px;height:130px}
+  .score-number{font-size:36px}
+  .memory-panel{padding:18px}
+  .snail-float{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- Floating snails -->
-<div class="snail-float snail-fl-1">🐌</div>
-<div class="snail-float snail-fl-2">🐌</div>
-<div class="snail-float snail-fl-3">🐌</div>
-<div class="snail-float snail-fl-4">🐌</div>
-<div class="snail-float snail-fl-5">🐌</div>
-<div class="snail-float snail-fl-6">🐌</div>
-<div class="snail-float snail-fl-7">🐌</div>
-<div class="snail-float snail-fl-8">🐌</div>
+<!-- 浮动蜗牛装饰 -->
+<div class="snail-float sf-1"><svg width="36"height="28"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#D4AF37"opacity=".6"/><circle cx="18"cy="16"r="8"fill="#F5D76E"opacity=".4"/><path d="M6 18 Q4 22 8 24"stroke="#B8860B"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/><path d="M16 17 Q18 19 20 17"stroke="#B8860B"stroke-width="1"fill="none"/></svg></div>
+<div class="snail-float sf-2"><svg width="32"height="26"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FF8FAB"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#FDA4AF"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#DB2777"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-3"><svg width="30"height="24"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#6EE7B7"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#A7F3D0"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#059669"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-4"><svg width="34"height="27"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#7DD3FC"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#BAE6FD"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#0284c7"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-5"><svg width="28"height="23"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#C4B5FD"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#DDD6FE"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#7c3aed"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-6"><svg width="33"height="26"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FDE68A"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#FEF08A"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#ca8a04"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-7"><svg width="29"height="23"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FCA5A5"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#fecdd3"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#e11d48"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-8"><svg width="31"height="25"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#D4AF37"opacity:.45"/><circle cx="18"cy="16"r="8"fill="#F5D76E"opacity=".3"/><path d="M6 18 Q4 22 8 24"stroke="#B8860B"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
 
-<div class="quiz-container">
+<div class="app-container">
 
-<!-- Logo bar (always visible) -->
-<div class="quiz-logo-bar" id="logoBar">
-  <img src="" alt="蜗牛AI" id="logoBarImg">
-  <span>蜗牛AI</span>
-</div>
-
-<!-- Start Page -->
+<!-- ========== 开始页 ========== -->
 <div class="start-page" id="startPage">
-  <img src="" alt="蜗牛AI" class="logo-hero" id="logoHero">
-  <h1>CRM系统优化学习互动</h1>
-  <div class="subtitle">数据迁移 · 客户管理 · 机会管理</div>
-  <div class="desc">
-    基于CRM系统优化与数据迁移研讨会内容<br>
-    5大模块 · 15道题 · 即时解析 · 学习记忆追踪
+  <div class="start-logo-wrap">
+    <img id="startLogo" alt="蜗牛AI">
   </div>
-  <button class="btn-start" onclick="startQuiz()">开始答题 🚀</button>
-  <div class="progress-overview" id="progressOverview" style="display:none">
-    <h3>📊 学习进度</h3>
-    <div class="progress-stats" id="progressStats"></div>
+  <h1 class="start-title">🐌 蜗牛AI学习互动</h1>
+  <p class="start-subtitle">20260620 线上私享会 · 知识巩固测验</p>
+  <button class="start-btn" onclick="startQuiz()">开始答题</button>
+  <div class="start-progress" id="historyPanel" style="display:none">
+    <h3>📊 学习进度记录</h3>
+    <div class="progress-grid" id="progressGrid"></div>
+    <div class="weak-modules" id="weakModules"></div>
   </div>
 </div>
 
-<!-- Quiz Page -->
-<div class="quiz-page" id="quizPage">
+<!-- ========== 答题区 ========== -->
+<div class="quiz-area" id="quizArea">
+  <div class="quiz-logo-bar">
+    <img id="quizLogoBar" alt="蜗牛AI">
+    <div class="logo-label">SNAIL AI ACADEMY</div>
+  </div>
   <div class="progress-bar-wrap">
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     <span class="progress-text" id="progressText">1/15</span>
-    <img src="" alt="" class="progress-logo" id="progressLogo">
+    <img class="progress-logo" id="progressLogo" alt="">
   </div>
-  <div class="quiz-card" id="quizCard">
-    <div class="card-corner-snail ccs-tl">🐌</div>
-    <div class="card-corner-snail ccs-tr">🐌</div>
-    <div class="card-corner-snail ccs-bl">🐌</div>
-    <div class="card-corner-snail ccs-br">🐌</div>
-    <div id="cardContent"></div>
-  </div>
-  <button class="btn-next" id="btnNext" onclick="nextQuestion()">下一题 →</button>
+  <div id="questionContainer"></div>
 </div>
 
-<!-- Result Page -->
+<!-- ========== 结果页 ========== -->
 <div class="result-page" id="resultPage">
-  <img src="" alt="蜗牛AI" class="logo-result" id="logoResult">
-  <h2>答题完成！</h2>
-  <div class="result-score" id="resultScore">0/15</div>
-  <div class="result-msg" id="resultMsg"></div>
-  <div class="memory-panel" id="memoryPanel"></div>
-  <button class="btn-retry" onclick="retryQuiz()">再试一次 🔄</button>
+  <img class="result-logo" id="resultLogo" alt="蜗牛AI">
+  <div class="result-score-circle">
+    <div class="score-ring"></div>
+    <div class="score-fill" id="scoreFill"></div>
+    <span class="score-number" id="scoreNumber">0</span>
+    <span class="score-label">分 / 15</span>
+  </div>
+  <h2 class="result-title" id="resultTitle"></h2>
+  <p class="result-subtitle" id="resultSubtitle"></p>
+  <div class="memory-panel" id="memoryPanel">
+    <h3>🧠 学习记忆面板</h3>
+    <div id="memoryContent"></div>
+  </div>
+  <div class="result-actions">
+    <button class="nav-btn secondary" onclick="location.reload()">返回首页</button>
+    <button class="nav-btn primary" onclick="retryQuiz()">再试一次</button>
+  </div>
 </div>
 
-</div>
+</div><!-- /.app-container -->
 
 <script>
-// ========== LOGO ==========
-const LOGO_URL = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgHBgcJCAgJDBMMDAsLDBgREg4THBgdHRsYGxofIywlHyEqIRobJjQnKi4vMTIxHiU2OjYwOiwwMTD/2wBDAQgJCQwKDBcMDBcwIBsgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDD/wAARCAF3ApoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAIWuIVfY0qBvQsM1IrBhwc1zfiS1Mcy3CDh+D9f8A69VtP82biG58uQdF5GRXj1cxdKs6Tj+J0KhePMmddmlrn47nVLf/AFi+av8Au5/UVat9bjZtlxGY29e1dMMdTlpLT1M3Ta2Naio4po5V3RuGHtUldykpK6M9gooopgFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFYuo64LS7Nv5JYjHJOOtZVa0KMeab0KjFydkbVBrnz4j2dYD/wB9f/Wqxb6/byjLIyfr/KsFjqD+0U6Ul0LesWwurCSPvjcv1HNcdGJF/eIzK0Z/h/z1rtYLuC4GYpFb2B5/KuWuoPJ1CaHtksP5/wAjXj5tBSUa8GdOHbV4M29JvReQZ4Drww/r9KsyQQyj54wfw/ya5aF5LK4EyL07evtXUQzrLAksZyGGRWWGrqtG090KpBwkVX014zvtZSpPbpSRalPauEvI8j+9V4SZ5pHCyja6hh6EV1RfK/3crGd7/ET29xFOu6NwalrElsnhbzLRzn+7U9nqm5vKuhsccZ/x9K7qOMTfLV0ZEqfWJq0UlLXomQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAF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';
+// ==================== Logo (Base64 SVG) ====================
+const LOGO_URL = 'data:image/svg+xml;base64,' + btoa(`<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 666 375" width="666" height="375">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#F5D76E"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8B6914"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <!-- 背景 -->
+  <rect width="666" height="375" rx="24" fill="#FFFBF0"/>
+  <!-- 悉尼大桥简化 -->
+  <path d="M180 280 Q333 200 486 280" stroke="url(#g2)" stroke-width="4" fill="none" opacity="0.3"/>
+  <path d="M220 270 L220 290 M260 255 L260 290 M300 240 L300 290 M340 230 L340 290 M380 225 L380 290 M420 230 L420 290 M460 240 L460 290 M500 255 L500 290" stroke="url(#g2)" stroke-width="2" opacity="0.2"/>
+  <!-- 蜗牛身体 -->
+  <ellipse cx="300" cy="195" rx="115" ry="82" fill="url(#g1)" opacity="0.85"/>
+  <ellipse cx="300" cy="185" rx="75" ry="54" fill="#F5D76E" opacity="0.35"/>
+  <!-- 蜗壳螺旋 -->
+  <path d="M300 155 C330 140 360 160 355 190 C350 220 310 235 285 215 C265 198 270 165 300 155" stroke="#B8860B" stroke-width="4" fill="none" opacity="0.5"/>
+  <path d="M300 170 C320 162 335 178 332 196 C328 214 302 222 288 208 C277 197 280 176 300 170" stroke="#B8860B" stroke-width="2.5" fill="none" opacity="0.4"/>
+  <!-- 触角 -->
+  <path d="M220 170 Q205 145 210 125" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M240 163 Q232 138 240 118" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="210" cy="122" r="5" fill="#D4AF37"/>
+  <circle cx="240" cy="116" r="5" fill="#D4AF37"/>
+  <!-- 眼睛 -->
+  <circle cx="250" cy="178" r="8" fill="#2D2B32"/>
+  <circle cx="252" cy="176" r="3" fill="#fff"/>
+  <circle cx="290" cy="182" r="8" fill="#2D2B32"/>
+  <circle cx="292" cy="180" r="3" fill="#fff"/>
+  <!-- 微笑 -->
+  <path d="M260 202 Q275 216 292 202" stroke="#8B6914" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 尾巴 -->
+  <path d="M185 200 Q165 215 175 232" stroke="#B8860B" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- 文字 -->
+  <text x="333" y="300" text-anchor="middle" font-family="-apple-system,PingFang SC,sans-serif" font-size="38" font-weight="800" fill="url(#g1)">蜗牛AI</text>
+  <text x="333" y="335" text-anchor="middle" font-family="-apple-system,PingFang SC,sans-serif" font-size="16" fill="#9E99AA" letter-spacing="4">SNAIL AI ACADEMY</text>
+  <!-- 装饰星星 -->
+  <circle cx="480" cy="90" r="3" fill="#D4AF37" opacity="0.5"/>
+  <circle cx="520" cy="130" r="2" fill="#F5D76E" opacity="0.4"/>
+  <circle cx="120" cy="110" r="2.5" fill="#D4AF37" opacity="0.45"/>
+  <circle cx="550" cy="300" r="2" fill="#F5D76E" opacity="0.35"/>
+  <circle cx="90" cy="280" r="2" fill="#D4AF37" opacity="0.4"/>
+</svg>`);
 
-// Set logo images
-document.getElementById('logoBarImg').src = LOGO_URL;
-document.getElementById('logoHero').src = LOGO_URL;
-document.getElementById('logoResult').src = LOGO_URL;
+// 设置所有Logo
+document.getElementById('startLogo').src = LOGO_URL;
+document.getElementById('quizLogoBar').src = LOGO_URL;
 document.getElementById('progressLogo').src = LOGO_URL;
+document.getElementById('resultLogo').src = LOGO_URL;
 
-// ========== QUIZ DATA ==========
-const modules = [
-  {
-    id: 1, title: '数据迁移与对接', subtitle: '金数据API与CSV方案', icon: '🔄', color: '#FF8FAB',
-    questions: [
-      {
-        id: 1,
-        contact: { name: 'RobinMacMini', initial: 'R', role: '数据迁移负责人', color: '#FF8FAB' },
-        text: '团队在尝试通过API获取金数据时遇到了什么限制？',
-        options: [
-          'API接口不存在，金数据未提供API服务',
-          'API仅支持高级会员，团队为普通会员无法使用',
-          'API调用频率受限，每小时仅允许10次请求',
-          'API返回数据格式与CRM系统不兼容'
-        ],
-        originalAnswer: 1,
-        explanation: '经测试确认，金数据API仅支持<b>高级会员</b>使用，团队当前为<b>普通会员</b>，无法直接通过API获取数据。因此决定放弃API对接，采用手动导出CSV方案。',
-        knowledge: '金数据API限制'
-      },
-      {
-        id: 2,
-        contact: { name: 'Michael', initial: 'M', role: '产品经理', color: '#7DD3FC' },
-        text: '团队最终确定的数据迁移方案是什么？',
-        options: [
-          '开发中间件实现API自动同步',
-          '使用ETL工具进行实时数据转换',
-          '手动导出CSV文件再导入CRM系统',
-          '直接在数据库层面进行数据迁移'
-        ],
-        originalAnswer: 2,
-        explanation: '决定放弃API对接，采用<b>手动导出CSV文件再导入CRM系统</b>的方案。RobinMacMini强调需先导出数据，再通过手动调整格式进行导入。',
-        knowledge: 'CSV迁移方案'
-      },
-      {
-        id: 3,
-        contact: { name: 'sean电脑', initial: 'S', role: '技术顾问', color: '#6EE7B7' },
-        text: '为减少手动调整格式的工作量，后端需要增加什么功能？',
-        options: [
-          '自动识别并过滤重复数据的去重功能',
-          '支持Excel和CSV双格式导入的兼容功能',
-          'CSV导入功能，实现自动列名匹配与解析逻辑',
-          '数据格式自动转换和字段映射的AI功能'
-        ],
-        originalAnswer: 2,
-        explanation: '要求后端增加<b>CSV导入功能</b>，并实现<b>自动列名匹配与解析逻辑</b>，减少手动调整格式的工作量。同时在导入过程中发现数据错乱，需由数据工程师介入清洗和修正。',
-        knowledge: 'CSV自动解析'
-      }
-    ]
-  },
-  {
-    id: 2, title: '客户分级与标签', subtitle: '多维分类体系构建', icon: '🏷️', color: '#C4B5FD',
-    questions: [
-      {
-        id: 4,
-        contact: { name: '蒋培james', initial: 'J', role: '业务架构师', color: '#FDE68A' },
-        text: '会议确立的客户分类体系包含哪两个维度？',
-        options: [
-          '"国内/海外"与"企业/个人"两个维度',
-          '"新客户/老客户"与"等级（VVIP/VIP/普通）"两个维度',
-          '"高价值/低价值"与"活跃/沉睡"两个维度',
-          '"付费/免费"与"长期/短期"两个维度'
-        ],
-        originalAnswer: 1,
-        explanation: '确立了<b>"新客户/老客户"</b>与<b>"等级（VVIP/VIP/普通）"</b>两个维度的分类体系，并增加了"批发/零售"的业务属性。',
-        knowledge: '客户分类维度'
-      },
-      {
-        id: 5,
-        contact: { name: 'RobinMacMini', initial: 'R', role: '数据迁移负责人', color: '#FF8FAB' },
-        text: '"蝴蝶"和"水牛"在系统中分别代表什么角色？',
-        options: [
-          '"蝴蝶"代表大客户，"水牛"代表小客户',
-          '"蝴蝶"代表推荐人，"水牛"代表跟进转化人',
-          '"蝴蝶"代表新客户，"水牛"代表老客户',
-          '"蝴蝶"代表零售客户，"水牛"代表批发客户'
-        ],
-        originalAnswer: 1,
-        explanation: '明确<b>"蝴蝶"代表推荐人</b>，<b>"水牛"代表跟进转化人</b>，需在系统中建立对应的归属关系字段。同时增设"能否推荐其他客户"字段，覆盖潜在代理或推荐人需求，替代了原有的模糊标签。',
-        knowledge: '蝴蝶/水牛定义'
-      },
-      {
-        id: 6,
-        contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#7DD3FC' },
-        text: '为覆盖潜在代理或推荐人需求，系统增设了什么字段？',
-        options: [
-          '"客户来源渠道"字段',
-          '"客户终身价值(LTV)"字段',
-          '"能否推荐其他客户"字段',
-          '"客户活跃度评分"字段'
-        ],
-        originalAnswer: 2,
-        explanation: '增设<b>"能否推荐其他客户"</b>字段，以覆盖潜在代理或推荐人需求，替代了原有的"蝴蝶/水牛"等模糊标签，使分类逻辑更加清晰。',
-        knowledge: '推荐人字段'
-      }
-    ]
-  },
-  {
-    id: 3, title: '客户管理交互优化', subtitle: '权限修复与体验提升', icon: '🛠️', color: '#6EE7B7',
-    questions: [
-      {
-        id: 7,
-        contact: { name: 'sean电脑', initial: 'S', role: '技术顾问', color: '#6EE7B7' },
-        text: '客户管理中"创建人"字段存在什么问题需要修复？',
-        options: [
-          '创建人字段数据丢失，无法恢复',
-          '创建人权限过高，可以修改所有客户数据',
-          '添加客户时创建人字段不显示或无法选择',
-          '创建人字段与修改人字段混淆显示'
-        ],
-        originalAnswer: 2,
-        explanation: '解决了添加客户时<b>"创建人"字段不显示或无法选择</b>的问题，确保数据可追溯。这是保证客户管理数据完整性的关键修复。',
-        knowledge: '创建人权限修复'
-      },
-      {
-        id: 8,
-        contact: { name: 'Michael', initial: 'M', role: '产品经理', color: '#7DD3FC' },
-        text: '客户管理页面中编辑功能存在什么Bug？',
-        options: [
-          '编辑后数据无法保存，总是回到原始状态',
-          '编辑时系统报错并自动退出页面',
-          '"编辑客户"按钮点击无响应',
-          '编辑页面加载速度过慢，经常超时'
-        ],
-        originalAnswer: 2,
-        explanation: '修复了客户管理页面中<b>"编辑客户"按钮点击无响应</b>的Bug，确保用户可以正常编辑客户信息。',
-        knowledge: '编辑按钮Bug'
-      },
-      {
-        id: 9,
-        contact: { name: '蒋培james', initial: 'J', role: '业务架构师', color: '#FDE68A' },
-        text: '客户详情页需要增加什么功能来丰富客户信息展示？',
-        options: [
-          '客户评分和等级自动计算功能',
-          '图片上传功能及附件列表索引',
-          '客户社交账号自动抓取功能',
-          '客户消费趋势预测图表'
-        ],
-        originalAnswer: 1,
-        explanation: '增加<b>附件列表功能</b>，支持上传图片和文件，并在客户详情页展示。同时增加"下次联系时间"字段，用于后续的自动化扫描提醒。',
-        knowledge: '附件与图片功能'
-      }
-    ]
-  },
-  {
-    id: 4, title: '机会管理与项目增强', subtitle: '金额细化与功能完善', icon: '💰', color: '#FDE68A',
-    questions: [
-      {
-        id: 10,
-        contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#7DD3FC' },
-        text: '原有的"机会金额"被拆分为哪三个金额字段？',
-        options: [
-          '"预算金额"、"审批金额"、"执行金额"',
-          '"意向金额"、"已确定金额"、"已到账金额"',
-          '"预估金额"、"合同金额"、"回款金额"',
-          '"报价金额"、"成交金额"、"利润金额"'
-        ],
-        originalAnswer: 1,
-        explanation: '将原有的"机会金额"拆分为<b>"意向金额"、"已确定金额"和"已到账金额"</b>三列，以精确追踪投资进度。',
-        knowledge: '三阶段金额管理'
-      },
-      {
-        id: 11,
-        contact: { name: 'RobinMacMini', initial: 'R', role: '数据迁移负责人', color: '#FF8FAB' },
-        text: '项目管理模块需要增加什么功能？',
-        options: [
-          '项目审批流程和权限管理功能',
-          '"新增项目"和"删除项目"功能',
-          '项目甘特图和里程碑追踪功能',
-          '项目模板自动生成功能'
-        ],
-        originalAnswer: 1,
-        explanation: '在项目管理模块增加<b>"新增项目"和"删除项目"</b>的功能，并清理了测试数据（如6号、13号地等无效项目）。',
-        knowledge: '项目增删功能'
-      },
-      {
-        id: 12,
-        contact: { name: 'Michael', initial: 'M', role: '产品经理', color: '#7DD3FC' },
-        text: '机会管理中"下次联系时间"字段的用途是什么？',
-        options: [
-          '用于统计销售跟进频率和效率',
-          '用于计算客户流失预警指标',
-          '用于后续的自动化扫描推送提醒',
-          '用于生成年度客户回访计划'
-        ],
-        originalAnswer: 2,
-        explanation: '增加"下次联系时间"字段，用于后续的<b>自动化扫描推送提醒</b>，确保销售人员不会遗漏重要跟进时机。',
-        knowledge: '自动化提醒'
-      }
-    ]
-  },
-  {
-    id: 5, title: '待办与执行计划', subtitle: '6月1日全量上线', icon: '📋', color: '#7DD3FC',
-    questions: [
-      {
-        id: 13,
-        contact: { name: 'sean电脑', initial: 'S', role: '技术顾问', color: '#6EE7B7' },
-        text: '现有多少个客户和机会数据需要进行迁移？',
-        options: [
-          '56个客户和72个机会',
-          '76个客户和82个机会',
-          '96个客户和102个机会',
-          '66个客户和92个机会'
-        ],
-        originalAnswer: 1,
-        explanation: '需要对现有<b>76个客户</b>和<b>82个机会</b>数据进行迁移，并自动补充新增字段的默认值。',
-        knowledge: '数据迁移规模'
-      },
-      {
-        id: 14,
-        contact: { name: '蒋培james', initial: 'J', role: '业务架构师', color: '#FDE68A' },
-        text: 'Michael需要在企微中发送什么文档？',
-        options: [
-          '数据迁移时间表和风险预案',
-          '客户类型、蝴蝶/水牛归属等新增字段需求文档',
-          '系统测试用例和验收标准',
-          '项目预算和资源分配计划'
-        ],
-        originalAnswer: 1,
-        explanation: 'Michael需要将<b>客户类型、蝴蝶/水牛归属等新增字段需求</b>整理成文档发到企微，确保开发团队明确需求。',
-        knowledge: '字段需求文档'
-      },
-      {
-        id: 15,
-        contact: { name: 'JasonXie', initial: 'J', role: '项目负责人', color: '#7DD3FC' },
-        text: '会议要求全体参会人员在什么时间做什么？',
-        options: [
-          '当天晚上提交系统优化建议报告',
-          '次日早上参加线上培训会议',
-          '半小时后登录系统进行功能测试，发现问题截图发群',
-          '一周内完成所有客户数据的重新录入'
-        ],
-        originalAnswer: 2,
-        explanation: '要求全体参会人员<b>半小时后登录系统进行功能测试</b>，发现问题截图发群。同时制定6月1日全量上线的执行计划。',
-        knowledge: '测试与上线计划'
-      }
-    ]
-  }
-];
+// ==================== 题目数据 ====================
+const quizData = {
+  modules: [
+    {
+      id: 1,
+      title: 'AI进化与能力认知',
+      subtitle: '理解AI发展脉络与核心概念',
+      icon: '🧠',
+      color: '#0071e3',
+      questions: [
+        {
+          id: 1,
+          contact: {name:'Coco Li',initial:'CL',role:'AI应用探索者',color:'#FF8FAB'},
+          text: '根据Robin分享的「AI Early Map」模型，全球81亿人口中，目前处于「已开始使用AI」（绿色区域）阶段的人口大约是多少？',
+          options: ['约1.38亿人','约13.8亿人','约5亿人','约5000万人'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：约13.8亿人（绿色区域）</b><br><br>AI Early Map将全球人口分为四个层次：<br>① 81亿总人口 → ② 约<b>13.8亿</b>已开始使用AI（绿色） → ③ 2000万+有Agent辅助经验（黄色）→ ④ 300万深度用户（红色）。Coco Li作为早期探索者，正处于从绿色向黄色过渡的关键阶段。',
+          knowledge: 'AI Early Map / 用户分层'
+        },
+        {
+          id: 2,
+          contact: {name:'崔大威',initial:'崔',role:'企业数字化转型顾问',color:'#6EE7B7'},
+          text: '「输出式学习」的核心主张是：学习的最佳方式不是被动输入，而是通过什么方式来内化知识？',
+          options: ['反复阅读课件和笔记','让AI帮你做思维导图','主动输出/创造内容（写、讲、做）','参加更多线上课程'],
+          originalAnswer: 2,
+          explanation: '<b>正确答案：主动输出/创造内容（写、讲、做）</b><br><br>输出式学习的核心理念：<br>• 输入≠学习，<b>输出才是真正的学习</b><br>• 通过写作、演讲、实操来检验理解程度<br>• 每次输出都会暴露认知盲区，从而精准补强<br>• 崔大威作为企业顾问，可以尝试用输出式学习法整理本次私享会笔记并分享给团队。',
+          knowledge: '输出式学习 / Learning by Output'
+        },
+        {
+          id: 3,
+          contact: {name:'Steven Wei',initial:'SW',role:'连续创业者',color:'#7DD3FC'},
+          text: 'Robin提出AI应用落地的三个递进阶段依次是什么？请选择正确的顺序。',
+          options: ['个人AI化 → 企业AI化 → 家庭AI化','家庭AI化 → 个人AI化 → 企业AI化','个人AI化 → 家庭AI化 → 企业AI化','企业AI化 → 个人AI化 → 家庭AI化'],
+          originalAnswer: 2,
+          explanation: '<b>正确答案：个人AI化 → 家庭AI化 → 企业AI化</b><br><br>这是AI渗透的自然路径：<br>1️⃣ <b>个人AI化</b>：先用AI提升自己的效率和能力<br>2️⃣ <b>家庭AI化</b>：将AI工具引入家庭场景（教育、健康管理、智能家装等）<br>3️⃣ <b>企业AI化</b>：最后才是组织层面的系统化AI转型<br><br>Steven Wei作为创业者，建议先从第1阶段入手，打造个人AI工作流。',
+          knowledge: 'AI落地三阶段'
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: '本地AI与腾讯龙虾',
+      subtitle: '数据隐私与本地部署方案',
+      icon: '🦞',
+      color: '#E85D04',
+      questions: [
+        {
+          id: 4,
+          contact: {name:'David Yao',initial:'DY',role:'数据安全工程师',color:'#FCA5A5'},
+          text: '「腾讯龙虾」（Tencent Claude / Local AI）与普通云AI最大的区别是什么？',
+          options: ['运行速度更快','界面更好看','数据完全在本地处理，不离开机器','支持更多语言'],
+          originalAnswer: 2,
+          explanation: '<b>正确答案：数据完全在本地处理，不离开机器</b><br><br>腾讯龙虾（Local AI）的核心价值：<br>🔒 <b>数据不出机</b>——所有计算在本地完成<br>🔒 只有方法论类问题才会发送到云端<br>🔒 适合对数据安全有高要求的场景（金融、法律、医疗等）<br><br>David Yao作为数据安全工程师，这正是你关注的痛点——Local AI提供了「云的智能+本地隐私」的最佳平衡。',
+          knowledge: '本地AI / 数据隐私 / 腾讯龙虾'
+        },
+        {
+          id: 5,
+          contact: {name:'Isabella F',initial:'IF',role:'法律合规专员',color:'#C4B5FD'},
+          text: '在使用本地AI处理敏感文件时，以下哪种类型的数据适合发送到云端请求AI辅助？',
+          options: ['包含客户身份证号的合同原文','带财务数据的内部报表','询问"如何分析这份合同的风险点？"的方法论问题','员工薪资明细表'],
+          originalAnswer: 2,
+          explanation: '<b>正确答案：询问方法论的问题</b><br><br>Local AI的设计原则：<br>✅ 可以发云端：<b>方法、框架、通用知识类提问</b><br>❌ 不能发云端：<b>任何具体业务数据/个人信息</b><br><br>Isabella F作为法律合规专员，处理合同时应牢记：只把「怎么审」的问题发给AI，绝不能把合同原文或客户信息上传到云端。',
+          knowledge: '数据分级 / 合规要求'
+        },
+        {
+          id: 6,
+          contact: {name:'Bo Shu',initial:'BS',role:'IT架构师',color:'#FDE68A'},
+          text: '腾讯龙虾相比纯云端AI方案，在以下哪个场景中具有明显优势？',
+          options: ['需要调用最新互联网实时信息的任务','需要处理大量本地私有文档的场景','需要多用户协作编辑的场景','需要免费使用的场景'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：需要处理大量本地私有文档的场景</b><br><br>Local AI的优势场景矩阵：<br>✅ 本地私有文档批量处理 → Local AI完胜<br>✅ 实时联网搜索 → 云端AI更优<br>✅ 多人协作 → 取决于具体产品<br><br>Bo Shu作为IT架构师，在企业内部部署Local AI来处理内部知识库和私有文档是最合适的选择。',
+          knowledge: 'Local AI vs Cloud AI / 场景选型'
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: 'Google AI工具实战',
+      subtitle: 'Google生态中的AI能力矩阵',
+      icon: '🔍',
+      color: '#4285F4',
+      questions: [
+        {
+          id: 7,
+          contact: {name:'Mandy CHEN',initial:'MC',role:'数字营销专家',color:'#FF8FAB'},
+          text: 'Google AI工具生态中，以下哪项功能可以帮助营销人员快速生成多语言广告文案？',
+          options: ['Google Search Console','Google Ads的AI文案生成器','Google Analytics 4','Google Tag Manager'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：Google Ads的AI文案生成器</b><br><br>Google正在将AI深度整合进广告产品线：<br>• Google Ads AI可以<b>自动生成/优化广告文案</b><br>• 支持多语言适配和A/B测试<br>• 根据目标受众自动调整语调和关键词<br><br>Mandy CHEN作为数字营销专家，善用这个工具可以将文案产出效率提升数倍。',
+          knowledge: 'Google AI / 广告文案生成'
+        },
+        {
+          id: 8,
+          contact: {name:'Chris Cao',initial:'CC',role:'效率工具爱好者',color:'#6EE7B7'},
+          text: '在Google Workspace中集成的AI助手（如Gemini for Workspace），最实用的日常办公场景是什么？',
+          options: ['替代人工编写全部代码','辅助撰写邮件、总结文档、整理会议纪要','直接代替老板做决策','自动完成所有数据分析报告'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：辅助撰写邮件、总结文档、整理会议纪要</b><br><br>Gemini for Workspace 的核心价值：<br>✉️ 在Gmail中智能起草/回复邮件<br>📄 在Docs中总结长文、改写润色<br>📊 在Sheets中分析数据趋势<br>📝 在Meet中自动生成会议纪要<br><br>Chris Cao作为效率工具控，这些功能每天能为你节省1-2小时的重复性工作时间。',
+          knowledge: 'Gemini for Workspace / 效率提升'
+        },
+        {
+          id: 9,
+          contact: {name:'Ling Chan',initial:'LC',role:'SEO优化师',color:'#7DD3FC'},
+          text: '使用Google AI进行内容创作时，为了保证输出质量和原创性，最佳实践是什么？',
+          options: ['直接复制AI生成的全文发布','用AI做初稿框架，再由人工深度加工和事实核查','只用AI生成标题，其余全手写','完全不使用AI，保持100%人工创作'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：用AI做初稿框架，再由人工深度加工和事实核查</b><br><br>AI内容创作的黄金法则：<br>🤖 AI负责：<b>结构搭建、素材搜集、初稿生成</b><br>👨‍💻 人负责：<b>观点注入、事实核查、风格调优、情感表达</b><br><br>Ling Chan做SEO深知：搜索引擎越来越看重内容的独特性和价值感，「AI+人工」的混合模式效果最好。',
+          knowledge: 'AI内容创作 / SEO / 原创性'
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: 'Prompt工程与4元素框架',
+      subtitle: '高效沟通AI的方法论',
+      icon: '💬',
+      color: '#9333EA',
+      questions: [
+        {
+          id: 10,
+          contact: {name:'Sarah Li',initial:'SL',role:'产品经理',color:'#C4B5FD'},
+          text: 'Robin提出的「4元素Prompt框架」包含哪四个核心要素？请选出完整正确的组合。',
+          options: ['角色定义、任务描述、输出格式、字数限制','角色定义、用户身份、任务描述、输出格式','背景说明、任务描述、示例参考、输出格式','用户身份、任务描述、时间限制、输出格式'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：角色定义 → 用户身份 → 任务描述 → 输出格式</b><br><br>4元素Prompt框架（按顺序）：<br>1️⃣ <b>角色定义</b>：你是谁？（专家身份设定）<br>2️⃣ <b>用户身份</b>：我是谁？（让AI理解你的背景和需求层级）<br>3️⃣ <b>任务描述</b>：要做什么？（明确具体的指令）<br>4️⃣ <b>输出格式</b>：要什么形式？（表格/列表/代码/文章…）<br><br>Sarah Li写PRD时可以用这个框架让AI快速产出需求文档草稿。',
+          knowledge: '4元素Prompt框架 / Prompt Engineering'
+        },
+        {
+          id: 11,
+          contact: {name:'Jenny Feng',initial:'JF',role:'内容创作者',color:'#FCA5A5'},
+          text: '在4元素框架中，「角色定义」这一步为什么特别重要？它主要解决什么问题？',
+          options: ['让AI回答得更快','让AI知道用什么专业视角和知识深度来回应','减少Token消耗','增加回答的字数'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：让AI知道用什么专业视角和知识深度来回应</b><br><br>角色定义的作用机制：<br>🎭 设定角色 → AI激活对应领域的知识图谱<br>🎭 "你是资深律师" vs "你是小学生" → 同一问题的回答天差地别<br>🎭 角色越精确，输出的专业度和针对性越高<br><br>Jenny Feng创作内容时，试试设定「你是一位拥有10万粉丝的生活方式博主」，AI的语气和角度会完全不同。',
+          knowledge: '角色设定 / Persona Prompting'
+        },
+        {
+          id: 12,
+          contact: {name:'Allan Wang',initial:'AW',role:'技术总监',color:'#7DD3FC'},
+          text: '以下哪个Prompt示例最好地体现了「4元素框架」的完整运用？',
+          options: ['帮我写一份PPT','你是一位资深的AI产品经理。我是一家传统制造企业的CTO，正在规划AI转型路线图。请为我输出一份分3个阶段的实施计划，用Markdown表格格式呈现。','写一个关于AI转型的方案','请帮我列出AI转型的10个步骤'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：完整的4元素Prompt示例</b><br><br>拆解这个优秀Prompt：<br>✅ <b>角色</b>：「你是一位资深的AI产品经理」<br>✅ <b>用户身份</b>：「我是一家传统制造企业的CTO」<br>✅ <b>任务描述</b>：「规划AI转型路线图，分3个阶段」<br>✅ <b>输出格式</b>：「Markdown表格格式」<br><br>Allan Wang作为技术总监，这个模板可以直接套用到你的AI转型规划工作中。',
+          knowledge: 'Prompt最佳实践 / 框架应用'
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: '实战应用场景',
+      subtitle: '股票强度指数·法律审查·AI音乐·软件替换',
+      icon: '⚡',
+      color: '#059669',
+      questions: [
+        {
+          id: 13,
+          contact: {name:'Carter Peng',initial:'CP',role:'量化投资研究员',color:'#FDE68A'},
+          text: 'Robin分享的「股票强度指数」筛选体系采用三层过滤法。以下哪组条件组合是正确的？',
+          options: ['强度>80 → 行业前20 → 净利润率>30%','强度≥90 → 行业前10 → 毛利率≥40%','强度>85 → 行业前15 → 营收增长率>25%','强度≥95 → 行业前5 → ROE>20%'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：强度≥90 → 行业前10 → 毛利率≥40%</b><br><br>股票强度指数三层筛选法：<br>第一层：<b>强度分数 ≥ 90分</b>（剔除弱票）<br>第二层：<b>行业排名前10</b>（聚焦龙头）<br>第三层：<b>毛利率 ≥ 40%</b>（验证盈利质量）<br><br>Carter Peng作为量化研究员，这套体系可以作为因子选股策略的基础框架进一步优化。',
+          knowledge: '股票强度指数 / 三层筛选 / 量化选股'
+        },
+        {
+          id: 14,
+          contact: {name:'Charlene Cai',initial:'CC',role:'法务主管',color:'#FB7185'},
+          text: '利用AI审查法律合同时，最高效且风险可控的工作流程是怎样的？',
+          options: ['把整份合同丢给AI让它一次性分析','先让AI识别合同类型和关键条款，再逐条款审查风险，最后由人工复核','只让AI检查错别字和格式','完全依赖AI的审查结果不做人工确认'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：三步法流程</b><br><br>AI法律合同审查的最佳实践：<br>第一步：<b>AI识别</b>——合同类型、当事方、关键条款定位<br>第二步：<b>逐条款风险扫描</b>——违约责任、保密条款、争议解决等<br>第三步：<b>人工复核</b>——AI标注高风险项后由法务最终确认<br><br>⚠️ 重要提醒：AI是<b>辅助工具</b>，法律责任必须由人来承担。<br><br>Charlene Cai做法务主管，这套流程可以在保证质量的同时大幅提升团队效率。',
+          knowledge: 'AI合同审查 / 法律科技 / 风险控制'
+        },
+        {
+          id: 15,
+          contact: {name:'Jason Jin',initial:'JJ',role:'创业者/SaaS Founder',color:'#34D399'},
+          text: '关于「AI驱动的企业软件替换/增强」这一趋势，以下哪个判断最准确？',
+          options: ['AI会立即淘汰所有传统企业软件','AI将逐步嵌入现有软件栈，部分场景可替换独立SaaS工具','传统软件公司不会被AI影响','只有大企业才能享受AI带来的软件变革红利'],
+          originalAnswer: 1,
+          explanation: '<b>正确答案：AI将逐步嵌入现有软件栈，部分场景可替换独立SaaS工具</b><br><br>企业软件的AI演进路径：<br>🔄 <b>嵌入增强</b>：传统软件加入AI Copilot（Office 365 Copilot, Salesforce Einstein）<br>🔄 <b>聚合替代</b>：一个AI Agent替代多个单一功能SaaS<br>🔄 <b>原生重构</b>：新一代AI-native应用重新定义品类<br><br>Jason Jin作为创业者，值得关注的机会：<br>• 哪些SaaS的「AI增强」还不够好？（机会点）<br>• 能否做一个AI Agent替代3-5个现有工具？（切入点）',
+          knowledge: '企业软件AI化 / SaaS替代 / 创业机会'
+        }
+      ]
+    }
+  ]
+};
 
-// ========== STATE ==========
+// ==================== 全局状态 ====================
 let currentQ = 0;
 let score = 0;
 let answers = [];
-let shuffledOptions = [];
-let answered = false;
-const totalQ = 15;
+let userOptions = {}; // 记录用户选择的选项偏好 A/B/C/D
+const optionLetters = ['A','B','C','D'];
+const STORAGE_KEY = 'snail_quiz_progress';
 
-// ========== RANDOMIZE ==========
-function randomizeAnswers() {
-  shuffledOptions = [];
-  modules.forEach(m => {
-    m.questions.forEach(q => {
-      const correctIdx = q.originalAnswer;
-      const correctOpt = q.options[correctIdx];
-      const wrongOpts = q.options.filter((_, i) => i !== correctIdx);
-      // Fisher-Yates shuffle wrong options
-      for (let i = wrongOpts.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [wrongOpts[i], wrongOpts[j]] = [wrongOpts[j], wrongOpts[i]];
-      }
-      const correctSlot = Math.floor(Math.random() * 4);
-      const opts = [];
-      let wIdx = 0;
-      for (let i = 0; i < 4; i++) {
-        if (i === correctSlot) {
-          opts.push({ text: correctOpt, isCorrect: true });
-        } else {
-          opts.push({ text: wrongOpts[wIdx++], isCorrect: false });
-        }
-      }
-      shuffledOptions.push({ questionId: q.id, options: opts, correctSlot });
-    });
-  });
+// ==================== localStorage 进度管理 ====================
+function loadProgress(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }catch(e){ return null; }
+}
+function saveProgress(data){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){}
+}
+function getModuleStats(){
+  const p = loadProgress();
+  return p ? (p.moduleStats || {}) : {};
+}
+function getQuestionStats(){
+  const p = loadProgress();
+  return p ? (p.questionStats || {}) : {};
 }
 
-// ========== LOCALSTORAGE ==========
-function getProgress() {
-  try {
-    const d = localStorage.getItem('snail_quiz_progress');
-    return d ? JSON.parse(d) : null;
-  } catch(e) { return null; }
-}
-function saveProgress(result) {
-  let p = getProgress() || { totalAttempts:0, bestScore:0, lastScore:0, lastDate:'', history:[], questionStats:{}, moduleStats:{}, optionPreference:{A:0,B:0,C:0,D:0} };
-  p.totalAttempts++;
-  if (result.score > p.bestScore) p.bestScore = result.score;
-  p.lastScore = result.score;
-  p.lastDate = new Date().toISOString().slice(0,10);
-  p.history.push({ date: p.lastDate, score: result.score, total: totalQ, moduleScores: result.moduleScores });
-  if (p.history.length > 20) p.history = p.history.slice(-20);
-  // question stats
-  result.details.forEach(d => {
-    if (!p.questionStats[d.qId]) p.questionStats[d.qId] = { correct:0, wrong:0 };
-    d.correct ? p.questionStats[d.qId].correct++ : p.questionStats[d.qId].wrong++;
-  });
-  // module stats
-  Object.entries(result.moduleScores).forEach(([mId, ms]) => {
-    if (!p.moduleStats[mId]) p.moduleStats[mId] = { totalCorrect:0, totalWrong:0 };
-    p.moduleStats[mId].totalCorrect += ms.correct;
-    p.moduleStats[mId].totalWrong += ms.wrong;
-  });
-  // option preference
-  result.optionPreference && Object.entries(result.optionPreference).forEach(([k,v]) => {
-    p.optionPreference[k] = (p.optionPreference[k]||0) + v;
-  });
-  try { localStorage.setItem('snail_quiz_progress', JSON.stringify(p)); } catch(e) {}
-}
-
-function getMasteryLevel(qId) {
-  const p = getProgress();
-  if (!p || !p.questionStats[qId]) return 'new';
-  const s = p.questionStats[qId];
-  const total = s.correct + s.wrong;
-  if (total === 0) return 'new';
-  const rate = s.correct / total;
-  if (rate >= 0.8) return 'mastered';
-  if (rate >= 0.5) return 'familiar';
+function getMasteryLevel(mId){
+  const stats = getModuleStats();
+  const m = stats[mId];
+  if(!m) return 'new';
+  const total = (m.totalCorrect||0)+(m.totalWrong||0);
+  if(total===0) return 'new';
+  const rate = m.totalCorrect/total;
+  if(rate>=0.8) return 'mastered';
+  if(rate>=0.5) return 'familiar';
   return 'weak';
 }
-
-function getMasteryLabel(level) {
-  const map = { mastered:'已掌握', familiar:'熟悉中', weak:'薄弱', new:'首次' };
-  return map[level] || '首次';
+function getMasteryLabel(lv){
+  return {mastered:'✅ 已 mastered',familiar:'👍 熟悉中',weak:'⚠️ 薄弱',new:'🆕 首次'}[lv] || '🆕 首次';
 }
-function getMasteryClass(level) {
-  const map = { mastered:'mastery-mastered', familiar:'mastery-familiar', weak:'mastery-weak', new:'mastery-new' };
-  return map[level] || 'mastery-new';
-}
+function getMasteryClass(lv){ return 'mastery-'+lv; }
 
-// ========== RENDER ==========
-function renderStartPage() {
-  document.getElementById('startPage').style.display = '';
-  document.getElementById('quizPage').classList.remove('active');
-  document.getElementById('resultPage').classList.remove('active');
-  const p = getProgress();
-  if (p && p.totalAttempts > 0) {
-    document.getElementById('progressOverview').style.display = '';
-    const avg = p.history.length > 0 ? (p.history.reduce((s,h) => s+h.score, 0) / p.history.length).toFixed(1) : 0;
-    // Find weak modules
-    let weakModules = [];
-    Object.entries(p.moduleStats).forEach(([mId, ms]) => {
-      const rate = ms.totalCorrect / (ms.totalCorrect + ms.totalWrong || 1);
-      if (rate < 0.5) weakModules.push(mId);
-    });
-    let weakHtml = weakModules.map(mId => {
-      const m = modules.find(x => x.id == mId);
-      return m ? `<span style="background:#FEE2E2;color:#991B1B;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;margin-left:4px">${m.icon} ${m.title} 薄弱</span>` : '';
-    }).join('');
-    document.getElementById('progressStats').innerHTML =
-      `<div class="progress-stat">答题 <strong>${p.totalAttempts}</strong> 次</div>` +
-      `<div class="progress-stat">最佳 <strong>${p.bestScore}/${totalQ}</strong></div>` +
-      `<div class="progress-stat">平均 <strong>${avg}</strong></div>` +
-      `<div class="progress-stat">上次 <strong>${p.lastScore}/${totalQ}</strong></div>` +
-      (weakHtml ? `</div><div style="margin-top:8px;font-size:11px;color:var(--text-muted)">薄弱模块：${weakHtml}</div>` : '');
+// 显示历史进度面板
+function showHistoryPanel(){
+  const p = loadProgress();
+  const panel = document.getElementById('historyPanel');
+  const grid = document.getElementById('progressGrid');
+  const weakDiv = document.getElementById('weakModules');
+  if(!p || !p.totalAttempts){
+    panel.style.display='none'; return;
   }
-}
+  panel.style.display='block';
+  const avg = p.totalAttempts>0 ? ((p.history||[]).reduce((s,h)=>s+h.score,0)/(p.history||[]).length).toFixed(1):'0';
 
-function getQuestionData(idx) {
-  let qIdx = 0;
-  for (const m of modules) {
-    for (const q of m.questions) {
-      if (qIdx === idx) return { module: m, question: q, shuffled: shuffledOptions[idx] };
-      qIdx++;
+  grid.innerHTML = `
+    <div class="progress-item"><div class="label">答题次数</div><div class="value">${p.totalAttempts}次</div></div>
+    <div class="progress-item"><div class="label">历史最佳</div><div class="value">${p.bestScore||0}分</div></div>
+    <div class="progress-item"><div class="label">平均得分</div><div class="value">${avg}分</div></div>
+    <div class="progress-item"><div class="label">上次成绩</div><div class="value">${p.lastScore||0}分</div></div>
+    <div class="progress-item"><div class="label">上次日期</div><div class="value">${p.lastScore!=null?(p.lastDate||'-'):'-'}</div></div>
+  `;
+
+  // 薄弱模块标记
+  weakDiv.innerHTML='';
+  const ms = p.moduleStats||{};
+  Object.keys(ms).forEach(mid=>{
+    const m=ms[mid];
+    const total=(m.totalCorrect||0)+(m.totalWrong||0);
+    if(total>=3 && m.totalCorrect/total<0.5){
+      const mod=quizData.modules.find(x=>x.id==parseInt(mid));
+      if(mod){
+        const tag=document.createElement('span');tag.className='weak-tag';
+        tag.textContent=mod.title;weakDiv.appendChild(tag);
+      }
     }
+  });
+  if(weakDiv.children.length===0) weakDiv.innerHTML='<span style="font-size:12px;color:#6EE7B7">暂无薄弱模块，继续保持！🎉</span>';
+}
+
+// ==================== 答案随机化算法 ====================
+function randomizeAnswers(question){
+  // 完全随机：correctSlot随机，错误选项Fisher-Yates洗牌
+  const correctSlot=Math.floor(Math.random()*4);
+  const wrongs=[...question.options];
+  const correctAns=wrongs.splice(question.originalAnswer,1)[0];
+  // Fisher-Yates shuffle wrongs
+  for(let i=wrongs.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));[wrongs[i],wrongs[j]]=[wrongs[j],wrongs[i]];
   }
-  return null;
+  const arr=[...wrongs];
+  arr.splice(correctSlot,0,correctAns);
+  return {options:arr,correctIndex:correctSlot};
 }
 
-function renderQuestion(idx) {
-  const data = getQuestionData(idx);
-  if (!data) return;
-  const { module, question, shuffled } = data;
-  const bgClass = `snail-bg-${(idx % 15) + 1}`;
-  const card = document.getElementById('quizCard');
-  card.className = `quiz-card ${bgClass}`;
-  const mastery = getMasteryLevel(question.id);
-  const letters = ['A','B','C','D'];
-  const optsHtml = shuffled.options.map((o, i) =>
-    `<button class="option-btn" data-idx="${i}" onclick="selectOption(${i})">
-      <span class="option-letter">${letters[i]}</span>
-      <span>${o.text}</span>
-    </button>`
-  ).join('');
+// ==================== 渲染题目 ====================
+function renderQuestion(idx){
+  let qFlat=[];
+  quizData.modules.forEach(mod=>mod.questions.forEach(q=>qFlat.push({q,...mod})));
+  if(idx>=qFlat.length) return showResult();
+  const item=qFlat[idx];
+  const q=item.q;
+  const mod=item;
 
-  document.getElementById('cardContent').innerHTML =
-    `<span class="module-badge" style="background:${module.color}22;color:${module.color}">${module.icon} ${module.title}</span>` +
-    `<span class="mastery-badge ${getMasteryClass(mastery)}">${getMasteryLabel(mastery)}</span>` +
-    `<div class="contact-tag" style="background:${question.contact.color}15;color:${question.contact.color}">
-      <span class="contact-avatar" style="background:${question.contact.color}">${question.contact.initial}</span>
-      ${question.contact.name} · ${question.contact.role}
-    </div>` +
-    `<div class="question-text">${question.text}</div>` +
-    `<div class="options-list">${optsHtml}</div>` +
-    `<div class="explanation-box" id="explanation">
-      <strong>📝 解析：</strong>${question.explanation}
-      <div class="knowledge-tag">${question.knowledge}</div>
-    </div>`;
+  // 随机化答案
+  const randomized=randomizeAnswers(q);
 
-  document.getElementById('progressFill').style.width = `${((idx+1)/totalQ)*100}%`;
-  document.getElementById('progressText').textContent = `${idx+1}/${totalQ}`;
-  document.getElementById('btnNext').classList.remove('visible');
-  answered = false;
+  const masteryLv=getMasteryLevel(mod.id);
+
+  const container=document.getElementById('questionContainer');
+  container.innerHTML=`
+    <div class="module-header">
+      <span class="module-icon">${mod.icon}</span>
+      <div class="module-info">
+        <h2>${mod.title}</h2>
+        <p>${mod.subtitle}</p>
+      </div>
+    </div>
+    <div class="quiz-card snail-bg-${q.id}">
+      <div class="card-corner-snail corner-tl"><svg width="42"height="42"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="${q.contact.color}"opacity=".3"/><circle cx="18"cy="16"r="7"fill="${q.contact.color}"opacity=".2"/><circle cx="15"cy="14"r="1.5"fill="${q.contact.color}"opacity=".6"/><circle cx="21"cy="14"r="1.5"fill="${q.contact.color}"opacity=".6"/></svg></div>
+      <div class="card-corner-snail corner-br"><svg width="42"height="42"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="${q.contact.color}"opacity=".25"/><circle cx="18"cy="16"r="7"fill="${q.contact.color}"opacity=".18"/></svg></div>
+      <div class="q-number">QUESTION ${q.id}/15</div>
+      <div class="contact-tag" style="background:${q.contact.color}15;color:${q.contact.color};border:1px solid ${q.contact.color}40">
+        <div class="contact-avatar" style="background:${q.contact.color}">${q.contact.initial}</div>
+        ${q.contact.name} · ${q.contact.role}
+        <span class="mastery-badge ${getMasteryClass(masteryLv)}">${getMasteryLabel(masteryLv)}</span>
+      </div>
+      <div class="question-text">${q.text}</div>
+      <div class="options-list" id="optionsList">
+        ${randomized.options.map((opt,i)=>`
+          <button class="option-btn" data-index="${i}" onclick="selectOption(${q.id},${i},${randomized.correctIndex},'${q.contact.color}')">
+            <span class="option-letter">${optionLetters[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation-area" id="expl${q.id}">
+        <div class="explanation-title">💡 解析</div>
+        <div class="explanation-text">${q.explanation}</div>
+        <span class="knowledge-tag"># ${q.knowledge}</span>
+      </div>
+      <div class="nav-buttons" id="nav${q.id}" style="display:none">
+        ${idx<qFlat.length-1?`<button class="nav-btn primary" onclick="nextQuestion()">下一题 →</button>`:`<button class="nav-btn primary" onclick="showResult()">查看结果 🏆</button>`}
+      </div>
+    </div>
+  `;
+
+  // 更新进度条
+  const pct=((idx)/qFlat.length)*100;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=(idx+1)+'/'+qFlat.length;
 }
 
-function selectOption(idx) {
-  if (answered) return;
-  answered = true;
-  const data = getQuestionData(currentQ);
-  const shuffled = data.shuffled;
-  const isCorrect = shuffled.options[idx].isCorrect;
-  if (isCorrect) score++;
+// ==================== 选择答案 ====================
+function selectOption(qId,selectedIndex,correctIndex,contactColor){
+  // 禁用所有选项
+  const btns=document.querySelectorAll('#optionsList .option-btn');
+  btns.forEach(b=>b.classList.add('disabled'));
 
-  answers.push({
-    qId: data.question.id,
-    moduleId: data.module.id,
-    selectedIdx: idx,
-    correct: isCorrect,
-    selectedLetter: ['A','B','C','D'][idx]
-  });
+  const selectedBtn=btns[selectedIndex];
+  selectedBtn.classList.add('selected');
 
-  const btns = document.querySelectorAll('.option-btn');
-  btns.forEach((btn, i) => {
-    btn.onclick = null;
-    if (shuffled.options[i].isCorrect) btn.classList.add('correct');
-    if (i === idx && !isCorrect) btn.classList.add('wrong');
-    if (i === idx) btn.classList.add('selected');
-  });
+  const isCorrect=selectedIndex===correctIndex;
 
-  document.getElementById('explanation').classList.add('visible');
-  document.getElementById('btnNext').classList.add('visible');
-  document.getElementById('btnNext').textContent = currentQ < totalQ - 1 ? '下一题 →' : '查看结果 🎯';
-}
+  // 记录选项偏好
+  const letter=optionLetters[selectedIndex];
+  userOptions[letter]=(userOptions[letter]||0)+1;
 
-function nextQuestion() {
-  currentQ++;
-  if (currentQ >= totalQ) {
-    showResult();
-  } else {
-    renderQuestion(currentQ);
-  }
-}
-
-function startQuiz() {
-  currentQ = 0;
-  score = 0;
-  answers = [];
-  answered = false;
-  randomizeAnswers();
-  document.getElementById('startPage').style.display = 'none';
-  document.getElementById('quizPage').classList.add('active');
-  document.getElementById('resultPage').classList.remove('active');
-  renderQuestion(0);
-}
-
-function showResult() {
-  document.getElementById('quizPage').classList.remove('active');
-  document.getElementById('resultPage').classList.add('active');
-
-  const pct = Math.round((score / totalQ) * 100);
-  document.getElementById('resultScore').textContent = `${score}/${totalQ}`;
-  const msgs = [
-    { min: 90, text: '🎉 CRM优化大师！你对每个细节了如指掌！' },
-    { min: 70, text: '👍 表现优秀！大部分知识点都掌握了！' },
-    { min: 50, text: '💪 不错的基础，继续加油复习薄弱点！' },
-    { min: 0, text: '📚 需要多复习哦，重新学习会议内容吧！' }
-  ];
-  document.getElementById('resultMsg').textContent = msgs.find(m => pct >= m.min).text;
-
-  // Module scores
-  const moduleScores = {};
-  modules.forEach(m => { moduleScores[m.id] = { correct: 0, wrong: 0 }; });
-  answers.forEach(a => {
-    if (a.correct) moduleScores[a.moduleId].correct++;
-    else moduleScores[a.moduleId].wrong++;
-  });
-
-  // Option preference
-  const optionPreference = { A:0, B:0, C:0, D:0 };
-  answers.forEach(a => { optionPreference[a.selectedLetter]++; });
-
-  // Save to localStorage
-  saveProgress({ score, moduleScores, details: answers, optionPreference });
-
-  // Render memory panel
-  const p = getProgress();
-  const prevScore = p.history.length >= 2 ? p.history[p.history.length - 2].score : null;
-  let trendHtml = '';
-  if (prevScore !== null) {
-    const diff = score - prevScore;
-    if (diff > 0) trendHtml = `<span class="trend-value trend-up">↑ +${diff}</span>`;
-    else if (diff < 0) trendHtml = `<span class="trend-value trend-down">↓ ${diff}</span>`;
-    else trendHtml = `<span class="trend-value trend-flat">— 持平</span>`;
-  } else {
-    trendHtml = `<span class="trend-value trend-flat">首次答题</span>`;
+  if(isCorrect){
+    score++;
+    selectedBtn.classList.add('correct');
+  }else{
+    selectedBtn.classList.add('wrong');
+    btns[correctIndex].classList.add('correct');
   }
 
-  const prefColors = ['#FF8FAB','#C4B5FD','#6EE7B7','#7DD3FC'];
-  const totalPref = Object.values(optionPreference).reduce((a,b)=>a+b,0) || 1;
-  const prefHtml = ['A','B','C','D'].map((l,i) => {
-    const cnt = optionPreference[l];
-    const p2 = Math.round((cnt/totalPref)*100);
-    return `<div class="pref-bar-wrap">
-      <span class="pref-label">${l}</span>
-      <div class="pref-track"><div class="pref-fill" style="width:${p2}%;background:${prefColors[i]}"></div></div>
-      <span class="pref-pct">${cnt}次 ${p2}%</span>
-    </div>`;
+  // 显示解析
+  document.getElementById('expl'+qId).classList.add('show');
+  document.getElementById('nav'+qId).style.display='flex';
+
+  // 记录本题结果
+  answers.push({qId,selected:selectedIndex,correct:correctIndex,isCorrect});
+}
+
+function nextQuestion(){ currentQ++; renderQuestion(currentQ); }
+
+// ==================== 开始 & 重试 ====================
+function startQuiz(){
+  score=0;currentQ=0;answers=[];userOptions={};
+  document.getElementById('startPage').style.display='none';
+  document.getElementById('quizArea').style.display='block';
+  document.getElementById('resultPage').style.display='none';
+  renderQuestion(currentQ);
+}
+
+function retryQuiz(){ startQuiz(); }
+
+// ==================== 结果页 ====================
+function showResult(){
+  document.getElementById('quizArea').style.display='none';
+  document.getElementById('resultPage').style.display='block';
+
+  // 分数动画
+  const scoreEl=document.getElementById('scoreNumber');
+  let display=0;
+  const target=score;
+  const anim=setInterval(()=>{
+    display++;
+    scoreEl.textContent=display;
+    if(display>=target)clearInterval(anim);
+  },80);
+
+  // 分数环
+  const deg=(score/15)*360;
+  document.getElementById('scoreFill').style.transform=`rotate(${deg}deg)`;
+
+  // 结果评语
+  const titles=['💪 继续加油！','👍 还不错！','🎉 很棒！','🏆 太厉害了！','👑 完美通关！'];
+  const subs=['多复习几次就能进步哦～','已经超过一半了，保持节奏！','你对AI的理解很扎实了！','你是蜗牛AI的超级学员！','满分大神！请收下我们的膝盖！'];
+  const tier=score<=4?0:score<=7?1:score<=11?2:score<15?3:4;
+  document.getElementById('resultTitle').textContent=titles[tier];
+  document.getElementById('resultSubtitle').textContent=subs[tier];
+
+  // 保存进度到localStorage
+  saveToStorage();
+
+  // 渲染学习记忆面板
+  renderMemoryPanel();
+}
+
+function saveToStorage(){
+  const p=loadProgress()||{totalAttempts:0,bestScore:0,lastScore:0,lastDate:'',history:[],questionStats:{},moduleStats:{},optionPreference:{A:0,B:0,C:0,D:0}};
+  p.totalAttempts=(p.totalAttempts||0)+1;
+  p.lastScore=score;
+  p.lastDate=new Date().toISOString().slice(0,10);
+  if(score>(p.bestScore||0)) p.bestScore=score;
+
+  // 历史
+  const moduleScores={};
+  quizData.modules.forEach(mod=>{
+    const modAns=answers.filter(a=>{
+      return mod.questions.some(q=>q.id===a.qId);
+    });
+    moduleScores[mod.id]={correct:modAns.filter(a=>a.isCorrect).length,total:modAns.length};
+  });
+  (p.history=p.history||[]).unshift({date:p.lastDate,score:score,total:15,moduleScores});
+  if(p.history.length>20) p.history.pop();
+
+  // 每题统计
+  answers.forEach(a=>{
+    const qs=(p.questionStats=p.questionStats||{})[a.qId]||(p.questionStats[a.qId]={correct:0,wrong:0,lastAnswer:a.selected});
+    if(a.isCorrect) qs.correct++; else qs.wrong++;
+    qs.lastAnswer=a.selected;
+  });
+
+  // 模块统计
+  quizData.modules.forEach(mod=>{
+    const ms=(p.moduleStats=p.moduleStats||{})[mod.id]||(p.moduleStats[mod.id]={totalCorrect:0,totalWrong:0});
+    mod.questions.forEach(q=>{
+      const ans=answers.find(a=>a.qId===q.id);
+      if(ans){
+        if(ans.isCorrect) ms.totalCorrect++; else ms.totalWrong++;
+      }
+    });
+  });
+
+  // 选项偏好累计
+  Object.keys(userOptions).forEach(k=>{
+    p.optionPreference[k]=(p.optionPreference[k]||0)+userOptions[k];
+  });
+
+  saveProgress(p);
+}
+
+function renderMemoryPanel(){
+  const p=loadProgress();
+  if(!p)return;
+  const content=document.getElementById('memoryContent');
+
+  // 上次vs本次趋势
+  const prevScore=p.history&&p.history.length>1?p.history[1].score:null;
+  let trendHtml='';
+  if(prevScore!=null){
+    const diff=score-prevScore;
+    const cls=diff>0?'trend-up':diff<0?'trend-down':'trend-same';
+    const arrow=diff>0?'↑':diff<0?'↓':'—';
+    trendHtml=`<span class="${cls}">${arrow}${Math.abs(diff)}</span>`;
+  }
+
+  // 选项偏好总统计
+  const op=p.optionPreference||{A:0,B:0,C:0,D:0};
+  const opTotal=op.A+op.B+op.C+op.D||1;
+  const prefColors={A:'#FF8FAB',B:'#6EE7B7',C:'#7DD3FC',D:'#C4B5FD'};
+  const prefHtml=Object.entries(op).map(([k,v])=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+      <span class="pref-label" style="color:${prefColors[k]}">${k}</span>
+      <div class="pref-bar"><div class="pref-fill" style="width:${(v/opTotal)*100}%;background:${prefColors[k]}"></div></div>
+      <span class="pref-pct">${v}次 (${((v/opTotal)*100).toFixed(0)}%)</span>
+    </div>
+  `).join('');
+
+  // 模块掌握度
+  const ms=p.moduleStats||{};
+  const modMasteryHtml=quizData.modules.map(mod=>{
+    const m=ms[mod.id]||{totalCorrect:0,totalWrong:0};
+    const total=m.totalCorrect+m.totalWrong;
+    const rate=total>0?(m.totalCorrect/total)*100:0;
+    const fillColor=rate>=80?'#34D399':rate>=50?'#FDE68A':'#FB7185';
+    return `
+      <div class="mm-item">
+        <span class="mm-icon">${mod.icon}</span>
+        <span class="mm-name">${mod.title}</span>
+        <div class="mm-bar"><div class="mm-fill" style="width:${rate}%;background:${fillColor}"></div></div>
+        <span class="mm-pct">${total>0?Math.round(rate)+'%':'—'}</span>
+      </div>`;
   }).join('');
 
-  const moduleMasteryHtml = modules.map(m => {
-    const ms = moduleScores[m.id];
-    const rate = ms.correct / (ms.correct + ms.wrong || 1);
-    const pRate = Math.round(rate * 100);
-    const color = rate >= 0.8 ? '#34D399' : rate >= 0.5 ? '#FDE68A' : '#FB7185';
-    return `<div class="module-mastery-row">
-      <span class="mm-icon">${m.icon}</span>
-      <span class="mm-name">${m.title}</span>
-      <div class="mm-bar"><div class="mm-fill" style="width:${pRate}%;background:${color}"></div></div>
-      <span class="mm-pct" style="color:${color}">${pRate}%</span>
-    </div>`;
-  }).join('');
+  content.innerHTML=`
+    <div class="memory-row">
+      <span class="memory-label">本次得分</span>
+      <span class="memory-value" style="color:#059669;font-size:22px">${score}<small style="font-size:12px;color:#9E99AA">/15</small> ${trendHtml}</span>
+    </div>
+    <div class="memory-row">
+      <span class="memory-label">历史最佳</span>
+      <span class="memory-value">${p.bestScore||0}<small style="font-size:12px;color:#9E99AA">/15</small></span>
+    </div>
+    <div class="memory-row">
+      <span class="memory-label">累计答题</span>
+      <span class="memory-value">${p.totalAttempts}次</span>
+    </div>
 
-  document.getElementById('memoryPanel').innerHTML =
-    `<h3>🧠 学习记忆面板</h3>` +
-    `<div class="trend-row"><span class="trend-label">本次得分</span><span class="trend-value">${score}/${totalQ}</span></div>` +
-    `<div class="trend-row"><span class="trend-label">历史最佳</span><span class="trend-value">${p.bestScore}/${totalQ}</span></div>` +
-    `<div class="trend-row"><span class="trend-label">进步趋势</span>${trendHtml}</div>` +
-    `<div style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text-secondary)">选项偏好</div>` +
-    prefHtml +
-    `<div style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text-secondary)">模块掌握度</div>` +
-    moduleMasteryHtml;
+    <div class="preference-section" style="margin-top:20px;padding-top:14px;border-top:1px solid #f0ece4">
+      <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:4px">📊 选项偏好统计</div>
+      ${prefHtml}
+    </div>
+
+    <div class="module-mastery" style="margin-top:18px;padding-top:14px;border-top:1px solid #f0ece4">
+      <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:4px">📈 模块掌握度</div>
+      ${modMasteryHtml}
+    </div>
+  `;
 }
 
-function retryQuiz() {
-  document.getElementById('resultPage').classList.remove('active');
-  startQuiz();
-}
-
-// ========== INIT ==========
-randomizeAnswers();
-renderStartPage();
+// ==================== 初始化 ====================
+showHistoryPanel();
 </script>
 </body>
 </html>
