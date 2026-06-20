@@ -249,9 +249,9 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 </div><!-- /.app-container -->
 
 <script>
-// ==================== Logo (Base64 SVG) ====================
-const LOGO_URL = 'data:image/svg+xml;base64,' + btoa(`<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 666 375" width="666" height="375">
+// ==================== Logo (SVG Data URL) ====================
+// 注意：btoa() 不支持中文，改用 encodeURIComponent + data:image/svg+xml 格式
+const _svgStr = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 666 375" width="666" height="375">
   <defs>
     <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#D4AF37"/>
@@ -262,41 +262,32 @@ const LOGO_URL = 'data:image/svg+xml;base64,' + btoa(`<?xml version="1.0" encodi
       <stop offset="100%" style="stop-color:#D4AF37"/>
     </linearGradient>
   </defs>
-  <!-- 背景 -->
   <rect width="666" height="375" rx="24" fill="#FFFBF0"/>
-  <!-- 悉尼大桥简化 -->
   <path d="M180 280 Q333 200 486 280" stroke="url(#g2)" stroke-width="4" fill="none" opacity="0.3"/>
   <path d="M220 270 L220 290 M260 255 L260 290 M300 240 L300 290 M340 230 L340 290 M380 225 L380 290 M420 230 L420 290 M460 240 L460 290 M500 255 L500 290" stroke="url(#g2)" stroke-width="2" opacity="0.2"/>
-  <!-- 蜗牛身体 -->
   <ellipse cx="300" cy="195" rx="115" ry="82" fill="url(#g1)" opacity="0.85"/>
   <ellipse cx="300" cy="185" rx="75" ry="54" fill="#F5D76E" opacity="0.35"/>
-  <!-- 蜗壳螺旋 -->
   <path d="M300 155 C330 140 360 160 355 190 C350 220 310 235 285 215 C265 198 270 165 300 155" stroke="#B8860B" stroke-width="4" fill="none" opacity="0.5"/>
   <path d="M300 170 C320 162 335 178 332 196 C328 214 302 222 288 208 C277 197 280 176 300 170" stroke="#B8860B" stroke-width="2.5" fill="none" opacity="0.4"/>
-  <!-- 触角 -->
   <path d="M220 170 Q205 145 210 125" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
   <path d="M240 163 Q232 138 240 118" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
   <circle cx="210" cy="122" r="5" fill="#D4AF37"/>
   <circle cx="240" cy="116" r="5" fill="#D4AF37"/>
-  <!-- 眼睛 -->
   <circle cx="250" cy="178" r="8" fill="#2D2B32"/>
   <circle cx="252" cy="176" r="3" fill="#fff"/>
   <circle cx="290" cy="182" r="8" fill="#2D2B32"/>
   <circle cx="292" cy="180" r="3" fill="#fff"/>
-  <!-- 微笑 -->
   <path d="M260 202 Q275 216 292 202" stroke="#8B6914" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <!-- 尾巴 -->
   <path d="M185 200 Q165 215 175 232" stroke="#B8860B" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
-  <!-- 文字 -->
   <text x="333" y="300" text-anchor="middle" font-family="-apple-system,PingFang SC,sans-serif" font-size="38" font-weight="800" fill="url(#g1)">蜗牛AI</text>
   <text x="333" y="335" text-anchor="middle" font-family="-apple-system,PingFang SC,sans-serif" font-size="16" fill="#9E99AA" letter-spacing="4">SNAIL AI ACADEMY</text>
-  <!-- 装饰星星 -->
   <circle cx="480" cy="90" r="3" fill="#D4AF37" opacity="0.5"/>
   <circle cx="520" cy="130" r="2" fill="#F5D76E" opacity="0.4"/>
   <circle cx="120" cy="110" r="2.5" fill="#D4AF37" opacity="0.45"/>
   <circle cx="550" cy="300" r="2" fill="#F5D76E" opacity="0.35"/>
   <circle cx="90" cy="280" r="2" fill="#D4AF37" opacity="0.4"/>
-</svg>`);
+</svg>`;
+const LOGO_URL = 'data:image/svg+xml,' + encodeURIComponent(_svgStr);
 
 // 设置所有Logo
 document.getElementById('startLogo').src = LOGO_URL;
