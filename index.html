@@ -22,7 +22,7 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 /* ===== 开始页 ===== */
 .start-page{text-align:center;padding:60px 20px 40px}
 .start-logo-wrap{margin-bottom:32px}
-.start-logo-wrap img{width:140px;height:auto;border-radius:16px;animation:bounceIn 1s ease both;filter:drop-shadow(0 4px 20px rgba(212,175,55,0.4))}
+.start-logo-svg{width:140px;height:auto;border-radius:16px;animation:bounceIn 1s ease both;filter:drop-shadow(0 4px 20px rgba(212,175,55,0.4))}
 @keyframes bounceIn{0%{transform:scale(.3);opacity:0}50%{transform:scale(1.05)}70%{transform:scale(.9)}100%{transform:scale(1);opacity:1}}
 .start-title{font-size:28px;font-weight:800;background:linear-gradient(135deg,#D4AF37,#F5D76E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
 .start-subtitle{font-size:15px;color:var(--text-secondary);margin-bottom:36px}
@@ -40,8 +40,8 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 /* ===== 题目区域 ===== */
 .quiz-area{display:none}
 .quiz-logo-bar{text-align:center;padding:12px 0 8px}
-.quiz-logo-bar img{height:32px;opacity:.45;transition:.3s;border-radius:6px}
-.quiz-logo-bar img:hover{opacity:.7}
+.quiz-logo-bar svg{height:32px;opacity:.45;transition:.3s;border-radius:6px}
+.quiz-logo-bar svg:hover{opacity:.7}
 .quiz-logo-bar .logo-label{font-size:10px;color:var(--text-muted);letter-spacing:1px;margin-top:2px}
 
 /* 进度条 */
@@ -49,7 +49,7 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .progress-track{flex:1;height:8px;background:#ede9e3;border-radius:4px;overflow:hidden;position:relative}
 .progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent-mint),var(--accent-sky));transition:width .5s ease}
 .progress-text{font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;min-width:52px;text-align:right}
-.progress-logo{width:20px;height:14px;opacity:.6;flex-shrink:0}
+.progress-logo svg{width:20px;height:14px;opacity:.6}
 
 /* 模块标签 */
 .module-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
@@ -58,9 +58,8 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .module-info p{font-size:12px;color:var(--text-muted)}
 
 /* 题目卡片 */
-.quiz-card{background:var(--card-white);border-radius:var(--radius);padding:28px 24px;box-shadow:0 4px 24px rgba(0,0,0,.05);position:relative;overflow:hidden;margin-bottom:24px;transition:.3s}
+.quiz-card{background:var(--card-white);border-radius:var(--radius);padding:28px 24px;box-shadow:0 4px 24px rgba(0,0,0,.05);position:relative;overflow:hidden;margin-bottom:24px;transition:.3z}
 .quiz-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;opacity:.08;z-index:0}
-/* 卡片四角蜗牛装饰 */
 .card-corner-snail{position:absolute;width:42px;height:42px;pointer-events:none;opacity:.45;z-index:0}
 .corner-tl{top:8px;left:8px}.corner-tr{top:8px;right:8px}.corner-bl{bottom:8px;left:8px}.corner-br{bottom:8px;right:8px}
 
@@ -87,7 +86,6 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .option-btn.wrong .option-letter{background:var(--red)!important;color:#fff!important}
 .option-btn.disabled{pointer-events:none;opacity:.6}
 
-/* 解析区 */
 .explanation-area{display:none;margin-top:20px;padding:18px;border-radius:var(--radius-sm);background:var(--bg-warm);position:relative;z-index:1}
 .explanation-area.show{display:block;animation:fadeUp .4s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -95,7 +93,6 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .explanation-text{font-size:14px;line-height:1.7;color:var(--text-primary)}
 .knowledge-tag{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;background:#e0e7ff;color:#4338ca;margin-top:10px}
 
-/* 导航按钮 */
 .nav-buttons{display:flex;gap:12px;margin-top:20px}
 .nav-btn{flex:1;padding:14px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;border:none;transition:.25s}
 .nav-btn.primary{background:linear-gradient(135deg,var(--accent-pink),#f472b6);color:#fff;box-shadow:0 4px 16px rgba(255,143,171,.3)}
@@ -105,7 +102,7 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 
 /* ===== 结果页 ===== */
 .result-page{display:none;text-align:center;padding:40px 20px}
-.result-logo{width:100px;margin-bottom:20px;border-radius:16px;animation:bounceIn .8s ease both;filter:drop-shadow(0 4px 16px rgba(212,175,55,.35))}
+.result-logo-svg{width:100px;margin-bottom:20px;border-radius:16px;animation:bounceIn .8s ease both;filter:drop-shadow(0 4px 16px rgba(212,175,55,.35))}
 .result-score-circle{width:160px;height:160px;border-radius:50%;margin:0 auto 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .score-ring{position:absolute;width:100%;height:100%;border-radius:50%;border:6px solid #ede9e3}
 .score-fill{position:absolute;width:100%;height:100%;border-radius:50%;border:6px solid transparent;border-top-color:var(--accent-mint);border-right-color:var(--accent-mint);transition:transform .8s ease}
@@ -114,7 +111,6 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .result-title{font-size:24px;font-weight:800;margin-bottom:6px}
 .result-subtitle{font-size:14px;color:var(--text-secondary);margin-bottom:32px}
 
-/* 学习记忆面板 */
 .memory-panel{background:var(--card-white);border-radius:var(--radius);padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.05);text-align:left;margin-bottom:24px}
 .memory-panel h3{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .memory-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f5f0ea}
@@ -123,15 +119,12 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .memory-value{font-size:15px;font-weight:700}
 .trend-up{color:var(--green)}.trend-down{color:var(--red)}.trend-same{color:var(--text-muted)}
 
-/* 选项偏好 */
 .preference-section{margin-top:16px}
-.pref-bar-wrap{display:flex;align-items:center;gap:8px;margin-top:6px}
 .pref-label{width:20px;font-size:12px;font-weight:700;color:var(--text-muted)}
 .pref-bar{flex:1;height:18px;background:#f0ece4;border-radius:4px;overflow:hidden;position:relative}
 .pref-fill{height:100%;border-radius:4px;transition:width .5s ease}
 .pref-pct{font-size:11px;font-weight:600;color:var(--text-muted);min-width:32px;text-align:right}
 
-/* 模块掌握度 */
 .module-mastery{margin-top:16px}
 .mm-item{display:flex;align-items:center;gap:10px;padding:8px 0}
 .mm-icon{font-size:16px}
@@ -144,23 +137,16 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .result-actions .nav-btn{padding:16px 28px}
 
 /* ===== 15种题目背景色 ===== */
-.snail-bg-1{background:linear-gradient(135deg,#FFF0F5,#FFE4EC)}
-.snail-bg-2{background:linear-gradient(135deg,#F0FFF4,#E6FFE6)}
-.snail-bg-3{background:linear-gradient(135deg,#F0F8FF,#E6F2FF)}
-.snail-bg-4{background:linear-gradient(135deg,#F8F0FF,#F0E6FF)}
-.snail-bg-5{background:linear-gradient(135deg,#FFF5F0,#FFEEE6)}
-.snail-bg-6{background:linear-gradient(135deg,#FFFCF0,#FFF8E6)}
-.snail-bg-7{background:linear-gradient(135deg,#FFF0F0,#FFE8E8)}
-.snail-bg-8{background:linear-gradient(135deg,#F0FFF5,#E6FFEE)}
-.snail-bg-9{background:linear-gradient(135deg,#F8F0FF,#F3E8FF)}
-.snail-bg-10{background:linear-gradient(135deg,#FFF0F5,#FFE8F0)}
-.snail-bg-11{background:linear-gradient(135deg,#F0FFFF,#E6FAFA)}
-.snail-bg-12{background:linear-gradient(135deg,#FFFDF5,#FFF8EE)}
-.snail-bg-13{background:linear-gradient(135deg,#FFF0F3,#FFEAEF)}
-.snail-bg-14{background:linear-gradient(135deg,#FFFCF0,#FFF5E6)}
+.snail-bg-1{background:linear-gradient(135deg,#FFF0F5,#FFE4EC)}.snail-bg-2{background:linear-gradient(135deg,#F0FFF4,#E6FFE6)}
+.snail-bg-3{background:linear-gradient(135deg,#F0F8FF,#E6F2FF)}.snail-bg-4{background:linear-gradient(135deg,#F8F0FF,#F0E6FF)}
+.snail-bg-5{background:linear-gradient(135deg,#FFF5F0,#FFEEE6)}.snail-bg-6{background:linear-gradient(135deg,#FFFCF0,#FFF8E6)}
+.snail-bg-7{background:linear-gradient(135deg,#FFF0F0,#FFE8E8)}.snail-bg-8{background:linear-gradient(135deg,#F0FFF5,#E6FFEE)}
+.snail-bg-9{background:linear-gradient(135deg,#F8F0FF,#F3E8FF)}.snail-bg-10{background:linear-gradient(135deg,#FFF0F5,#FFE8F0)}
+.snail-bg-11{background:linear-gradient(135deg,#F0FFFF,#E6FAFA)}.snail-bg-12{background:linear-gradient(135deg,#FFFDF5,#FFF8EE)}
+.snail-bg-13{background:linear-gradient(135deg,#FFF0F3,#FFEAEF)}.snail-bg-14{background:linear-gradient(135deg,#FFFCF0,#FFF5E6)}
 .snail-bg-15{background:linear-gradient(135deg,#F8F0FF,#F5EAFF)}
 
-/* ===== 浮动蜗牛（页面两侧） ===== */
+/* ===== 浮动蜗牛 ===== */
 .snail-float{position:fixed;z-index:50;opacity:.5;pointer-events:none;animation:snailFloat 4s ease-in-out infinite}
 .sf-1{top:80px;left:12px;animation-delay:0s}.sf-2{top:200px;right:16px;animation-delay:.8s}
 .sf-3{top:400px;left:8px;animation-delay:1.6s}.sf-4{top:560px;right:12px;animation-delay:2.4s}
@@ -168,13 +154,12 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 .sf-7{top:1080px;left:14px;animation-delay:1.2s}.sf-8{top:1240px;right:20px;animation-delay:2s}
 @keyframes snailFloat{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-8px) rotate(2deg)}75%{transform:translateY(5px) rotate(-2deg)}}
 
-/* ===== 响应式 ===== */
 @media(max-width:520px){
   .app-container{padding:12px 10px 80px}
   .start-title{font-size:24px}.quiz-card{padding:22px 18px}
   .question-text{font-size:15px}.option-btn{padding:14px 14px;font-size:14px}
-  .quiz-logo-bar img{height:24px}
-  .start-logo-wrap img{width:110px}
+  .quiz-logo-bar svg{height:24px}
+  .start-logo-svg{width:110px}
   .result-score-circle{width:130px;height:130px}
   .score-number{font-size:36px}
   .memory-panel{padding:18px}
@@ -186,24 +171,29 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 
 <!-- 浮动蜗牛装饰 -->
 <div class="snail-float sf-1"><svg width="36"height="28"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#D4AF37"opacity=".6"/><circle cx="18"cy="16"r="8"fill="#F5D76E"opacity=".4"/><path d="M6 18 Q4 22 8 24"stroke="#B8860B"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/><path d="M16 17 Q18 19 20 17"stroke="#B8860B"stroke-width="1"fill="none"/></svg></div>
-<div class="snail-float sf-2"><svg width="32"height="26"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FF8FAB"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#FDA4AF"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#DB2777"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
-<div class="snail-float sf-3"><svg width="30"height="24"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#6EE7B7"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#A7F3D0"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#059669"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
-<div class="snail-float sf-4"><svg width="34"height="27"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#7DD3FC"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#BAE6FD"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#0284c7"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
-<div class="snail-float sf-5"><svg width="28"height="23"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#C4B5FD"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#DDD6FE"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#7c3aed"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
-<div class="snail-float sf-6"><svg width="33"height="26"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FDE68A"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#FEF08A"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#ca8a04"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
-<div class="snail-float sf-7"><svg width="29"height="23"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FCA5A5"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#fecdd3"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#e11d48"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
-<div class="snail-float sf-8"><svg width="31"height="25"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#D4AF37"opacity:.45"/><circle cx="18"cy="16"r="8"fill="#F5D76E"opacity=".3"/><path d="M6 18 Q4 22 8 24"stroke="#B8860B"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5"fill="#333"/></svg></div>
+<div class="snail-float sf-2"><svg width="32"height="26"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FF8FAB"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#FDA4AF"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#DB2777"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+<div class="snail-float sf-3"><svg width="30"height="24"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#6EE7B7"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#A7F3D0"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#059669"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+<div class="snail-float sf-4"><svg width="34"height="27"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#7DD3FC"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#BAE6FD"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#0284c7"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+<div class="snail-float sf-5"><svg width="28"height="23"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#C4B5FD"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#DDD6FE"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#7c3aed"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+<div class="snail-float sf-6"><svg width="33"height="26"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FDE68A"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#FEF08A"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#ca8a04"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+<div class="snail-float sf-7"><svg width="29"height="23"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#FCA5A5"opacity=".5"/><circle cx="18"cy="16"r="8"fill="#fecdd3"opacity=".35"/><path d="M6 18 Q4 22 8 24"stroke="#e11d48"stroke-width="1.5"fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+<div class="snail-float sf-8"><svg width="31"height="25"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="#D4AF37"opacity:.45"/><circle cx="18"cy="16"r="8"fill="#F5D76E"opacity=".3"/><path d="M6 18 Q4 22 8 24"stroke="#B8860B"stroke-width="1.5" fill="none"/><circle cx="15"cy="14"r="1.5"fill="#333"/><circle cx="21"cy="14"r="1.5" fill="#333"/></svg></div>
+
+<!-- 官方Logo (Base64 JPG) - 蜗牛AI品牌标识 v20260620 -->
+<script>
+var LOGO_B64 = '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgHBgcJCAgJDBMMDAsLDBgREg4THBgdHRsYGxofIywlHyEqIRobJjQnKi4vMTIxHiU2OjYwOiwwMTD/2wBDAQgJCQwKDBcMDBcwIBsgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDD/wAARCAF3ApoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAIWuIVfY0qBvQsM1IrBhwc1zfiS1Mcy3CDh+D9f8A69VtP82biG58uQdF5GRXj1cxdKs6Tj+J0KhePMmddmlrn47nVLf/AFi+av8Au5/UVat9bjZtlxGY29e1dMMdTlpLT1M3Ta2Naio4po5V3RuGHtUldykpK6M9gooopgFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFYuo64LS7Nv5JYjHJOOtZVa0KMeab0KjFydkbVBrnz4j2dYD/wB9f/Wqxb6/byjLIyfr/KsFjqD+0U6Ul0LesWwurCSPvjcv1HNcdGJF/eIzK0Z/h/z1rtYLuC4GYpFb2B5/KuWuoPJ1CaHtksP5/wAjXj5tBSUa8GdOHbV4M29JvReQZ4Drww/r9KsyQQyj54wfw/ya5aF5LK4EyL07evtXUQzrLAksZyGGRWWGrqtG090KpBwkVX014zvtZSpPbpSRalPauEvI8j+9V4SZ5pHCyja6hh6EV1RfK/3crGd7/ET29xFOu6NwalrElsnhbzLRzn+7U9nqm5vKuhsccZ/x9K7qOMTfLV0ZEqfWJq0UlLXomQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFACGub8X2/yRXS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P717eS50i7OHjcmMH2+8P61y08W51uVr3XdL1RpKlaF1udq2tWkyRJduVMv3cDNaY5FcH8S/wDj9sPo38xXdJ0FdFOo5VZweyM5RtFPuPooFFdRmFFFFMAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//9k=';
+</script>
 
 <div class="app-container">
 
 <!-- ========== 开始页 ========== -->
 <div class="start-page" id="startPage">
   <div class="start-logo-wrap">
-    <img id="startLogo" alt="蜗牛AI">
+    <img class="start-logo-svg" id="startLogoImg" alt="蜗牛AI" />
   </div>
   <h1 class="start-title">🐌 蜗牛AI学习互动</h1>
   <p class="start-subtitle">20260620 线上私享会 · 知识巩固测验</p>
-  <button class="start-btn" onclick="startQuiz()">开始答题</button>
+  <button class="start-btn" id="startBtn">开始答题</button>
   <div class="start-progress" id="historyPanel" style="display:none">
     <h3>📊 学习进度记录</h3>
     <div class="progress-grid" id="progressGrid"></div>
@@ -214,20 +204,20 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 <!-- ========== 答题区 ========== -->
 <div class="quiz-area" id="quizArea">
   <div class="quiz-logo-bar">
-    <img id="quizLogoBar" alt="蜗牛AI">
+    <img id="quizLogoBarImg" alt="蜗牛AI" />
     <div class="logo-label">SNAIL AI ACADEMY</div>
   </div>
   <div class="progress-bar-wrap">
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     <span class="progress-text" id="progressText">1/15</span>
-    <img class="progress-logo" id="progressLogo" alt="">
+    <span class="progress-logo" id="progressLogoWrap"><img id="progressLogoImg" alt="" style="width:20px;height:14px;opacity:.6;vertical-align:middle"/></span>
   </div>
   <div id="questionContainer"></div>
 </div>
 
 <!-- ========== 结果页 ========== -->
 <div class="result-page" id="resultPage">
-  <img class="result-logo" id="resultLogo" alt="蜗牛AI">
+  <img class="result-logo-svg" id="resultLogoImg" alt="蜗牛AI" />
   <div class="result-score-circle">
     <div class="score-ring"></div>
     <div class="score-fill" id="scoreFill"></div>
@@ -249,54 +239,18 @@ body{font-family:var(--font);background:var(--bg-cream);color:var(--text-primary
 </div><!-- /.app-container -->
 
 <script>
-// ==================== Logo (SVG Data URL) ====================
-// 注意：btoa() 不支持中文，改用 encodeURIComponent + data:image/svg+xml 格式
-const _svgStr = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 666 375" width="666" height="375">
-  <defs>
-    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4AF37"/>
-      <stop offset="100%" style="stop-color:#F5D76E"/>
-    </linearGradient>
-    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#8B6914"/>
-      <stop offset="100%" style="stop-color:#D4AF37"/>
-    </linearGradient>
-  </defs>
-  <rect width="666" height="375" rx="24" fill="#FFFBF0"/>
-  <path d="M180 280 Q333 200 486 280" stroke="url(#g2)" stroke-width="4" fill="none" opacity="0.3"/>
-  <path d="M220 270 L220 290 M260 255 L260 290 M300 240 L300 290 M340 230 L340 290 M380 225 L380 290 M420 230 L420 290 M460 240 L460 290 M500 255 L500 290" stroke="url(#g2)" stroke-width="2" opacity="0.2"/>
-  <ellipse cx="300" cy="195" rx="115" ry="82" fill="url(#g1)" opacity="0.85"/>
-  <ellipse cx="300" cy="185" rx="75" ry="54" fill="#F5D76E" opacity="0.35"/>
-  <path d="M300 155 C330 140 360 160 355 190 C350 220 310 235 285 215 C265 198 270 165 300 155" stroke="#B8860B" stroke-width="4" fill="none" opacity="0.5"/>
-  <path d="M300 170 C320 162 335 178 332 196 C328 214 302 222 288 208 C277 197 280 176 300 170" stroke="#B8860B" stroke-width="2.5" fill="none" opacity="0.4"/>
-  <path d="M220 170 Q205 145 210 125" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M240 163 Q232 138 240 118" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="210" cy="122" r="5" fill="#D4AF37"/>
-  <circle cx="240" cy="116" r="5" fill="#D4AF37"/>
-  <circle cx="250" cy="178" r="8" fill="#2D2B32"/>
-  <circle cx="252" cy="176" r="3" fill="#fff"/>
-  <circle cx="290" cy="182" r="8" fill="#2D2B32"/>
-  <circle cx="292" cy="180" r="3" fill="#fff"/>
-  <path d="M260 202 Q275 216 292 202" stroke="#8B6914" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <path d="M185 200 Q165 215 175 232" stroke="#B8860B" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
-  <text x="333" y="300" text-anchor="middle" font-family="-apple-system,PingFang SC,sans-serif" font-size="38" font-weight="800" fill="url(#g1)">蜗牛AI</text>
-  <text x="333" y="335" text-anchor="middle" font-family="-apple-system,PingFang SC,sans-serif" font-size="16" fill="#9E99AA" letter-spacing="4">SNAIL AI ACADEMY</text>
-  <circle cx="480" cy="90" r="3" fill="#D4AF37" opacity="0.5"/>
-  <circle cx="520" cy="130" r="2" fill="#F5D76E" opacity="0.4"/>
-  <circle cx="120" cy="110" r="2.5" fill="#D4AF37" opacity="0.45"/>
-  <circle cx="550" cy="300" r="2" fill="#F5D76E" opacity="0.35"/>
-  <circle cx="90" cy="280" r="2" fill="#D4AF37" opacity="0.4"/>
-</svg>`;
-const LOGO_URL = 'data:image/svg+xml,' + encodeURIComponent(_svgStr);
-
-// 设置所有Logo
-document.getElementById('startLogo').src = LOGO_URL;
-document.getElementById('quizLogoBar').src = LOGO_URL;
-document.getElementById('progressLogo').src = LOGO_URL;
-document.getElementById('resultLogo').src = LOGO_URL;
+// ==================== 初始化Logo（Base64 JPG官方标识） ====================
+(function initLogos(){
+  var src = 'data:image/jpeg;base64,' + LOGO_B64;
+  var els = ['startLogoImg','quizLogoBarImg','progressLogoImg','resultLogoImg'];
+  els.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.src = src;
+  });
+})();
 
 // ==================== 题目数据 ====================
-const quizData = {
+var quizData = {
   modules: [
     {
       id: 1,
@@ -482,77 +436,51 @@ const quizData = {
 };
 
 // ==================== 全局状态 ====================
-let currentQ = 0;
-let score = 0;
-let answers = [];
-let userOptions = {}; // 记录用户选择的选项偏好 A/B/C/D
-const optionLetters = ['A','B','C','D'];
-const STORAGE_KEY = 'snail_quiz_progress';
+var currentQ = 0;
+var score = 0;
+var answers = [];
+var userOptions = {};
+var optionLetters = ['A','B','C','D'];
+var STORAGE_KEY = 'snail_quiz_progress';
 
 // ==================== localStorage 进度管理 ====================
-function loadProgress(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }catch(e){ return null; }
-}
-function saveProgress(data){
-  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){}
-}
-function getModuleStats(){
-  const p = loadProgress();
-  return p ? (p.moduleStats || {}) : {};
-}
-function getQuestionStats(){
-  const p = loadProgress();
-  return p ? (p.questionStats || {}) : {};
-}
+function loadProgress(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||null; }catch(e){return null;} }
+function saveProgress(data){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){} }
+
+function getModuleStats(){ var p=loadProgress(); return p?(p.moduleStats||{}):{}; }
+function getQuestionStats(){ var p=loadProgress(); return p?(p.questionStats||{}):{}; }
 
 function getMasteryLevel(mId){
-  const stats = getModuleStats();
-  const m = stats[mId];
+  var stats=getModuleStats(); var m=stats[mId];
   if(!m) return 'new';
-  const total = (m.totalCorrect||0)+(m.totalWrong||0);
+  var total=(m.totalCorrect||0)+(m.totalWrong||0);
   if(total===0) return 'new';
-  const rate = m.totalCorrect/total;
-  if(rate>=0.8) return 'mastered';
-  if(rate>=0.5) return 'familiar';
-  return 'weak';
+  var rate=m.totalCorrect/total;
+  if(rate>=0.8) return 'mastered'; if(rate>=0.5) return 'familiar'; return 'weak';
 }
 function getMasteryLabel(lv){
-  return {mastered:'✅ 已 mastered',familiar:'👍 熟悉中',weak:'⚠️ 薄弱',new:'🆕 首次'}[lv] || '🆕 首次';
+  return {mastered:'✅ 已 mastered',familiar:'👍 熟悉中',weak:'⚠️ 薄弱',new:'🆕 首次'}[lv]||'🆕 首次';
 }
 function getMasteryClass(lv){ return 'mastery-'+lv; }
 
-// 显示历史进度面板
 function showHistoryPanel(){
-  const p = loadProgress();
-  const panel = document.getElementById('historyPanel');
-  const grid = document.getElementById('progressGrid');
-  const weakDiv = document.getElementById('weakModules');
-  if(!p || !p.totalAttempts){
-    panel.style.display='none'; return;
-  }
+  var p=loadProgress();
+  var panel=document.getElementById('historyPanel'); var grid=document.getElementById('progressGrid'); var weakDiv=document.getElementById('weakModules');
+  if(!p||!p.totalAttempts){ panel.style.display='none'; return; }
   panel.style.display='block';
-  const avg = p.totalAttempts>0 ? ((p.history||[]).reduce((s,h)=>s+h.score,0)/(p.history||[]).length).toFixed(1):'0';
-
-  grid.innerHTML = `
-    <div class="progress-item"><div class="label">答题次数</div><div class="value">${p.totalAttempts}次</div></div>
-    <div class="progress-item"><div class="label">历史最佳</div><div class="value">${p.bestScore||0}分</div></div>
-    <div class="progress-item"><div class="label">平均得分</div><div class="value">${avg}分</div></div>
-    <div class="progress-item"><div class="label">上次成绩</div><div class="value">${p.lastScore||0}分</div></div>
-    <div class="progress-item"><div class="label">上次日期</div><div class="value">${p.lastScore!=null?(p.lastDate||'-'):'-'}</div></div>
-  `;
-
-  // 薄弱模块标记
+  var avg=p.totalAttempts>0?((p.history||[]).reduce(function(s,h){return s+h.score;},0)/(p.history||[]).length).toFixed(1):'0';
+  grid.innerHTML='<div class="progress-item"><div class="label">答题次数</div><div class="value">'+p.totalAttempts+'次</div></div>'+
+    '<div class="progress-item"><div class="label">历史最佳</div><div class="value">'+(p.bestScore||0)+'分</div></div>'+
+    '<div class="progress-item"><div class="label">平均得分</div><div class="value">'+avg+'分</div></div>'+
+    '<div class="progress-item"><div class="label">上次成绩</div><div class="value">'+(p.lastScore||0)+'分</div></div>'+
+    '<div class="progress-item"><div class="label">上次日期</div><div class="value">'+(p.lastScore!=null?(p.lastDate||'-'):'-')+'</div></div>';
   weakDiv.innerHTML='';
-  const ms = p.moduleStats||{};
-  Object.keys(ms).forEach(mid=>{
-    const m=ms[mid];
-    const total=(m.totalCorrect||0)+(m.totalWrong||0);
-    if(total>=3 && m.totalCorrect/total<0.5){
-      const mod=quizData.modules.find(x=>x.id==parseInt(mid));
-      if(mod){
-        const tag=document.createElement('span');tag.className='weak-tag';
-        tag.textContent=mod.title;weakDiv.appendChild(tag);
-      }
+  var ms=p.moduleStats||{};
+  Object.keys(ms).forEach(function(mid){
+    var m=ms[mid]; var total=(m.totalCorrect||0)+(m.totalWrong||0);
+    if(total>=3&&m.totalCorrect/total<0.5){
+      var mod=quizData.modules.find(function(x){return x.id==parseInt(mid);});
+      if(mod){ var tag=document.createElement('span');tag.className='weak-tag';tag.textContent=mod.title;weakDiv.appendChild(tag); }
     }
   });
   if(weakDiv.children.length===0) weakDiv.innerHTML='<span style="font-size:12px;color:#6EE7B7">暂无薄弱模块，继续保持！🎉</span>';
@@ -560,119 +488,91 @@ function showHistoryPanel(){
 
 // ==================== 答案随机化算法 ====================
 function randomizeAnswers(question){
-  // 完全随机：correctSlot随机，错误选项Fisher-Yates洗牌
-  const correctSlot=Math.floor(Math.random()*4);
-  const wrongs=[...question.options];
-  const correctAns=wrongs.splice(question.originalAnswer,1)[0];
-  // Fisher-Yates shuffle wrongs
-  for(let i=wrongs.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));[wrongs[i],wrongs[j]]=[wrongs[j],wrongs[i]];
-  }
-  const arr=[...wrongs];
+  var correctSlot=Math.floor(Math.random()*4);
+  var wrongs=[].concat(question.options);
+  var correctAns=wrongs.splice(question.originalAnswer,1)[0];
+  for(var i=wrongs.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var tmp=wrongs[i];wrongs[i]=wrongs[j];wrongs[j]=tmp; }
+  var arr=[].concat(wrongs);
   arr.splice(correctSlot,0,correctAns);
   return {options:arr,correctIndex:correctSlot};
 }
 
 // ==================== 渲染题目 ====================
 function renderQuestion(idx){
-  let qFlat=[];
-  quizData.modules.forEach(mod=>mod.questions.forEach(q=>qFlat.push({q,...mod})));
+  var qFlat=[];
+  quizData.modules.forEach(function(mod){mod.questions.forEach(function(q){qFlat.push({q:q,icon:mod.icon,title:mod.title,subtitle:mod.subtitle,color:mod.color,id:mod.id});});});
   if(idx>=qFlat.length) return showResult();
-  const item=qFlat[idx];
-  const q=item.q;
-  const mod=item;
+  var item=qFlat[idx]; var q=item.q;
 
-  // 随机化答案
-  const randomized=randomizeAnswers(q);
+  var randomized=randomizeAnswers(q);
+  var masteryLv=getMasteryLevel(item.id);
 
-  const masteryLv=getMasteryLevel(mod.id);
+  var container=document.getElementById('questionContainer');
+  container.innerHTML=
+    '<div class="module-header">'+
+      '<span class="module-icon">'+item.icon+'</span>'+
+      '<div class="module-info"><h2>'+item.title+'</h2><p>'+item.subtitle+'</p></div>'+
+    '</div>'+
+    '<div class="quiz-card snail-bg-'+q.id+'">'+
+      '<div class="card-corner-snail corner-tl"><svg width="42" height="42" viewBox="0 0 36 28"><ellipse cx="18" cy="18" rx="14" ry="10" fill="'+q.contact.color+'" opacity=".3"/><circle cx="18" cy="16" r="7" fill="'+q.contact.color+'" opacity=".2"/></svg></div>'+
+      '<div class="card-corner-snail corner-br"><svg width="42" height="42" viewBox="0 0 36 28"><ellipse cx="18" cy="18" rx="14" ry="10" fill="'+q.contact.color+'" opacity=".25"/></svg></div>'+
+      '<div class="q-number">QUESTION '+q.id+'/15</div>'+
+      '<div class="contact-tag" style="background:'+q.contact.color+'15;color:'+q.contact.color+';border:1px solid '+q.contact.color+'40">'+
+        '<div class="contact-avatar" style="background:'+q.contact.color+'">'+q.contact.initial+'</div>'+
+        q.contact.name+' · '+q.contact.role+
+        '<span class="mastery-badge '+getMasteryClass(masteryLv)+'">'+getMasteryLabel(masteryLv)+'</span>'+
+      '</div>'+
+      '<div class="question-text">'+q.text+'</div>'+
+      '<div class="options-list" id="optionsList">'+
+        randomized.options.map(function(opt,i){
+          return '<button class="option-btn" data-index="'+i+'" onclick="selectOption('+q.id+','+i+','+randomized.correctIndex+',\''+q.contact.color+'\')">'+
+            '<span class="option-letter">'+optionLetters[i]+'</span><span>'+opt+'</span>'+
+          '</button>';
+        }).join('')+
+      '</div>'+
+      '<div class="explanation-area" id="expl'+q.id+'">'+
+        '<div class="explanation-title">💡 解析</div>'+
+        '<div class="explanation-text">'+q.explanation+'</div>'+
+        '<span class="knowledge-tag"># '+q.knowledge+'</span>'+
+      '</div>'+
+      '<div class="nav-buttons" id="nav'+q.id+'" style="display:none">'+
+        (idx<qFlat.length-1?'<button class="nav-btn primary" onclick="nextQuestion()">下一题 →</button>':'<button class="nav-btn primary" onclick="showResult()">查看结果 🏆</button>')+
+      '</div>'+
+    '</div>';
 
-  const container=document.getElementById('questionContainer');
-  container.innerHTML=`
-    <div class="module-header">
-      <span class="module-icon">${mod.icon}</span>
-      <div class="module-info">
-        <h2>${mod.title}</h2>
-        <p>${mod.subtitle}</p>
-      </div>
-    </div>
-    <div class="quiz-card snail-bg-${q.id}">
-      <div class="card-corner-snail corner-tl"><svg width="42"height="42"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="${q.contact.color}"opacity=".3"/><circle cx="18"cy="16"r="7"fill="${q.contact.color}"opacity=".2"/><circle cx="15"cy="14"r="1.5"fill="${q.contact.color}"opacity=".6"/><circle cx="21"cy="14"r="1.5"fill="${q.contact.color}"opacity=".6"/></svg></div>
-      <div class="card-corner-snail corner-br"><svg width="42"height="42"viewBox="0 0 36 28"><ellipse cx="18"cy="18"rx="14"ry="10"fill="${q.contact.color}"opacity=".25"/><circle cx="18"cy="16"r="7"fill="${q.contact.color}"opacity=".18"/></svg></div>
-      <div class="q-number">QUESTION ${q.id}/15</div>
-      <div class="contact-tag" style="background:${q.contact.color}15;color:${q.contact.color};border:1px solid ${q.contact.color}40">
-        <div class="contact-avatar" style="background:${q.contact.color}">${q.contact.initial}</div>
-        ${q.contact.name} · ${q.contact.role}
-        <span class="mastery-badge ${getMasteryClass(masteryLv)}">${getMasteryLabel(masteryLv)}</span>
-      </div>
-      <div class="question-text">${q.text}</div>
-      <div class="options-list" id="optionsList">
-        ${randomized.options.map((opt,i)=>`
-          <button class="option-btn" data-index="${i}" onclick="selectOption(${q.id},${i},${randomized.correctIndex},'${q.contact.color}')">
-            <span class="option-letter">${optionLetters[i]}</span>
-            <span>${opt}</span>
-          </button>
-        `).join('')}
-      </div>
-      <div class="explanation-area" id="expl${q.id}">
-        <div class="explanation-title">💡 解析</div>
-        <div class="explanation-text">${q.explanation}</div>
-        <span class="knowledge-tag"># ${q.knowledge}</span>
-      </div>
-      <div class="nav-buttons" id="nav${q.id}" style="display:none">
-        ${idx<qFlat.length-1?`<button class="nav-btn primary" onclick="nextQuestion()">下一题 →</button>`:`<button class="nav-btn primary" onclick="showResult()">查看结果 🏆</button>`}
-      </div>
-    </div>
-  `;
-
-  // 更新进度条
-  const pct=((idx)/qFlat.length)*100;
-  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressFill').style.width=((idx)/qFlat.length)*100+'%';
   document.getElementById('progressText').textContent=(idx+1)+'/'+qFlat.length;
 }
 
 // ==================== 选择答案 ====================
 function selectOption(qId,selectedIndex,correctIndex,contactColor){
-  // 禁用所有选项
-  const btns=document.querySelectorAll('#optionsList .option-btn');
-  btns.forEach(b=>b.classList.add('disabled'));
+  var btns=document.querySelectorAll('#optionsList .option-btn');
+  btns.forEach(function(b){b.classList.add('disabled');});
 
-  const selectedBtn=btns[selectedIndex];
-  selectedBtn.classList.add('selected');
+  btns[selectedIndex].classList.add('selected');
+  var isCorrect=selectedIndex===correctIndex;
 
-  const isCorrect=selectedIndex===correctIndex;
+  var letter=optionLetters[selectedIndex]; userOptions[letter]=(userOptions[letter]||0)+1;
 
-  // 记录选项偏好
-  const letter=optionLetters[selectedIndex];
-  userOptions[letter]=(userOptions[letter]||0)+1;
+  if(isCorrect){ score++; btns[selectedIndex].classList.add('correct'); }
+  else{ btns[selectedIndex].classList.add('wrong'); btns[correctIndex].classList.add('correct'); }
 
-  if(isCorrect){
-    score++;
-    selectedBtn.classList.add('correct');
-  }else{
-    selectedBtn.classList.add('wrong');
-    btns[correctIndex].classList.add('correct');
-  }
-
-  // 显示解析
   document.getElementById('expl'+qId).classList.add('show');
   document.getElementById('nav'+qId).style.display='flex';
 
-  // 记录本题结果
-  answers.push({qId,selected:selectedIndex,correct:correctIndex,isCorrect});
+  answers.push({qId:qId,selected:selectedIndex,correct:correctIndex,isCorrect:isCorrect});
 }
 
 function nextQuestion(){ currentQ++; renderQuestion(currentQ); }
 
 // ==================== 开始 & 重试 ====================
 function startQuiz(){
-  score=0;currentQ=0;answers=[];userOptions={};
+  score=0; currentQ=0; answers=[]; userOptions={};
   document.getElementById('startPage').style.display='none';
   document.getElementById('quizArea').style.display='block';
   document.getElementById('resultPage').style.display='none';
   renderQuestion(currentQ);
 }
-
 function retryQuiz(){ startQuiz(); }
 
 // ==================== 结果页 ====================
@@ -680,149 +580,95 @@ function showResult(){
   document.getElementById('quizArea').style.display='none';
   document.getElementById('resultPage').style.display='block';
 
-  // 分数动画
-  const scoreEl=document.getElementById('scoreNumber');
-  let display=0;
-  const target=score;
-  const anim=setInterval(()=>{
-    display++;
-    scoreEl.textContent=display;
-    if(display>=target)clearInterval(anim);
-  },80);
+  var scoreEl=document.getElementById('scoreNumber');
+  var display=0; var target=score;
+  var anim=setInterval(function(){ display++; scoreEl.textContent=display; if(display>=target)clearInterval(anim); },80);
 
-  // 分数环
-  const deg=(score/15)*360;
-  document.getElementById('scoreFill').style.transform=`rotate(${deg}deg)`;
+  document.getElementById('scoreFill').style.transform='rotate('+((score/15)*360)+'deg)';
 
-  // 结果评语
-  const titles=['💪 继续加油！','👍 还不错！','🎉 很棒！','🏆 太厉害了！','👑 完美通关！'];
-  const subs=['多复习几次就能进步哦～','已经超过一半了，保持节奏！','你对AI的理解很扎实了！','你是蜗牛AI的超级学员！','满分大神！请收下我们的膝盖！'];
-  const tier=score<=4?0:score<=7?1:score<=11?2:score<15?3:4;
+  var titles=['💪 继续加油！','👍 还不错！','🎉 很棒！','🏆 太厉害了！','👑 完美通关！'];
+  var subs=['多复习几次就能进步哦～','已经超过一半了，保持节奏！','你对AI的理解很扎实了！','你是蜗牛AI的超级学员！','满分大神！请收下我们的膝盖！'];
+  var tier=score<=4?0:score<=7?1:score<=11?2:score<15?3:4;
   document.getElementById('resultTitle').textContent=titles[tier];
   document.getElementById('resultSubtitle').textContent=subs[tier];
 
-  // 保存进度到localStorage
   saveToStorage();
-
-  // 渲染学习记忆面板
   renderMemoryPanel();
 }
 
 function saveToStorage(){
-  const p=loadProgress()||{totalAttempts:0,bestScore:0,lastScore:0,lastDate:'',history:[],questionStats:{},moduleStats:{},optionPreference:{A:0,B:0,C:0,D:0}};
-  p.totalAttempts=(p.totalAttempts||0)+1;
-  p.lastScore=score;
-  p.lastDate=new Date().toISOString().slice(0,10);
+  var p=loadProgress()||{totalAttempts:0,bestScore:0,lastScore:0,lastDate:'',history:[],questionStats:{},moduleStats:{},optionPreference:{A:0,B:0,C:0,D:0}};
+  p.totalAttempts=(p.totalAttempts||0)+1; p.lastScore=score; p.lastDate=new Date().toISOString().slice(0,10);
   if(score>(p.bestScore||0)) p.bestScore=score;
 
-  // 历史
-  const moduleScores={};
-  quizData.modules.forEach(mod=>{
-    const modAns=answers.filter(a=>{
-      return mod.questions.some(q=>q.id===a.qId);
-    });
-    moduleScores[mod.id]={correct:modAns.filter(a=>a.isCorrect).length,total:modAns.length};
+  var moduleScores={};
+  quizData.modules.forEach(function(mod){
+    var modAns=answers.filter(function(a){ return mod.questions.some(function(q){return q.id===a.qId;}); });
+    moduleScores[mod.id]={correct:modAns.filter(function(a){return a.isCorrect;}).length,total:modAns.length};
   });
-  (p.history=p.history||[]).unshift({date:p.lastDate,score:score,total:15,moduleScores});
+  (p.history=p.history||[]).unshift({date:p.lastDate,score:score,total:15,moduleScores:moduleScores});
   if(p.history.length>20) p.history.pop();
 
-  // 每题统计
-  answers.forEach(a=>{
-    const qs=(p.questionStats=p.questionStats||{})[a.qId]||(p.questionStats[a.qId]={correct:0,wrong:0,lastAnswer:a.selected});
+  answers.forEach(function(a){
+    var qs=(p.questionStats=p.questionStats||{})[a.qId]||(p.questionStats[a.qId]={correct:0,wrong:0,lastAnswer:a.selected});
     if(a.isCorrect) qs.correct++; else qs.wrong++;
     qs.lastAnswer=a.selected;
   });
 
-  // 模块统计
-  quizData.modules.forEach(mod=>{
-    const ms=(p.moduleStats=p.moduleStats||{})[mod.id]||(p.moduleStats[mod.id]={totalCorrect:0,totalWrong:0});
-    mod.questions.forEach(q=>{
-      const ans=answers.find(a=>a.qId===q.id);
-      if(ans){
-        if(ans.isCorrect) ms.totalCorrect++; else ms.totalWrong++;
-      }
+  quizData.modules.forEach(function(mod){
+    var ms=(p.moduleStats=p.moduleStats||{})[mod.id]||(p.moduleStats[mod.id]={totalCorrect:0,totalWrong:0});
+    mod.questions.forEach(function(q){
+      var ans=answers.find(function(a){return a.qId===q.id;});
+      if(ans){ if(ans.isCorrect) ms.totalCorrect++; else ms.totalWrong++; }
     });
   });
 
-  // 选项偏好累计
-  Object.keys(userOptions).forEach(k=>{
-    p.optionPreference[k]=(p.optionPreference[k]||0)+userOptions[k];
-  });
-
+  Object.keys(userOptions).forEach(function(k){ p.optionPreference[k]=(p.optionPreference[k]||0)+userOptions[k]; });
   saveProgress(p);
 }
 
 function renderMemoryPanel(){
-  const p=loadProgress();
-  if(!p)return;
-  const content=document.getElementById('memoryContent');
+  var p=loadProgress(); if(!p)return;
+  var content=document.getElementById('memoryContent');
 
-  // 上次vs本次趋势
-  const prevScore=p.history&&p.history.length>1?p.history[1].score:null;
-  let trendHtml='';
-  if(prevScore!=null){
-    const diff=score-prevScore;
-    const cls=diff>0?'trend-up':diff<0?'trend-down':'trend-same';
-    const arrow=diff>0?'↑':diff<0?'↓':'—';
-    trendHtml=`<span class="${cls}">${arrow}${Math.abs(diff)}</span>`;
-  }
+  var prevScore=p.history&&p.history.length>1?p.history[1].score:null; var trendHtml='';
+  if(prevScore!=null){ var diff=score-prevScore; var cls=diff>0?'trend-up':diff<0?'trend-down':'trend-same'; var arrow=diff>0?'↑':diff<0?'↓':'—'; trendHtml='<span class="'+cls+'">'+arrow+Math.abs(diff)+'</span>'; }
 
-  // 选项偏好总统计
-  const op=p.optionPreference||{A:0,B:0,C:0,D:0};
-  const opTotal=op.A+op.B+op.C+op.D||1;
-  const prefColors={A:'#FF8FAB',B:'#6EE7B7',C:'#7DD3FC',D:'#C4B5FD'};
-  const prefHtml=Object.entries(op).map(([k,v])=>`
-    <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-      <span class="pref-label" style="color:${prefColors[k]}">${k}</span>
-      <div class="pref-bar"><div class="pref-fill" style="width:${(v/opTotal)*100}%;background:${prefColors[k]}"></div></div>
-      <span class="pref-pct">${v}次 (${((v/opTotal)*100).toFixed(0)}%)</span>
-    </div>
-  `).join('');
-
-  // 模块掌握度
-  const ms=p.moduleStats||{};
-  const modMasteryHtml=quizData.modules.map(mod=>{
-    const m=ms[mod.id]||{totalCorrect:0,totalWrong:0};
-    const total=m.totalCorrect+m.totalWrong;
-    const rate=total>0?(m.totalCorrect/total)*100:0;
-    const fillColor=rate>=80?'#34D399':rate>=50?'#FDE68A':'#FB7185';
-    return `
-      <div class="mm-item">
-        <span class="mm-icon">${mod.icon}</span>
-        <span class="mm-name">${mod.title}</span>
-        <div class="mm-bar"><div class="mm-fill" style="width:${rate}%;background:${fillColor}"></div></div>
-        <span class="mm-pct">${total>0?Math.round(rate)+'%':'—'}</span>
-      </div>`;
+  var op=p.optionPreference||{A:0,B:0,C:0,D:0}; var opTotal=op.A+op.B+op.C+op.D||1;
+  var prefColors={A:'#FF8FAB',B:'#6EE7B7',C:'#7DD3FC',D:'#C4B5FD'};
+  var prefHtml=Object.keys(op).map(function(k){
+    return '<div style="display:flex;align-items:center;gap:8px;margin-top:6px"><span class="pref-label" style="color:'+prefColors[k]+'">'+k+'</span><div class="pref-bar"><div class="pref-fill" style="width:'+((op[k]/opTotal)*100)+'%;background:'+prefColors[k]+'"></div></div><span class="pref-pct">'+op[k]+'次 ('+Math.round((op[k]/opTotal)*100)+'%)</span></div>';
   }).join('');
 
-  content.innerHTML=`
-    <div class="memory-row">
-      <span class="memory-label">本次得分</span>
-      <span class="memory-value" style="color:#059669;font-size:22px">${score}<small style="font-size:12px;color:#9E99AA">/15</small> ${trendHtml}</span>
-    </div>
-    <div class="memory-row">
-      <span class="memory-label">历史最佳</span>
-      <span class="memory-value">${p.bestScore||0}<small style="font-size:12px;color:#9E99AA">/15</small></span>
-    </div>
-    <div class="memory-row">
-      <span class="memory-label">累计答题</span>
-      <span class="memory-value">${p.totalAttempts}次</span>
-    </div>
+  var ms=p.moduleStats||{};
+  var modMasteryHtml=quizData.modules.map(function(mod){
+    var m=ms[mod.id]||{totalCorrect:0,totalWrong:0}; var total=m.totalCorrect+m.totalWrong; var rate=total>0?(m.totalCorrect/total)*100:0;
+    var fillColor=rate>=80?'#34D399':rate>=50?'#FDE68A':'#FB7185';
+    return '<div class="mm-item"><span class="mm-icon">'+mod.icon+'</span><span class="mm-name">'+mod.title+'</span><div class="mm-bar"><div class="mm-fill" style="width:'+rate+'%;background:'+fillColor+'"></div></div><span class="mm-pct">'+(total>0?Math.round(rate)+'%':'—')+'</span></div>';
+  }).join('');
 
-    <div class="preference-section" style="margin-top:20px;padding-top:14px;border-top:1px solid #f0ece4">
-      <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:4px">📊 选项偏好统计</div>
-      ${prefHtml}
-    </div>
-
-    <div class="module-mastery" style="margin-top:18px;padding-top:14px;border-top:1px solid #f0ece4">
-      <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:4px">📈 模块掌握度</div>
-      ${modMasteryHtml}
-    </div>
-  `;
+  content.innerHTML=
+    '<div class="memory-row"><span class="memory-label">本次得分</span><span class="memory-value" style="color:#059669;font-size:22px">'+score+'<small style="font-size:12px;color:#9E99AA">/15</small> '+trendHtml+'</span></div>'+
+    '<div class="memory-row"><span class="memory-label">历史最佳</span><span class="memory-value">'+(p.bestScore||0)+'<small style="font-size:12px;color:#9E99AA">/15</small></span></div>'+
+    '<div class="memory-row"><span class="memory-label">累计答题</span><span class="memory-value">'+p.totalAttempts+'次</span></div>'+
+    '<div class="preference-section" style="margin-top:20px;padding-top:14px;border-top:1px solid #f0ece4"><div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:4px">📊 选项偏好统计</div>'+prefHtml+'</div>'+
+    '<div class="module-mastery" style="margin-top:18px;padding-top:14px;border-top:1px solid #f0ece4"><div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:4px">📈 模块掌握度</div>'+modMasteryHtml+'</div>';
 }
 
-// ==================== 初始化 ====================
-showHistoryPanel();
+// ==================== 按钮事件绑定 & 初始化 ====================
+document.addEventListener('DOMContentLoaded', function(){
+  // 绑定开始按钮点击事件
+  var startBtn = document.getElementById('startBtn');
+  if(startBtn){
+    startBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      startQuiz();
+    });
+  }
+
+  // 显示历史进度
+  showHistoryPanel();
+});
 </script>
 </body>
 </html>
